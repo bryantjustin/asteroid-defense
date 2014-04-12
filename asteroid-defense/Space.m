@@ -9,8 +9,12 @@
 #import "Space.h"
 #import "Asteroid.h"
 #import "Game.h"
+#import "Nuke.h"
+#import "Earth.h"
 
 #define kRADIAL_GRAVITY_FORCE 1000.0f
+#define ASTEROID_SPAWN_DISTANCE 1500.0f
+#define LAUNCH_INTERVAL 3.0f
 
 @implementation Space
 
@@ -20,13 +24,24 @@
         /* Setup your scene here */
         
         self.backgroundColor = [SKColor blackColor];
-
-        earth = [Earth new];
-        earth.position = CGPointMake( size.width / 2.0, size.height / 2.0 );
-        [self addChild:earth];
         
+        self.physicsWorld.gravity = CGVectorMake(0.0f, 0.0f);
+        
+        [self placeEarth];
     }
     return self;
+}
+
+- (CGPoint)earthPoint
+{
+    return CGPointMake(self.size.width / 2.0, self.size.height / 2.0);
+}
+
+- (void)placeEarth
+{
+    earth = [Earth new];
+    earth.position = self.earthPoint;
+    [self addChild:earth];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -54,56 +69,49 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *anyTouch = [touches anyObject];
-    CGPoint endLocation = [anyTouch locationInNode:self];
-    
-    CGVector vector = CGVectorMake( endLocation.x - touchLocation.x, endLocation.y - touchLocation.y);
-    Asteroid *asteroid = [Asteroid new];
-
-    asteroid.position = touchLocation;
-    asteroid.velocity = vector;
-
-    [self addChild:asteroid];
-    
-    [asteroid prepareTrail];
     
     [fingerTracker removeFromParent];
-    fingerTracker = nil;
+    [self launchMissileTowards:[anyTouch locationInNode:self]];
 }
 
-- (CGVector) distanceBetween:(CGVector)v1 and:(CGVector)v2
+- (void) spawnAsteroid
 {
-    return CGVectorMake( v2.dx - v1.dx, v2.dy - v1.dy );
-}
-
-- (float) lengthSquared:(CGVector)input
-{
-    return input.dx * input.dx + input.dy * input.dy;
-}
-
-- (float) length:(CGVector)input
-{
-    return sqrtf([self lengthSquared:input]);
-}
-
-- (float) normalizeVector:(CGVector) input
-{
-    float length = [self length:input];
-    if (length < FLT_EPSILON)
-    {
-        return 0.0f;
-    }
-    float invLength = 1.0f / length;
-    input.dx *= invLength;
-    input.dy *= invLength;
+    float angle = arc4random_uniform( 360.0 ) * M_PI / 180.0;
     
-    return length;
+    CGPoint o = earth.position;
+    CGPoint p = CGPointMake( o.x + ASTEROID_SPAWN_DISTANCE, o.y );
+    
+    CGFloat xPoint = cosf( angle ) * ( p.x - o.x ) - sinf( angle ) * ( p.y - o.y ) + o.x;
+    CGFloat yPoint = sinf( angle ) * ( p.x - o.x ) + cosf( angle ) * ( p.y - o.y ) + o.y;
+    
+    CGPoint spawnPoint = CGPointMake( xPoint, yPoint );
+    
+    Asteroid *asteroid = [Asteroid new];
+    asteroid.position = spawnPoint;
+    
+    asteroid.velocity = CGVectorMake( o.x - spawnPoint.x, o.y - spawnPoint.y );
+    
+    [self addChild:asteroid];
+}
+
+- (void)launchMissileTowards:(CGPoint)targetPoint
+{
+    CGPoint originPoint = self.earthPoint;
+    CGVector vector = CGVectorMake( targetPoint.x - originPoint.x, targetPoint.y - originPoint.y);
+    
+    Nuke *sprite = [Nuke new];
+    
+    sprite.position = originPoint;
+    [sprite setVector:vector];
+    
+    [self addChild:sprite];
 }
 
 - (void) update:(NSTimeInterval)currentTime
 {
     CGPoint earthPosition = earth.position;
     
-    for( SKSpriteNode *child in self.children )
+    for( SKNode *child in self.children )
     {
         if( child && [child isKindOfClass:Asteroid.class])
         {
@@ -111,11 +119,20 @@
             
             CGPoint position = child.position;
             CGFloat distance = sqrt( pow( position.x - earthPosition.x, 2.0) + (pow( position.y - earthPosition.y, 2.0 )));
+            
+            if( distance < 100 ) continue;
+            
             CGFloat force = kRADIAL_GRAVITY_FORCE / ( distance * distance);
             CGVector radialGravityForce = CGVectorMake((earthPosition.x - position.x) * force, (earthPosition.y - position.y) * force);
             
             asteroid.radialGravity = radialGravityForce;
         }
+    }
+    
+    if( currentTime - lastLaunch > LAUNCH_INTERVAL )
+    {
+        [self spawnAsteroid];
+        lastLaunch = currentTime;
     }
 }
 

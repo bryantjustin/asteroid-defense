@@ -2,3 +2,7 @@
 *.xcuserstate
 
 Pods/Pods.xcodeproj/xcuserdata/adamborzecki.xcuserdatad/xcschemes/xcschememanagement.plist
+
+*.xcbkptlist
+
+*.xcuserstate

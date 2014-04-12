@@ -14,6 +14,7 @@
     CGPoint touchLocation;
     Earth *earth;
     SKEmitterNode *fingerTracker;
+    NSTimeInterval lastLaunch;
 }
 
 @end
