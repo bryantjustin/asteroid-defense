@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "MyScene.h"
+#import "Space.h"
 
 @implementation ViewController
 
@@ -21,8 +21,9 @@
     skView.showsNodeCount = YES;
     
     // Create and configure the scene.
-    SKScene * scene = [MyScene sceneWithSize:skView.bounds.size];
+    SKScene * scene = [Space sceneWithSize:skView.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
+    scene.physicsWorld.gravity = CGVectorMake(0, 0);
     
     // Present the scene.
     [skView presentScene:scene];
