@@ -19,7 +19,7 @@
         self.physicsBody.categoryBitMask = asteroidCategory;
         self.physicsBody.dynamic = YES;
         self.physicsBody.mass = 1.0;
-        self.physicsBody.friction = 0.0;
+        self.physicsBody.linearDamping = 0.0;
     }
     
     return self;
