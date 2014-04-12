@@ -13,7 +13,6 @@
 		14D47E4418F9BFB500EA66DC /* nuke.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D47E4018F9BFB500EA66DC /* nuke.png */; };
 		14D47E4518F9BFB500EA66DC /* nuke@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D47E4118F9BFB500EA66DC /* nuke@2x.png */; };
 		14D47E4818F9BFE200EA66DC /* Nuke.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D47E4718F9BFE200EA66DC /* Nuke.m */; };
-		14D47E4A18F9DEA900EA66DC /* nuke.sks in Resources */ = {isa = PBXBuildFile; fileRef = 14D47E4918F9DEA900EA66DC /* nuke.sks */; };
 		8E035B4D18F98C2F002076E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E035B4C18F98C2F002076E4 /* Foundation.framework */; };
 		8E035B4F18F98C2F002076E4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E035B4E18F98C2F002076E4 /* CoreGraphics.framework */; };
 		8E035B5118F98C2F002076E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E035B5018F98C2F002076E4 /* UIKit.framework */; };
@@ -29,12 +28,18 @@
 		8E035B7318F98C2F002076E4 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E035B7218F98C2F002076E4 /* XCTest.framework */; };
 		8E035B7418F98C2F002076E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E035B4C18F98C2F002076E4 /* Foundation.framework */; };
 		8E035B7518F98C2F002076E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E035B5018F98C2F002076E4 /* UIKit.framework */; };
+<<<<<<< Updated upstream
+		8E035B7D18F98C2F002076E4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E035B7B18F98C2F002076E4 /* InfoPlist.strings */; };
+		8E035B7F18F98C2F002076E4 /* asteroid_defenseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E035B7E18F98C2F002076E4 /* asteroid_defenseTests.m */; };
 		8E035B8C18F9A20C002076E4 /* Asteroid.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E035B8B18F9A20C002076E4 /* Asteroid.m */; };
 		8E035B9118F9A5C5002076E4 /* Asteroid.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E035B8F18F9A5C5002076E4 /* Asteroid.png */; };
 		8E035B9218F9A5C5002076E4 /* Asteroid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E035B9018F9A5C5002076E4 /* Asteroid@2x.png */; };
 		8E035B9618F9A681002076E4 /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E035B9518F9A681002076E4 /* Game.m */; };
+		8E035B9A18F9AE84002076E4 /* Earth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E035B9918F9AE84002076E4 /* Earth.m */; };
 		8E035B9E18F9BD22002076E4 /* MyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8E035B9C18F9BD22002076E4 /* MyParticle.sks */; };
 		8E035B9F18F9BD22002076E4 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E035B9D18F9BD22002076E4 /* spark.png */; };
+=======
+>>>>>>> Stashed changes
 		AF043BE93D694459B8450AF6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF4F674E05AB49259E75E59A /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -55,9 +60,8 @@
 		14D47E3F18F9BFB500EA66DC /* miner@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "miner@2x.png"; sourceTree = "<group>"; };
 		14D47E4018F9BFB500EA66DC /* nuke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nuke.png; sourceTree = "<group>"; };
 		14D47E4118F9BFB500EA66DC /* nuke@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nuke@2x.png"; sourceTree = "<group>"; };
-		14D47E4618F9BFE200EA66DC /* Nuke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Nuke.h; sourceTree = "<group>"; };
-		14D47E4718F9BFE200EA66DC /* Nuke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Nuke.m; sourceTree = "<group>"; };
-		14D47E4918F9DEA900EA66DC /* nuke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = nuke.sks; path = Resources/Particles/nuke.sks; sourceTree = "<group>"; };
+		14D47E4618F9BFE200EA66DC /* Nuke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Nuke.h; path = Projectiles/Nuke.h; sourceTree = "<group>"; };
+		14D47E4718F9BFE200EA66DC /* Nuke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Nuke.m; path = Projectiles/Nuke.m; sourceTree = "<group>"; };
 		8E035B4918F98C2F002076E4 /* asteroid-defense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "asteroid-defense.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E035B4C18F98C2F002076E4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8E035B4E18F98C2F002076E4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -78,14 +82,22 @@
 		8E035B6B18F98C2F002076E4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8E035B7118F98C2F002076E4 /* asteroid-defenseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "asteroid-defenseTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E035B7218F98C2F002076E4 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+<<<<<<< Updated upstream
+		8E035B7A18F98C2F002076E4 /* asteroid-defenseTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "asteroid-defenseTests-Info.plist"; sourceTree = "<group>"; };
+		8E035B7C18F98C2F002076E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8E035B7E18F98C2F002076E4 /* asteroid_defenseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = asteroid_defenseTests.m; sourceTree = "<group>"; };
 		8E035B8A18F9A20C002076E4 /* Asteroid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Asteroid.h; path = Application/Asteroid/Asteroid.h; sourceTree = "<group>"; };
 		8E035B8B18F9A20C002076E4 /* Asteroid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Asteroid.m; path = Application/Asteroid/Asteroid.m; sourceTree = "<group>"; };
 		8E035B8F18F9A5C5002076E4 /* Asteroid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Asteroid.png; path = Resources/PNG/Asteroid.png; sourceTree = "<group>"; };
 		8E035B9018F9A5C5002076E4 /* Asteroid@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Asteroid@2x.png"; path = "Resources/PNG/Asteroid@2x.png"; sourceTree = "<group>"; };
 		8E035B9418F9A681002076E4 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Game.h; path = Application/Game/Game.h; sourceTree = "<group>"; };
 		8E035B9518F9A681002076E4 /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Game.m; path = Application/Game/Game.m; sourceTree = "<group>"; };
+		8E035B9818F9AE84002076E4 /* Earth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Earth.h; path = Application/Earth/Earth.h; sourceTree = "<group>"; };
+		8E035B9918F9AE84002076E4 /* Earth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Earth.m; path = Application/Earth/Earth.m; sourceTree = "<group>"; };
 		8E035B9C18F9BD22002076E4 /* MyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = MyParticle.sks; path = Resources/Particles/MyParticle.sks; sourceTree = "<group>"; };
 		8E035B9D18F9BD22002076E4 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark.png; path = Resources/Particles/spark.png; sourceTree = "<group>"; };
+=======
+>>>>>>> Stashed changes
 		9534B94CF7C9403A86D32F42 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		DF4F674E05AB49259E75E59A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -122,8 +134,7 @@
 				14B89F3718F9A51A006A23C4 /* Earth.h */,
 				14B89F3818F9A51A006A23C4 /* Earth.m */,
 			);
-			name = "Fixed Bodies";
-			path = "Application/Fixed Bodies";
+			path = "Fixed Bodies";
 			sourceTree = "<group>";
 		};
 		14D47E3C18F9BED600EA66DC /* Projectiles */ = {
@@ -133,14 +144,11 @@
 				14D47E4718F9BFE200EA66DC /* Nuke.m */,
 			);
 			name = Projectiles;
-			path = Application/Projectiles;
 			sourceTree = "<group>";
 		};
 		14D47E3D18F9BEE200EA66DC /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				8E035B8F18F9A5C5002076E4 /* Asteroid.png */,
-				8E035B9018F9A5C5002076E4 /* Asteroid@2x.png */,
 				14D47E3E18F9BFB500EA66DC /* miner.png */,
 				14D47E3F18F9BFB500EA66DC /* miner@2x.png */,
 				14D47E4018F9BFB500EA66DC /* nuke.png */,
@@ -184,8 +192,13 @@
 		8E035B5418F98C2F002076E4 /* asteroid-defense */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< Updated upstream
 				8E035B8D18F9A55C002076E4 /* Resources */,
 				8E035B8818F9A18D002076E4 /* Application */,
+=======
+				14D47E3C18F9BED600EA66DC /* Projectiles */,
+				14B89F3618F9A443006A23C4 /* Fixed Bodies */,
+>>>>>>> Stashed changes
 				8E035B5D18F98C2F002076E4 /* AppDelegate.h */,
 				8E035B5E18F98C2F002076E4 /* AppDelegate.m */,
 				8E035B6018F98C2F002076E4 /* Main.storyboard */,
@@ -203,6 +216,7 @@
 		8E035B5518F98C2F002076E4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				14D47E3D18F9BEE200EA66DC /* Images */,
 				8E035B5618F98C2F002076E4 /* asteroid-defense-Info.plist */,
 				8E035B5718F98C2F002076E4 /* InfoPlist.strings */,
 				8E035B5A18F98C2F002076E4 /* main.m */,
@@ -211,11 +225,29 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+<<<<<<< Updated upstream
+		8E035B7818F98C2F002076E4 /* asteroid-defenseTests */ = {
+			isa = PBXGroup;
+			children = (
+				8E035B7E18F98C2F002076E4 /* asteroid_defenseTests.m */,
+				8E035B7918F98C2F002076E4 /* Supporting Files */,
+			);
+			path = "asteroid-defenseTests";
+			sourceTree = "<group>";
+		};
+		8E035B7918F98C2F002076E4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8E035B7A18F98C2F002076E4 /* asteroid-defenseTests-Info.plist */,
+				8E035B7B18F98C2F002076E4 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		8E035B8818F9A18D002076E4 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				14D47E3C18F9BED600EA66DC /* Projectiles */,
-				14B89F3618F9A443006A23C4 /* Fixed Bodies */,
+				8E035B9718F9AE70002076E4 /* Earth */,
 				8E035B9318F9A66D002076E4 /* Game */,
 				8E035B8918F9A1D9002076E4 /* Asteroid */,
 			);
@@ -234,10 +266,19 @@
 		8E035B8D18F9A55C002076E4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				14D47E3D18F9BEE200EA66DC /* Images */,
 				8E035B9B18F9BD06002076E4 /* Particles */,
+				8E035B8E18F9A562002076E4 /* PNG */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		8E035B8E18F9A562002076E4 /* PNG */ = {
+			isa = PBXGroup;
+			children = (
+				8E035B8F18F9A5C5002076E4 /* Asteroid.png */,
+				8E035B9018F9A5C5002076E4 /* Asteroid@2x.png */,
+			);
+			name = PNG;
 			sourceTree = "<group>";
 		};
 		8E035B9318F9A66D002076E4 /* Game */ = {
@@ -249,16 +290,26 @@
 			name = Game;
 			sourceTree = "<group>";
 		};
+		8E035B9718F9AE70002076E4 /* Earth */ = {
+			isa = PBXGroup;
+			children = (
+				8E035B9818F9AE84002076E4 /* Earth.h */,
+				8E035B9918F9AE84002076E4 /* Earth.m */,
+			);
+			name = Earth;
+			sourceTree = "<group>";
+		};
 		8E035B9B18F9BD06002076E4 /* Particles */ = {
 			isa = PBXGroup;
 			children = (
 				8E035B9C18F9BD22002076E4 /* MyParticle.sks */,
 				8E035B9D18F9BD22002076E4 /* spark.png */,
-				14D47E4918F9DEA900EA66DC /* nuke.sks */,
 			);
 			name = Particles;
 			sourceTree = "<group>";
 		};
+=======
+>>>>>>> Stashed changes
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -343,16 +394,20 @@
 				14D47E4218F9BFB500EA66DC /* miner.png in Resources */,
 				8E035B5918F98C2F002076E4 /* InfoPlist.strings in Resources */,
 				8E035B6C18F98C2F002076E4 /* Images.xcassets in Resources */,
-				14D47E4518F9BFB500EA66DC /* nuke@2x.png in Resources */,
+<<<<<<< Updated upstream
 				8E035B9118F9A5C5002076E4 /* Asteroid.png in Resources */,
 				8E035B6A18F98C2F002076E4 /* Spaceship.png in Resources */,
-				14D47E4A18F9DEA900EA66DC /* nuke.sks in Resources */,
-				14D47E4318F9BFB500EA66DC /* miner@2x.png in Resources */,
 				8E035B9E18F9BD22002076E4 /* MyParticle.sks in Resources */,
 				8E035B9F18F9BD22002076E4 /* spark.png in Resources */,
 				8E035B6218F98C2F002076E4 /* Main.storyboard in Resources */,
-				14D47E4418F9BFB500EA66DC /* nuke.png in Resources */,
 				8E035B9218F9A5C5002076E4 /* Asteroid@2x.png in Resources */,
+=======
+				14D47E4518F9BFB500EA66DC /* nuke@2x.png in Resources */,
+				8E035B6A18F98C2F002076E4 /* Spaceship.png in Resources */,
+				14D47E4318F9BFB500EA66DC /* miner@2x.png in Resources */,
+				8E035B6218F98C2F002076E4 /* Main.storyboard in Resources */,
+				14D47E4418F9BFB500EA66DC /* nuke.png in Resources */,
+>>>>>>> Stashed changes
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,14 +458,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14D47E4818F9BFE200EA66DC /* Nuke.m in Sources */,
-				14B89F3918F9A51A006A23C4 /* Earth.m in Sources */,
+<<<<<<< Updated upstream
 				8E035B6818F98C2F002076E4 /* Space.m in Sources */,
+=======
+				14D47E4818F9BFE200EA66DC /* Nuke.m in Sources */,
+				8E035B6818F98C2F002076E4 /* MyScene.m in Sources */,
+				14B89F3918F9A51A006A23C4 /* Earth.m in Sources */,
+>>>>>>> Stashed changes
 				8E035B6518F98C2F002076E4 /* ViewController.m in Sources */,
 				8E035B5F18F98C2F002076E4 /* AppDelegate.m in Sources */,
 				8E035B9618F9A681002076E4 /* Game.m in Sources */,
 				8E035B8C18F9A20C002076E4 /* Asteroid.m in Sources */,
 				8E035B5B18F98C2F002076E4 /* main.m in Sources */,
+				8E035B9A18F9AE84002076E4 /* Earth.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,13 +589,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Aaron Ritchie (GMR7452Y2G)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Aaron Ritchie (GMR7452Y2G)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "asteroid-defense/asteroid-defense-Prefix.pch";
 				INFOPLIST_FILE = "asteroid-defense/asteroid-defense-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "33F5AE6B-D76F-4998-8792-1679E9B3084D";
+				PROVISIONING_PROFILE = "";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -547,13 +607,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Aaron Ritchie (GMR7452Y2G)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Aaron Ritchie (GMR7452Y2G)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "asteroid-defense/asteroid-defense-Prefix.pch";
 				INFOPLIST_FILE = "asteroid-defense/asteroid-defense-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "33F5AE6B-D76F-4998-8792-1679E9B3084D";
+				PROVISIONING_PROFILE = "";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				WRAPPER_EXTENSION = app;
 			};

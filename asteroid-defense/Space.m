@@ -8,6 +8,7 @@
 
 #import "Space.h"
 #import "Asteroid.h"
+#import "Nuke.h"
 #import "Earth.h"
 
 @implementation Space
@@ -18,13 +19,21 @@
         /* Setup your scene here */
         
         self.backgroundColor = [SKColor blackColor];
-
-        Earth *earth = [Earth new];
-        earth.position = CGPointMake( size.width / 2.0, size.height / 2.0 );
-        [self addChild:earth];
-        
+        [self placeEarth];
     }
     return self;
+}
+
+- (CGPoint)earthPoint
+{
+    return CGPointMake(self.size.width / 2.0, self.size.height / 2.0);
+}
+
+- (void)placeEarth
+{
+    Earth *earth = [Earth new];
+    earth.position = self.earthPoint;
+    [self addChild:earth];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -43,14 +52,30 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *anyTouch = [touches anyObject];
-    CGPoint endLocation = [anyTouch locationInNode:self];
+//    CGPoint endLocation = [anyTouch locationInNode:self];
+//
+//    CGVector vector = CGVectorMake( endLocation.x - touchLocation.x, endLocation.y - touchLocation.y);
+//    
+//    Nuke *sprite = [Nuke new];
+//
+//    sprite.position = touchLocation;
+//    [sprite setVector:vector];
+//
+//    [self addChild:sprite];
     
-    CGVector vector = CGVectorMake( endLocation.x - touchLocation.x, endLocation.y - touchLocation.y);
-    Asteroid *sprite = [Asteroid new];
+    [self launchMissileTowards:[anyTouch locationInNode:self]];
+}
 
-    sprite.position = touchLocation;
-    sprite.velocity = vector;
-
+- (void)launchMissileTowards:(CGPoint)targetPoint
+{
+    CGPoint originPoint = self.earthPoint;
+    CGVector vector = CGVectorMake( targetPoint.x - originPoint.x, targetPoint.y - originPoint.y);
+    
+    Nuke *sprite = [Nuke new];
+    
+    sprite.position = originPoint;
+    [sprite setVector:vector];
+    
     [self addChild:sprite];
 }
 
