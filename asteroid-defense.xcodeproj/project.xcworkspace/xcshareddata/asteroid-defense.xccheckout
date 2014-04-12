@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3FD4C620-5C47-464D-9CF6-BD2BD0B208AB</string>
+	<key>IDESourceControlProjectName</key>
+	<string>asteroid-defense</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>055C97A8-0079-403D-A61C-F1E398D4DB82</key>
+		<string>ssh://github.com/adam-borzecki/ateroid-defense.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>asteroid-defense.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>055C97A8-0079-403D-A61C-F1E398D4DB82</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/adam-borzecki/ateroid-defense.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>055C97A8-0079-403D-A61C-F1E398D4DB82</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>055C97A8-0079-403D-A61C-F1E398D4DB82</string>
+			<key>IDESourceControlWCCName</key>
+			<string>asteroid-defense</string>
+		</dict>
+	</array>
+</dict>
+</plist>
