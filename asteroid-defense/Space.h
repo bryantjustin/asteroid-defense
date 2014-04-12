@@ -7,11 +7,12 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "Earth.h"
 
 @interface Space : SKScene
 {
     CGPoint touchLocation;
-    
+    Earth *earth;
     SKEmitterNode *fingerTracker;
 }
 

@@ -33,4 +33,9 @@
     internal.physicsBody.velocity = velocity;
 }
 
+- (void) setRadialGravity:(CGVector)radialGravity
+{
+    [internal.physicsBody applyForce:radialGravity];
+}
+
 @end

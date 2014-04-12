@@ -15,4 +15,6 @@
 
 @property (nonatomic) CGVector velocity;
 
+@property (nonatomic) CGVector radialGravity;
+
 @end
