@@ -8,6 +8,9 @@
 
 #import "Nuke.h"
 #import "Game.h"
+#import "VectorUtil.h"
+
+#define LEVEL_1_SCALE 200.f
 
 @implementation Nuke
 
@@ -26,7 +29,8 @@
     self.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:12.0];
     self.physicsBody.categoryBitMask = nukeCategory;
     self.physicsBody.dynamic = YES;
-    self.physicsBody.mass = 5.0;
+    self.physicsBody.mass = 5.f;
+    self.physicsBody.linearDamping = 0.f;
     self.physicsBody.collisionBitMask = asteroidCategory;
     self.physicsBody.contactTestBitMask = asteroidCategory;
 }
@@ -34,7 +38,10 @@
 
 - (void)setVector:(CGVector)vector
 {
-    self.physicsBody.velocity = vector;
+    self.physicsBody.velocity = [VectorUtil
+        normalizeVector:vector
+        toScale:LEVEL_1_SCALE
+    ];
     self.zRotation = atan2(vector.dy,vector.dx);
 }
 

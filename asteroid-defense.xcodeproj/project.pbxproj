@@ -14,6 +14,7 @@
 		14D47E4518F9BFB500EA66DC /* nuke@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D47E4118F9BFB500EA66DC /* nuke@2x.png */; };
 		14D47E4818F9BFE200EA66DC /* Nuke.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D47E4718F9BFE200EA66DC /* Nuke.m */; };
 		14D47E4A18F9DEA900EA66DC /* nuke.sks in Resources */ = {isa = PBXBuildFile; fileRef = 14D47E4918F9DEA900EA66DC /* nuke.sks */; };
+		14D47E4E18F9E9F700EA66DC /* VectorUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D47E4D18F9E9F700EA66DC /* VectorUtil.m */; };
 		8E035B4D18F98C2F002076E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E035B4C18F98C2F002076E4 /* Foundation.framework */; };
 		8E035B4F18F98C2F002076E4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E035B4E18F98C2F002076E4 /* CoreGraphics.framework */; };
 		8E035B5118F98C2F002076E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E035B5018F98C2F002076E4 /* UIKit.framework */; };
@@ -58,6 +59,8 @@
 		14D47E4618F9BFE200EA66DC /* Nuke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Nuke.h; sourceTree = "<group>"; };
 		14D47E4718F9BFE200EA66DC /* Nuke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Nuke.m; sourceTree = "<group>"; };
 		14D47E4918F9DEA900EA66DC /* nuke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = nuke.sks; path = Resources/Particles/nuke.sks; sourceTree = "<group>"; };
+		14D47E4C18F9E9F700EA66DC /* VectorUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VectorUtil.h; path = Application/Utilities/VectorUtil.h; sourceTree = "<group>"; };
+		14D47E4D18F9E9F700EA66DC /* VectorUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VectorUtil.m; path = Application/Utilities/VectorUtil.m; sourceTree = "<group>"; };
 		8E035B4918F98C2F002076E4 /* asteroid-defense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "asteroid-defense.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E035B4C18F98C2F002076E4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8E035B4E18F98C2F002076E4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -149,6 +152,15 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		14D47E4B18F9E9B700EA66DC /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				14D47E4C18F9E9F700EA66DC /* VectorUtil.h */,
+				14D47E4D18F9E9F700EA66DC /* VectorUtil.m */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
 		8E035B4018F98C2F002076E4 = {
 			isa = PBXGroup;
 			children = (
@@ -218,6 +230,7 @@
 				14B89F3618F9A443006A23C4 /* Fixed Bodies */,
 				8E035B9318F9A66D002076E4 /* Game */,
 				8E035B8918F9A1D9002076E4 /* Asteroid */,
+				14D47E4B18F9E9B700EA66DC /* Utilities */,
 			);
 			name = Application;
 			sourceTree = "<group>";
@@ -410,6 +423,7 @@
 				8E035B5F18F98C2F002076E4 /* AppDelegate.m in Sources */,
 				8E035B9618F9A681002076E4 /* Game.m in Sources */,
 				8E035B8C18F9A20C002076E4 /* Asteroid.m in Sources */,
+				14D47E4E18F9E9F700EA66DC /* VectorUtil.m in Sources */,
 				8E035B5B18F98C2F002076E4 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

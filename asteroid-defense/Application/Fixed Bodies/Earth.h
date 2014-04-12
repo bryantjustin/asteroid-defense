@@ -8,6 +8,8 @@
 
 #import <SpriteKit/SpriteKit.h>
 
+#define EARTH_RADIUS 60.f
+
 @interface Earth : SKSpriteNode
 
 @end

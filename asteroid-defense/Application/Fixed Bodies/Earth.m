@@ -9,8 +9,6 @@
 #import "Earth.h"
 #import "Game.h"
 
-#define EARTH_RADIUS 90.f
-
 @implementation Earth
 
 - (id) init
