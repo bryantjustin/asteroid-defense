@@ -11,5 +11,6 @@
 @interface Nuke : SKSpriteNode
 
 @property (nonatomic) CGVector vector;
+@property (nonatomic) CGVector radialGravity;
 
 @end
