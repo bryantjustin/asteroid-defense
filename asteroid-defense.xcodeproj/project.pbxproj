@@ -127,6 +127,7 @@
 		8E035B5418F98C2F002076E4 /* asteroid-defense */ = {
 			isa = PBXGroup;
 			children = (
+				8E035B8818F9A18D002076E4 /* Application */,
 				8E035B5D18F98C2F002076E4 /* AppDelegate.h */,
 				8E035B5E18F98C2F002076E4 /* AppDelegate.m */,
 				8E035B6018F98C2F002076E4 /* Main.storyboard */,
@@ -168,6 +169,13 @@
 				8E035B7B18F98C2F002076E4 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8E035B8818F9A18D002076E4 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Application;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
