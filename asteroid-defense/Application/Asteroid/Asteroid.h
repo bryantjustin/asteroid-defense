@@ -10,11 +10,12 @@
 
 @interface Asteroid : SKSpriteNode
 {
-    SKSpriteNode *internal;
 }
 
 @property (nonatomic) CGVector velocity;
 
 @property (nonatomic) CGVector radialGravity;
+
+- (void) prepareTrail;
 
 @end

@@ -13,16 +13,12 @@
 
 - (id) init
 {
-    if( self = [super init])
+    if( self = [super initWithImageNamed:@"Asteroid"])
     {
-        internal = [SKSpriteNode spriteNodeWithImageNamed:@"Asteroid"];
-        
-        internal.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:15.0];
-        internal.physicsBody.categoryBitMask = asteroidCategory;
-        internal.physicsBody.dynamic = YES;
-        internal.physicsBody.mass = 1.0;
-        
-        [self addChild:internal];
+        self.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:15.0];
+        self.physicsBody.categoryBitMask = asteroidCategory;
+        self.physicsBody.dynamic = YES;
+        self.physicsBody.mass = 1.0;
     }
     
     return self;
@@ -30,12 +26,20 @@
 
 - (void) setVelocity:(CGVector)velocity
 {
-    internal.physicsBody.velocity = velocity;
+    self.physicsBody.velocity = velocity;
 }
 
 - (void) setRadialGravity:(CGVector)radialGravity
 {
-    [internal.physicsBody applyForce:radialGravity];
+    [self.physicsBody applyForce:radialGravity];
+}
+
+- (void) prepareTrail
+{
+    NSString *burstPath = [[NSBundle mainBundle] pathForResource:@"AsteroidPath" ofType:@"sks"];
+    SKEmitterNode *trail = [NSKeyedUnarchiver unarchiveObjectWithFile:burstPath];
+    trail.targetNode = self.parent;
+    [self addChild:trail];
 }
 
 @end

@@ -10,7 +10,7 @@
 #import "Asteroid.h"
 #import "Game.h"
 
-#define kRADIAL_GRAVITY_FORCE 2000.0f
+#define kRADIAL_GRAVITY_FORCE 1000.0f
 
 @implementation Space
 
@@ -57,12 +57,14 @@
     CGPoint endLocation = [anyTouch locationInNode:self];
     
     CGVector vector = CGVectorMake( endLocation.x - touchLocation.x, endLocation.y - touchLocation.y);
-    Asteroid *sprite = [Asteroid new];
+    Asteroid *asteroid = [Asteroid new];
 
-    sprite.position = touchLocation;
-    sprite.velocity = vector;
+    asteroid.position = touchLocation;
+    asteroid.velocity = vector;
 
-    [self addChild:sprite];
+    [self addChild:asteroid];
+    
+    [asteroid prepareTrail];
     
     [fingerTracker removeFromParent];
     fingerTracker = nil;
@@ -97,9 +99,9 @@
     return length;
 }
 
--(void)update:(CFTimeInterval)currentTime
+- (void) update:(NSTimeInterval)currentTime
 {
-    CGVector earthPos = CGVectorMake( earth.position.x, earth.position.y );
+    CGPoint earthPosition = earth.position;
     
     for( SKSpriteNode *child in self.children )
     {
@@ -107,11 +109,10 @@
         {
             Asteroid *asteroid = (Asteroid *)child;
             
-            CGVector position = CGVectorMake( child.position.x, child.position.y );
-            CGVector distance = [self distanceBetween:earthPos and:position];
-            CGFloat force = kRADIAL_GRAVITY_FORCE / [self lengthSquared:distance];
-            [self normalizeVector:distance];
-            CGVector radialGravityForce = CGVectorMake( distance.dx * force, distance.dy * force);
+            CGPoint position = child.position;
+            CGFloat distance = sqrt( pow( position.x - earthPosition.x, 2.0) + (pow( position.y - earthPosition.y, 2.0 )));
+            CGFloat force = kRADIAL_GRAVITY_FORCE / ( distance * distance);
+            CGVector radialGravityForce = CGVectorMake((earthPosition.x - position.x) * force, (earthPosition.y - position.y) * force);
             
             asteroid.radialGravity = radialGravityForce;
         }

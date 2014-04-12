@@ -31,6 +31,7 @@
 		8E035B9A18F9AE84002076E4 /* Earth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E035B9918F9AE84002076E4 /* Earth.m */; };
 		8E035B9E18F9BD22002076E4 /* FingerTracker.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8E035B9C18F9BD22002076E4 /* FingerTracker.sks */; };
 		8E035B9F18F9BD22002076E4 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E035B9D18F9BD22002076E4 /* spark.png */; };
+		8E035BA118F9DCF9002076E4 /* AsteroidPath.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8E035BA018F9DCF9002076E4 /* AsteroidPath.sks */; };
 		AF043BE93D694459B8450AF6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF4F674E05AB49259E75E59A /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +79,7 @@
 		8E035B9918F9AE84002076E4 /* Earth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Earth.m; path = Application/Earth/Earth.m; sourceTree = "<group>"; };
 		8E035B9C18F9BD22002076E4 /* FingerTracker.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = FingerTracker.sks; path = Resources/Particles/FingerTracker.sks; sourceTree = "<group>"; };
 		8E035B9D18F9BD22002076E4 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark.png; path = Resources/Particles/spark.png; sourceTree = "<group>"; };
+		8E035BA018F9DCF9002076E4 /* AsteroidPath.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = AsteroidPath.sks; path = Resources/Particles/AsteroidPath.sks; sourceTree = "<group>"; };
 		9534B94CF7C9403A86D32F42 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		DF4F674E05AB49259E75E59A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -148,10 +150,10 @@
 				8E035B8818F9A18D002076E4 /* Application */,
 				8E035B5D18F98C2F002076E4 /* AppDelegate.h */,
 				8E035B5E18F98C2F002076E4 /* AppDelegate.m */,
+				8E035B6618F98C2F002076E4 /* Space.h */,
 				8E035B6018F98C2F002076E4 /* Main.storyboard */,
 				8E035B6318F98C2F002076E4 /* ViewController.h */,
 				8E035B6418F98C2F002076E4 /* ViewController.m */,
-				8E035B6618F98C2F002076E4 /* Space.h */,
 				8E035B6718F98C2F002076E4 /* Space.m */,
 				8E035B6918F98C2F002076E4 /* Spaceship.png */,
 				8E035B6B18F98C2F002076E4 /* Images.xcassets */,
@@ -192,9 +194,9 @@
 		8E035B8818F9A18D002076E4 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				8E035B8918F9A1D9002076E4 /* Asteroid */,
 				8E035B9718F9AE70002076E4 /* Earth */,
 				8E035B9318F9A66D002076E4 /* Game */,
-				8E035B8918F9A1D9002076E4 /* Asteroid */,
 			);
 			name = Application;
 			sourceTree = "<group>";
@@ -249,6 +251,7 @@
 			children = (
 				8E035B9C18F9BD22002076E4 /* FingerTracker.sks */,
 				8E035B9D18F9BD22002076E4 /* spark.png */,
+				8E035BA018F9DCF9002076E4 /* AsteroidPath.sks */,
 			);
 			name = Particles;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E035B5918F98C2F002076E4 /* InfoPlist.strings in Resources */,
+				8E035BA118F9DCF9002076E4 /* AsteroidPath.sks in Resources */,
 				8E035B6C18F98C2F002076E4 /* Images.xcassets in Resources */,
 				8E035B9118F9A5C5002076E4 /* Asteroid.png in Resources */,
 				8E035B6A18F98C2F002076E4 /* Spaceship.png in Resources */,
