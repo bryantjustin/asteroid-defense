@@ -166,11 +166,5 @@
 {
     CGFloat percent = MAX(0.0, (GameManager.sharedManager.earthHealth / BASE_EARTH_HEALTH));
     [self setTexture:[Earth textureWithPercent:percent]];
-    [earthLabel setFontColor:[UIColor
-        colorWithRed:(1.f - percent)
-        green:(1.f - percent)
-        blue:(1.f - percent)
-        alpha:1.f]
-    ];
 }
 @end

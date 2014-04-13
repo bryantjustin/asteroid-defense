@@ -67,7 +67,7 @@
 + (BOOL) isWorldKiller
 {
     int num = arc4random_uniform( 100 );
-    return num > 90;
+    return num > 70;
 }
 
 @end

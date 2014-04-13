@@ -99,6 +99,11 @@
         name:kDidAcquireReadyNuke
         object:GameManager.sharedManager
     ];
+    [NSNotificationCenter.defaultCenter
+        removeObserver:self
+        name:@"WorldKiller"
+        object:nil
+    ];
 }
 /******************************************************************************/
 
@@ -152,17 +157,19 @@
     [self addChild:nukeCountLabel];
     
     timer = [self
-        labelForString:@"Time: 00000"
-        andPosition:CGPointMake(40,768)
-        withFontSize:12
+        labelForString:@"TIME: 00000"
+        andPosition:CGPointMake(20,770)
+        withFontSize:18
     ];
+    [timer setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeLeft];
     [self addChild:timer];
     
     worldKillerWarning = [self
-                          labelForString:@"World killer approaching!"
-                          andPosition:CGPointMake( 385,768)
-                          withFontSize:15
-                          ];
+        labelForString:@"WORLD KILLER APPROACHING!"
+        andPosition:CGPointMake(385,580)
+        withFontSize:18
+    ];
+    [worldKillerWarning setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeCenter];
     [self addChild:worldKillerWarning];
     worldKillerWarning.alpha = 0;
     
@@ -471,7 +478,7 @@
     if( currentTime - lastTime > 1 )
     {
         time++;
-        timer.text = [NSString stringWithFormat:@"Time: %05d",time];
+        timer.text = [NSString stringWithFormat:@"TIME: %05d",time];
         lastTime = currentTime;
     }
 }
