@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8E035B4818F98C2F002076E4"
                BuildableName = "asteroid-defense.app"
-               BlueprintName = "asteroid-defense"
-               ReferencedContainer = "container:asteroid-defense.xcodeproj">
+               BlueprintName = "Asteroid Defense"
+               ReferencedContainer = "container:Asteroid Defense.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,8 +34,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8E035B7018F98C2F002076E4"
                BuildableName = "asteroid-defenseTests.xctest"
-               BlueprintName = "asteroid-defenseTests"
-               ReferencedContainer = "container:asteroid-defense.xcodeproj">
+               BlueprintName = "Asteroid DefenseTests"
+               ReferencedContainer = "container:Asteroid Defense.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -44,8 +44,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8E035B4818F98C2F002076E4"
             BuildableName = "asteroid-defense.app"
-            BlueprintName = "asteroid-defense"
-            ReferencedContainer = "container:asteroid-defense.xcodeproj">
+            BlueprintName = "Asteroid Defense"
+            ReferencedContainer = "container:Asteroid Defense.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -63,8 +63,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8E035B4818F98C2F002076E4"
             BuildableName = "asteroid-defense.app"
-            BlueprintName = "asteroid-defense"
-            ReferencedContainer = "container:asteroid-defense.xcodeproj">
+            BlueprintName = "Asteroid Defense"
+            ReferencedContainer = "container:Asteroid Defense.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -81,8 +81,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8E035B4818F98C2F002076E4"
             BuildableName = "asteroid-defense.app"
-            BlueprintName = "asteroid-defense"
-            ReferencedContainer = "container:asteroid-defense.xcodeproj">
+            BlueprintName = "Asteroid Defense"
+            ReferencedContainer = "container:Asteroid Defense.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
