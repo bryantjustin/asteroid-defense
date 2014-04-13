@@ -28,6 +28,20 @@
     return self;
 }
 
+- (id) initAsWorldKiller
+{
+    if( self = [super initWithTexture:[Asteroid texture:ASTEROID_WORLD_KILLER_RADIUS]])
+    {
+        self.radius = ASTEROID_WORLD_KILLER_RADIUS;
+        float mass = 1.0 + ( self.radius - 5.0 ) / 5.0;
+        self.physicsBody = [Asteroid getPhyicsBodyWithRadius:ASTEROID_WORLD_KILLER_RADIUS andMass:mass];
+        self.physicsBody.categoryBitMask = asteroidCategory | worldKillerCategory;
+        self.mass = self.physicsBody.mass;
+    }
+    
+    return self;
+}
+
 - (void) setVelocity:(CGVector)velocity
 {
     self.physicsBody.velocity = velocity;
@@ -97,7 +111,7 @@
     }
     else
     {
-        physicsBody.collisionBitMask = 0;
+        physicsBody.collisionBitMask = asteroidCategory;
         physicsBody.contactTestBitMask = detonationCategory;
     }
     

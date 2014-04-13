@@ -12,6 +12,7 @@
 #import "GameManager.h"
 #import "Miner.h"
 #import "Space.h"
+#import "Nuke.h"
 
 #define PARTICLE_RESOURCE   @"nuke"
 #define PARTICLE_TYPE       @"sks"
@@ -67,7 +68,7 @@
     }
     else if([self isContactBetweenDetonationAndAsteroid:contact])
     {
-        [self deflectAsteroid:contact];
+        [self deflectAsteroid:contact withImpulse:15.0];
     }
 }
 
@@ -82,8 +83,8 @@
     uint32_t categoryBitMaskA = contact.bodyA.categoryBitMask;
     uint32_t categoryBitMaskB = contact.bodyB.categoryBitMask;
     
-    return (categoryBitMaskA == nukeCategory && categoryBitMaskB == asteroidCategory)
-    || (categoryBitMaskA == asteroidCategory && categoryBitMaskB == nukeCategory);
+    return (categoryBitMaskA == nukeCategory && (categoryBitMaskB & asteroidCategory ) != 0)
+    || ((categoryBitMaskA & asteroidCategory ) != 0 && categoryBitMaskB == nukeCategory);
 }
 
 - (BOOL)isContactBetweenEarthAndAsteroid:(SKPhysicsContact *)contact
@@ -91,8 +92,8 @@
     uint32_t categoryBitMaskA = contact.bodyA.categoryBitMask;
     uint32_t categoryBitMaskB = contact.bodyB.categoryBitMask;
     
-    return (categoryBitMaskA == earthCategory && categoryBitMaskB == asteroidCategory)
-    || (categoryBitMaskA == asteroidCategory && categoryBitMaskB == earthCategory);
+    return (categoryBitMaskA == earthCategory && (categoryBitMaskB & asteroidCategory ) != 0)
+    || ((categoryBitMaskA & asteroidCategory ) != 0 && categoryBitMaskB == earthCategory);
 }
 
 - (BOOL)isContactBetweenAsteroidAndAsteroid:(SKPhysicsContact *)contact
@@ -105,7 +106,7 @@
     uint32_t categoryBitMaskA = contact.bodyA.categoryBitMask;
     uint32_t categoryBitMaskB = contact.bodyB.categoryBitMask;
     
-    return (categoryBitMaskA == asteroidCategory && categoryBitMaskB == asteroidCategory);
+    return ((categoryBitMaskA & asteroidCategory ) != 0 && (categoryBitMaskB & asteroidCategory ) != 0);
 }
 
 - (BOOL)isContactBetweenDetonationAndAsteroid:(SKPhysicsContact *)contact
@@ -113,8 +114,8 @@
     uint32_t categoryBitMaskA = contact.bodyA.categoryBitMask;
     uint32_t categoryBitMaskB = contact.bodyB.categoryBitMask;
 
-    return (categoryBitMaskA == detonationCategory && categoryBitMaskB == asteroidCategory)
-    || (categoryBitMaskA == asteroidCategory && categoryBitMaskB == detonationCategory);
+    return (categoryBitMaskA == detonationCategory && (categoryBitMaskB & asteroidCategory ) != 0)
+    || ((categoryBitMaskA & asteroidCategory ) != 0 && categoryBitMaskB == detonationCategory);
 }
 
 - (BOOL)isContactBetweenMinerAndAsteroid:(SKPhysicsContact *)contact
@@ -122,8 +123,8 @@
     uint32_t categoryBitMaskA = contact.bodyA.categoryBitMask;
     uint32_t categoryBitMaskB = contact.bodyB.categoryBitMask;
     
-    return (categoryBitMaskA == minerCategory && categoryBitMaskB == asteroidCategory)
-    || (categoryBitMaskA == asteroidCategory && categoryBitMaskB == minerCategory);
+    return (categoryBitMaskA == minerCategory && (categoryBitMaskB & asteroidCategory ) != 0)
+    || ((categoryBitMaskA & asteroidCategory ) != 0 && categoryBitMaskB == minerCategory);
 }
 
 /******************************************************************************/
@@ -134,15 +135,37 @@
 
 - (void)detonateNukeAtContact:(SKPhysicsContact *)contact
 {
-    [contact.bodyA.node removeFromParent];
-    [contact.bodyB.node removeFromParent];
+    Asteroid *asteroid = [self asteroidForContact:contact];
+    if( (asteroid.physicsBody.categoryBitMask & worldKillerCategory ) == 0)
+    {
+        [asteroid removeFromParent];
+    }
+    else
+    {
+        [self deflectAsteroid:contact withImpulse:80.0];
+    }
+    
+    Nuke *nuke;
+    
+    if( asteroid == contact.bodyA.node )
+    {
+        nuke = (Nuke *)contact.bodyB.node;
+    }
+    else
+    {
+        nuke = (Nuke *)contact.bodyA.node;
+    }
+    
+    [nuke removeFromParent];
+    
     
     [self spawnAndSetupEmitterAt:contact.contactPoint];
 }
 
 - (void)shatterAsteroidAtContact:(SKPhysicsContact *)contact
 {
-    [[self asteroidForContact:contact] removeFromParent];
+    Asteroid *asteroid = [self asteroidForContact:contact];
+    [asteroid removeFromParent];
     
     SKEmitterNode *emitter = [self spawnEmitterAt:contact.contactPoint];
     [space addChild:emitter];
@@ -166,7 +189,7 @@
     [a2 removeFromParent];
 }
 
-- (void) deflectAsteroid:(SKPhysicsContact *)contact
+- (void) deflectAsteroid:(SKPhysicsContact *)contact withImpulse:(CGFloat)impulseUnit
 {
     Asteroid *asteroid = [self asteroidForContact:contact];
     
@@ -184,7 +207,7 @@
     CGPoint o = originNode.position;
     CGPoint a = asteroid.position;
     
-    CGVector vector = [VectorUtil normalizeVector: CGVectorMake( ( a.x - o.x ) * 1, ( a.y - o.y ) * 1) toScale:15.0];
+    CGVector vector = [VectorUtil normalizeVector: CGVectorMake( ( a.x - o.x ) * 1, ( a.y - o.y ) * 1) toScale:impulseUnit];
     
     [asteroid.physicsBody applyImpulse:vector];
 }
@@ -204,6 +227,12 @@
     ];
     
     __weak Asteroid* asteroid = [self asteroidForContact:contact];
+    
+    if(( asteroid.physicsBody.categoryBitMask & worldKillerCategory ) != 0 )
+    {
+        return;
+    }
+    
     if (!asteroid.isBeingMined)
     {
         asteroid.isBeingMined = YES;

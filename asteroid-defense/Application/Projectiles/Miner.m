@@ -32,7 +32,7 @@
     self.physicsBody.mass = 0.0001f;
     self.physicsBody.restitution = 1.f;
     self.physicsBody.linearDamping = 0.f;
-    self.physicsBody.collisionBitMask = noCategory;
+    self.physicsBody.collisionBitMask = worldKillerCategory;
     self.physicsBody.contactTestBitMask = asteroidCategory;
 }
 

@@ -23,4 +23,6 @@
 
 - (Asteroid *)combineWithAsteroid:(Asteroid *)asteroid;
 
+- (id) initAsWorldKiller;
+
 @end

@@ -29,17 +29,18 @@
     BOOL isWorldKiller = [self isWorldKiller];
     
     CGPoint o = EARTH_CENTER;
-    CGPoint p = CGPointMake( o.x + ASTEROID_SPAWN_DISTANCE, o.y );
+    CGPoint p = CGPointMake( o.x, ASTEROID_SPAWN_DISTANCE);
     
     CGPoint spawnPoint = [self rotatePoint:p aboutPoint:o byAngle:angle];
     
-    Asteroid *asteroid = [Asteroid new];
+    Asteroid *asteroid = isWorldKiller ? [[Asteroid alloc] initAsWorldKiller] : [Asteroid new];
     asteroid.position = spawnPoint;
     
     CGPoint targetPoint;
     if( isWorldKiller )
     {
         targetPoint = o;
+        [NSNotificationCenter.defaultCenter postNotificationName:@"WorldKiller" object:nil];
     }
     else
     {
@@ -50,7 +51,7 @@
         targetPoint = [self rotatePoint:CGPointMake( o.x, o.y + distance) aboutPoint:o byAngle: angle + ( M_PI_2 * ( up ? 1 : -1 )) ];
     }
     
-    asteroid.velocity = [VectorUtil normalizeVector:CGVectorMake( targetPoint.x - spawnPoint.x, targetPoint.y - spawnPoint.y ) toScale:12.];
+    asteroid.velocity = [VectorUtil normalizeVector:CGVectorMake( targetPoint.x - spawnPoint.x, targetPoint.y - spawnPoint.y ) toScale: isWorldKiller ? 25. : 12.];
 
     return asteroid;
 }
@@ -66,8 +67,7 @@
 + (BOOL) isWorldKiller
 {
     int num = arc4random_uniform( 100 );
-    
-    return num > 80;
+    return num > 90;
 }
 
 @end

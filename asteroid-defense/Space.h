@@ -23,6 +23,7 @@ typedef enum
 {
     CGPoint touchLocation;
     SKEmitterNode *fingerTracker;
+    NSMutableDictionary *calculated;
 }
 
 - (void) spawnNukeExplostionAt:(CGPoint)point;
