@@ -18,11 +18,14 @@
 
 @property (nonatomic) CGVector radialGravity;
 @property (nonatomic) BOOL isBeingMined;
+@property int damagePoints;
 
 - (void) prepareTrail;
 
 - (Asteroid *)combineWithAsteroid:(Asteroid *)asteroid;
 
 - (id) initAsWorldKiller;
+
+- (void) damage;
 
 @end

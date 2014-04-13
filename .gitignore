@@ -10,3 +10,5 @@ Pods/Pods.xcodeproj/xcuserdata/adamborzecki.xcuserdatad/xcschemes/xcschememanage
 *.orig
 
 *.orig
+
+*.xcbkptlist

@@ -143,6 +143,7 @@
     else
     {
         [self deflectAsteroid:contact withImpulse:80.0];
+        [asteroid damage];
     }
     
     Nuke *nuke;

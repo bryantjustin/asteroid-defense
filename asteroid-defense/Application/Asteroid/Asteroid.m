@@ -56,6 +56,15 @@
     [self.physicsBody applyForce:radialGravity];
 }
 
+- (void) damage
+{
+    self.damagePoints++;
+    if( self.damagePoints == WORLD_KILLER_HIT_POINTS )
+    {
+        [self removeFromParent];
+    }
+}
+
 - (void) prepareTrail
 {
     NSString *burstPath = [[NSBundle mainBundle] pathForResource:@"AsteroidPath" ofType:@"sks"];
