@@ -8,6 +8,7 @@
 
 #import "Asteroid.h"
 #import "Game.h"
+#import "VectorUtil.h"
 
 @implementation Asteroid
 

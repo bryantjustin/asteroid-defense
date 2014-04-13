@@ -24,9 +24,11 @@
 - (void)preparePhysics
 {
     self.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:EARTH_RADIUS];
-    self.physicsBody.categoryBitMask = planetCategory;
+    self.physicsBody.categoryBitMask = earthCategory;
     self.physicsBody.dynamic = NO;
     self.physicsBody.mass = 300.0;
+    self.physicsBody.collisionBitMask = asteroidCategory;
+    self.physicsBody.contactTestBitMask = asteroidCategory;
 }
 
 + (SKTexture *)texture

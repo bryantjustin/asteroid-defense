@@ -10,6 +10,9 @@
 #import "Earth.h"
 
 @interface Space : SKScene
+<
+    SKPhysicsContactDelegate
+>
 {
     CGPoint touchLocation;
     Earth *earth;
