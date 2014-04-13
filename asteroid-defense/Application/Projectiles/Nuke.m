@@ -35,8 +35,10 @@
     self.physicsBody.contactTestBitMask = asteroidCategory;
 }
 
-- (void)setVector:(CGVector)vector
+@synthesize vector;
+- (void)setVector:(CGVector)value;
 {
+    vector = value;
     self.physicsBody.velocity = [VectorUtil
         normalizeVector:vector
         toScale:LEVEL_1_SCALE

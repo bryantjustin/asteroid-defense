@@ -68,6 +68,7 @@
 		14D47E5318FA18AC00EA66DC /* Miner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Miner.m; sourceTree = "<group>"; };
 		14D47E5618FA1DB000EA66DC /* CollisionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollisionManager.h; sourceTree = "<group>"; };
 		14D47E5718FA1DB000EA66DC /* CollisionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollisionManager.m; sourceTree = "<group>"; };
+		14D47E5918FA2C8800EA66DC /* Projectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Projectile.h; sourceTree = "<group>"; };
 		8E035B4918F98C2F002076E4 /* asteroid-defense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "asteroid-defense.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E035B4C18F98C2F002076E4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8E035B4E18F98C2F002076E4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -144,6 +145,7 @@
 				14D47E4718F9BFE200EA66DC /* Nuke.m */,
 				14D47E5218FA18AC00EA66DC /* Miner.h */,
 				14D47E5318FA18AC00EA66DC /* Miner.m */,
+				14D47E5918FA2C8800EA66DC /* Projectile.h */,
 			);
 			name = Projectiles;
 			path = Application/Projectiles;

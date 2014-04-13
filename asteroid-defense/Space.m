@@ -10,6 +10,7 @@
 #import "Asteroid.h"
 #import "Game.h"
 #import "Nuke.h"
+#import "Miner.h"
 #import "Earth.h"
 #import "VectorUtil.h"
 
@@ -104,7 +105,15 @@
     UITouch *anyTouch = [touches anyObject];
     
     [fingerTracker removeFromParent];
-    [self launchMissileTowards:[anyTouch locationInNode:self]];
+    
+    [self
+        launchProjectile:Miner.class
+        towards:[anyTouch locationInNode:self]
+    ];
+//    [self
+//        launchProjectile:Nuke.class
+//        towards:[anyTouch locationInNode:self]
+//    ];
 }
 
 - (void) spawnAsteroid
@@ -130,18 +139,20 @@
     [self addChild:asteroid];
 }
 
-- (void)launchMissileTowards:(CGPoint)targetPoint
+- (void)launchProjectile:(Class)class
+    towards:(CGPoint)targetPoint
 {
     CGPoint originPoint = self.earthPoint;
     CGVector vector = CGVectorMake( targetPoint.x - originPoint.x, targetPoint.y - originPoint.y);
     
-    Nuke *sprite = [Nuke new];
+    SKSpriteNode<Projectile> *sprite = [class new];
     
     sprite.position = originPoint;
     [sprite setVector:vector];
     
     [self addChild:sprite];
 }
+
 
 - (void)update:(CFTimeInterval)currentTime
 {

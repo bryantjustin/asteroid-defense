@@ -7,8 +7,12 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "Projectile.h"
 
 @interface Nuke : SKSpriteNode
+<
+    Projectile
+>
 
 @property (nonatomic) CGVector vector;
 @property (nonatomic) CGVector radialGravity;
