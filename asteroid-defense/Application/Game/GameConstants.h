@@ -6,10 +6,11 @@
 //  Copyright (c) 2014 Adam Borzecki. All rights reserved.
 //
 
-static const uint32_t nukeCategory      =  0x1 << 0;
-static const uint32_t asteroidCategory  =  0x1 << 1;
-static const uint32_t earthCategory    =  0x1 << 2;
-static const uint32_t minerCategory      =  0x1 << 3;
+static const uint32_t noCategory        =  0x1 << 0;
+static const uint32_t nukeCategory      =  0x1 << 1;
+static const uint32_t asteroidCategory  =  0x1 << 2;
+static const uint32_t earthCategory     =  0x1 << 3;
+static const uint32_t minerCategory     =  0x1 << 4;
 
 #define EARTH_RADIUS 60.f
 #define MAX_ASTEROID_MULTIPLIER 10.0 / 6000.0

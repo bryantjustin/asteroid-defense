@@ -9,11 +9,14 @@
 #import "CollisionManager.h"
 
 #import "Asteroid.h"
+#import "Miner.h"
 #import "Space.h"
 
 #define PARTICLE_RESOURCE   @"nuke"
 #define PARTICLE_TYPE       @"sks"
-#define PARTICLES_TO_EMIT   50.
+#define PARTICLES_TO_EMIT   30.f
+
+#define MINER_FADE_DURATION 0.1f
 
 @implementation CollisionManager
 {
@@ -51,6 +54,10 @@
     {
         [self shatterAsteroidAtContact:contact];
     }
+    else if ([self isContactBetweenMinerAndAsteroid:contact])
+    {
+        [self mineAsteroidAtContact:contact];
+    }
 }
 
 /******************************************************************************/
@@ -77,6 +84,15 @@
     || (categoryBitMaskA == asteroidCategory && categoryBitMaskB == earthCategory);
 }
 
+- (BOOL)isContactBetweenMinerAndAsteroid:(SKPhysicsContact *)contact
+{
+    uint32_t categoryBitMaskA = contact.bodyA.categoryBitMask;
+    uint32_t categoryBitMaskB = contact.bodyB.categoryBitMask;
+    
+    return (categoryBitMaskA == minerCategory && categoryBitMaskB == asteroidCategory)
+    || (categoryBitMaskA == asteroidCategory && categoryBitMaskB == minerCategory);
+}
+
 /******************************************************************************/
 
 #pragma mark - Collision reaction methods
@@ -99,7 +115,7 @@
 
 - (void)shatterAsteroidAtContact:(SKPhysicsContact *)contact
 {
-    [[self asteroidForContact:contact]removeFromParent];
+    [[self asteroidForContact:contact] removeFromParent];
     
     SKEmitterNode *emitter = [self spawnEmitterAt:contact.contactPoint];
     [space addChild:emitter];
@@ -107,6 +123,20 @@
         performSelector:@selector(onEmitterComplete:)
         withObject:emitter
         afterDelay:[self lifeSpanForEmitter:emitter]
+    ];
+}
+
+- (void)mineAsteroidAtContact:(SKPhysicsContact *)contact
+{
+    __weak SKSpriteNode* miner = [self minerForContact:contact];
+    
+    SKAction *action = [SKAction fadeOutWithDuration:MINER_FADE_DURATION];
+    [miner
+        runAction:action
+        completion:^(void)
+        {
+            [miner removeFromParent];
+        }
     ];
 }
 
@@ -128,6 +158,20 @@
         asteroid = (Asteroid *)contact.bodyB.node;
     }
     return asteroid;
+}
+
+- (Miner *)minerForContact:(SKPhysicsContact *)contact
+{
+    Miner *miner = nil;
+    if ([contact.bodyA.node isKindOfClass:Miner.class])
+    {
+        miner = (Miner *)contact.bodyA.node;
+    }
+    else if([contact.bodyB.node isKindOfClass:Miner.class])
+    {
+        miner = (Miner *)contact.bodyB.node;
+    }
+    return miner;
 }
 
 - (void)onEmitterComplete:(SKEmitterNode *)emitter

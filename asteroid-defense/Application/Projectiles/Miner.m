@@ -29,9 +29,10 @@
     self.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:12.0];
     self.physicsBody.categoryBitMask = minerCategory;
     self.physicsBody.dynamic = YES;
-    self.physicsBody.mass = 1.f;
+    self.physicsBody.mass = 0.0001f;
+    self.physicsBody.restitution = 1.f;
     self.physicsBody.linearDamping = 0.f;
-    self.physicsBody.collisionBitMask = asteroidCategory;
+    self.physicsBody.collisionBitMask = noCategory;
     self.physicsBody.contactTestBitMask = asteroidCategory;
 }
 

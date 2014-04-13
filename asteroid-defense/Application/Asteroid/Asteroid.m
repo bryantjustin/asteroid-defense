@@ -26,7 +26,7 @@
             self.physicsBody.contactTestBitMask = asteroidCategory;
         }
         self.physicsBody.dynamic = YES;
-        self.physicsBody.mass = 1.0 + ( self.radius - 5.0 ) / 5.0;
+        self.physicsBody.mass = 1.f + ( self.radius - 5.0 ) / 5.0;
         self.physicsBody.linearDamping = 0.0;
     }
     
