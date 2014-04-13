@@ -52,6 +52,13 @@
     return self;
 }
 
+- (void)resetGameManager
+{
+    earthHealth = BASE_EARTH_HEALTH;
+    nukesReady = BASE_NUKES_READY;
+    resourcesMined = 0;
+}
+
 /******************************************************************************/
 
 #pragma mark - Synthesized properties

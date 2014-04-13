@@ -16,6 +16,14 @@ typedef enum
     ProjectileTypeNuke
 } ProjectileType;
 
+@class Space;
+
+@protocol SpaceDelegate <NSObject>
+
+- (void)spaceDidRequestToTryAgain:(Space *)self;
+
+@end
+
 @interface Space : SKScene
 <
     EarthDelegate
@@ -25,9 +33,11 @@ typedef enum
     SKEmitterNode *fingerTracker;
 }
 
-- (void) spawnNukeExplostionAt:(CGPoint)point;
+- (void)spawnNukeExplostionAt:(CGPoint)point;
 - (void)updateResourcesMined;
+- (void)initiateSelfDestruct;
 
 @property (nonatomic,strong) Earth *earth;
+@property (nonatomic,weak) id<SpaceDelegate> delegate;
 
 @end

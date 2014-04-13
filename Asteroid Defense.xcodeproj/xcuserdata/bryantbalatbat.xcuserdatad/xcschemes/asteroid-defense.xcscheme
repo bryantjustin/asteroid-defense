@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8E035B4818F98C2F002076E4"
-               BuildableName = "asteroid-defense.app"
+               BuildableName = "Asteroid Defense.app"
                BlueprintName = "Asteroid Defense"
                ReferencedContainer = "container:Asteroid Defense.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8E035B7018F98C2F002076E4"
-               BuildableName = "asteroid-defenseTests.xctest"
+               BuildableName = "Asteroid DefenseTests.xctest"
                BlueprintName = "Asteroid DefenseTests"
                ReferencedContainer = "container:Asteroid Defense.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8E035B4818F98C2F002076E4"
-            BuildableName = "asteroid-defense.app"
+            BuildableName = "Asteroid Defense.app"
             BlueprintName = "Asteroid Defense"
             ReferencedContainer = "container:Asteroid Defense.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8E035B4818F98C2F002076E4"
-            BuildableName = "asteroid-defense.app"
+            BuildableName = "Asteroid Defense.app"
             BlueprintName = "Asteroid Defense"
             ReferencedContainer = "container:Asteroid Defense.xcodeproj">
          </BuildableReference>
@@ -80,7 +80,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8E035B4818F98C2F002076E4"
-            BuildableName = "asteroid-defense.app"
+            BuildableName = "Asteroid Defense.app"
             BlueprintName = "Asteroid Defense"
             ReferencedContainer = "container:Asteroid Defense.xcodeproj">
          </BuildableReference>

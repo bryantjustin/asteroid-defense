@@ -35,9 +35,13 @@
     
     SKLabelNode *nukeCountLabel;
     SKLabelNode *resourcesMinedLabel;
+    SKLabelNode *earthWasLostLabel;
+    SKLabelNode *tapToTryAgain;
     
     NSSet *nodes;
     ProjectileType projectileType;
+    
+    BOOL markedForSelfDestruct;
 }
 
 @synthesize earth;
@@ -59,7 +63,7 @@
 
 /******************************************************************************/
 
--(id)initWithSize:(CGSize)size
+- (id)initWithSize:(CGSize)size
 {
     if (self = [super initWithSize:size])
     {
@@ -78,6 +82,20 @@
     return self;
 }
 
+/******************************************************************************/
+
+#pragma mark - Deconstructor
+
+/******************************************************************************/
+
+- (void)dealloc
+{
+    [NSNotificationCenter.defaultCenter
+        removeObserver:self
+        name:kDidAcquireReadyNuke
+        object:GameManager.sharedManager
+    ];
+}
 /******************************************************************************/
 
 #pragma mark - Prepare views and managers
@@ -135,11 +153,43 @@
         name:kDidAcquireReadyNuke
         object:GameManager.sharedManager
     ];
+    
+    earthWasLostLabel = [self
+        labelForString:@"EARTH WAS LOST!"
+        andPosition:CGPointMake(385, 680)
+        withFontSize:48.
+    ];
+    [earthWasLostLabel setAlpha:0.];
+    [self addChild:earthWasLostLabel];
+    
+    tapToTryAgain = [self labelForString:@"TAP TO TRY AGAIN."
+        andPosition:CGPointMake(385, 630)
+        withFontSize:48.
+    ];
+    [tapToTryAgain setAlpha:0.];
+    [self addChild:tapToTryAgain];
 }
 
 - (void)onAcquiredReadyNuke
 {
     [self updateNukesReady];
+}
+
+- (void)initiateSelfDestruct
+{
+    SKAction *action = [SKAction
+        fadeAlphaTo:1.f
+        duration:0.35
+    ];
+    
+    [earthWasLostLabel runAction:action];
+    [tapToTryAgain
+        runAction:action
+        completion:^(void)
+        {
+            markedForSelfDestruct = YES;
+        }
+    ];
 }
 
 /******************************************************************************/
@@ -172,6 +222,12 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (markedForSelfDestruct)
+    {
+        [self.delegate spaceDidRequestToTryAgain:self];
+        return;
+    }
+    
     [fingerTracker removeFromParent];
     
     UITouch *touch = [touches anyObject];
