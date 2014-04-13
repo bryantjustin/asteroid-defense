@@ -7,7 +7,6 @@
 //
 
 #import "Nuke.h"
-#import "Game.h"
 #import "VectorUtil.h"
 
 #define LEVEL_1_SCALE 200.f

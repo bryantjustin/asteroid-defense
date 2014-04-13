@@ -8,13 +8,9 @@
 
 #import "Space.h"
 #import "Asteroid.h"
-#import "Game.h"
 #import "Nuke.h"
 #import "Earth.h"
-
-#define kRADIAL_GRAVITY_FORCE 1000.0f
-#define ASTEROID_SPAWN_DISTANCE 1500.0f
-#define LAUNCH_INTERVAL 3.0f
+#import "VectorUtil.h"
 
 @implementation Space
 
@@ -28,6 +24,10 @@
         self.physicsWorld.gravity = CGVectorMake(0.0f, 0.0f);
         
         [self placeEarth];
+        
+        lastLaunch = 0;
+        
+        self.physicsWorld.contactDelegate = self;
     }
     return self;
 }
@@ -80,16 +80,16 @@
     
     CGPoint o = earth.position;
     CGPoint p = CGPointMake( o.x + ASTEROID_SPAWN_DISTANCE, o.y );
-    
+
     CGFloat xPoint = cosf( angle ) * ( p.x - o.x ) - sinf( angle ) * ( p.y - o.y ) + o.x;
     CGFloat yPoint = sinf( angle ) * ( p.x - o.x ) + cosf( angle ) * ( p.y - o.y ) + o.y;
-    
+
     CGPoint spawnPoint = CGPointMake( xPoint, yPoint );
-    
+
     Asteroid *asteroid = [Asteroid new];
     asteroid.position = spawnPoint;
-    
-    asteroid.velocity = CGVectorMake( o.x - spawnPoint.x, o.y - spawnPoint.y );
+
+    asteroid.velocity = [VectorUtil normalizeVector:CGVectorMake( o.x - spawnPoint.x, o.y - spawnPoint.y ) toScale:1.];
     
     [self addChild:asteroid];
 }
@@ -111,21 +111,39 @@
 {
     CGPoint earthPosition = earth.position;
     
+    NSMutableDictionary *calculated = [NSMutableDictionary new];
+    
     for( SKNode *child in self.children )
     {
         if( child && [child isKindOfClass:Asteroid.class])
         {
             Asteroid *asteroid = (Asteroid *)child;
+            CGPoint point1 = asteroid.position;
+            CGVector runningVector = CGVectorMake(0.0, 0.0);
             
-            CGPoint position = child.position;
-            CGFloat distance = sqrt( pow( position.x - earthPosition.x, 2.0) + (pow( position.y - earthPosition.y, 2.0 )));
+            for( SKNode *child2 in self.children )
+            {
+                if( child2 && [child2 isKindOfClass:Asteroid.class])
+                {
+                    Asteroid *asteroid2 = (Asteroid *)child2;
+                    
+                    if( asteroid == asteroid2 || [calculated[ asteroid2 ] boolValue] == YES )
+                    {
+                        continue;
+                    }
+                    
+                    CGPoint point2 = asteroid2.position;
+                    
+                    CGVector vector = [self getVectorBetweenPosition:point1 andPosition2:point2 andGravityForce:ASTEROIDAL_GRAVITY_FORCE];
+                    runningVector = [self addVectors:runningVector and:vector];
+                }
+            }
             
-            if( distance < 100 ) continue;
+            runningVector = [self addVectors:runningVector and:[self getVectorBetweenPosition:point1 andPosition2:earthPosition andGravityForce:PLANETARY_GRAVITY_FORCE]];
+        
+            asteroid.radialGravity = runningVector;
             
-            CGFloat force = kRADIAL_GRAVITY_FORCE / ( distance * distance);
-            CGVector radialGravityForce = CGVectorMake((earthPosition.x - position.x) * force, (earthPosition.y - position.y) * force);
-            
-            asteroid.radialGravity = radialGravityForce;
+            calculated[ asteroid ] = @(YES);
         }
     }
     
@@ -134,6 +152,27 @@
         [self spawnAsteroid];
         lastLaunch = currentTime;
     }
+}
+
+- (CGVector) getVectorBetweenPosition:(CGPoint)p1 andPosition2:(CGPoint)p2 andGravityForce:(float)gravity
+{
+    CGFloat distance = sqrt( pow( p1.x - p2.x, 2.0) + (pow( p1.y - p2.y, 2.0 )));
+    
+    CGFloat force = gravity / ( distance * distance);
+    CGVector radialGravityForce = CGVectorMake((p2.x - p1.x) * force, (p2.y - p1.y) * force);
+    
+    return radialGravityForce;
+}
+
+- (CGVector)addVectors:(CGVector)v1 and:(CGVector)v2
+{
+    return CGVectorMake(v2.dx + v1.dx, v2.dy + v1.dy);
+}
+
+- (void) didBeginContact:(SKPhysicsContact *)contact
+{
+    
+    
 }
 
 @end
