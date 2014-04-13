@@ -8,6 +8,7 @@
 
 #import "Nuke.h"
 #import "VectorUtil.h"
+#import "Space.h"
 
 #define LEVEL_1_SCALE 200.f
 
@@ -36,11 +37,18 @@
 
 - (void)setVector:(CGVector)vector
 {
-    self.physicsBody.velocity = [VectorUtil
-        normalizeVector:vector
-        toScale:LEVEL_1_SCALE
-    ];
+    CGPoint point = CGPointMake( vector.dx + EARTH_CENTER.x, vector.dy + EARTH_CENTER.y );
+    
+//    self.physicsBody.velocity = [VectorUtil
+//        normalizeVector:vector
+//        toScale:LEVEL_1_SCALE
+//    ];
     self.zRotation = atan2(vector.dy,vector.dx);
+    
+    [self runAction:[SKAction moveTo:point duration:1.0 ] completion:^{
+        [((Space *)self.parent) spawnNukeExplostionAt:point];
+        [self removeFromParent];
+    }];
 }
 
 @end

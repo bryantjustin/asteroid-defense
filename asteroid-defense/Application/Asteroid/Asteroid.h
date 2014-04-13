@@ -14,11 +14,9 @@
 
 @property float radius;
 @property (nonatomic) CGVector velocity;
-@property (nonatomic) CGFloat mass;
+@property CGFloat mass;
 
 @property (nonatomic) CGVector radialGravity;
-
-- (id) initWithMass:(CGFloat)mass andRadius:(float)radius;
 
 - (void) prepareTrail;
 

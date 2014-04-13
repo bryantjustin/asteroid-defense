@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Asteroid.h"
+
+static NSTimeInterval lastSpawn;
 
 @interface AsteroidSpawner : NSObject
+
++ (Asteroid *) spawn:(NSTimeInterval)currentTime;
 
 @end

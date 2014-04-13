@@ -9,8 +9,9 @@
 #import "Space.h"
 #import "Asteroid.h"
 #import "Nuke.h"
+#import "NukeExplosion.h"
 #import "Earth.h"
-#import "VectorUtil.h"
+#import "AsteroidSpawner.h"
 
 #import "CollisionManager.h"
 
@@ -48,8 +49,6 @@
         
         [self prepareCollisionManager];
         [self prepareEarth];
-        
-        lastLaunch = 0;
         
     }
     return self;
@@ -163,12 +162,12 @@
                     
                     CGPoint point2 = asteroid2.position;
                     
-                    CGVector vector = [self getVectorBetweenPosition:point1 andPosition2:point2 andGravityForce:ASTEROIDAL_GRAVITY_FORCE];
+                    CGVector vector = [VectorUtil getVectorBetweenPosition:point1 andPosition2:point2 andGravityForce:ASTEROIDAL_GRAVITY_FORCE];
                     runningVector = [VectorUtil addVectors:runningVector and:vector];
                 }
             }
             
-            runningVector = [VectorUtil addVectors:runningVector and:[self getVectorBetweenPosition:point1 andPosition2:earthPosition andGravityForce:PLANETARY_GRAVITY_FORCE]];
+            runningVector = [VectorUtil addVectors:runningVector and:[VectorUtil getVectorBetweenPosition:point1 andPosition2:earthPosition andGravityForce:PLANETARY_GRAVITY_FORCE]];
         
             asteroid.radialGravity = runningVector;
             
@@ -176,21 +175,21 @@
         }
     }
     
-    if( currentTime - lastLaunch > LAUNCH_INTERVAL )
+    Asteroid *newAsteroid = [AsteroidSpawner spawn:currentTime];
+    if( newAsteroid )
     {
-        [self spawnAsteroid];
-        lastLaunch = currentTime;
+        [self addChild:newAsteroid];
+//        [newAsteroid prepareTrail];
     }
 }
 
-- (CGVector) getVectorBetweenPosition:(CGPoint)p1 andPosition2:(CGPoint)p2 andGravityForce:(float)gravity
+- (void) spawnNukeExplostionAt:(CGPoint)point
 {
-    CGFloat distance = sqrt( pow( p1.x - p2.x, 2.0) + (pow( p1.y - p2.y, 2.0 )));
+    NukeExplosion *explosion = [NukeExplosion new];
+    explosion.position = point;
+    [self addChild:explosion];
     
-    CGFloat force = gravity / ( distance * distance);
-    CGVector radialGravityForce = CGVectorMake((p2.x - p1.x) * force, (p2.y - p1.y) * force);
-    
-    return radialGravityForce;
+//    [collisionManager spawnAndSetupEmitterAt:point];
 }
 
 @end
