@@ -13,14 +13,14 @@
 @protocol EarthDelegate <NSObject>
 
 - (void)earth:(Earth *)earth
-    didTryToLaunchMinerWithTouches:(NSSet *)touches;
-- (void)earth:(Earth *)earth
-    didTryToLaunchNukeWithTouches:(NSSet *)touches;
+    didRequestToFireProjectileWithTouches:(NSSet *)touches;
 
 @end
 
 @interface Earth : SKSpriteNode
 
 @property (nonatomic,weak) id<EarthDelegate> delegate;
+
+- (void)updateHealth;
 
 @end

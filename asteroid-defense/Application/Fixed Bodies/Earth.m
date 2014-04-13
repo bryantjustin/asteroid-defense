@@ -7,25 +7,13 @@
 //
 
 #import "Earth.h"
+#import "GameManager.h"
 
 @implementation Earth
 {
-    NSSet *nodes;
-    
-    BOOL shouldTryMinerLaunch;
-    BOOL shouldTryNukeLaunch;
+    BOOL didMoveDuringTouch;
+    SKLabelNode *earthLabel;
 }
-
-#define MINER_LAUNCHER_NAME @"miner-launcher"
-#define MINER_LAUNCHER_NODE_X -25
-#define MINER_LAUNCHER_NODE_Y 10
-
-#define NUKE_LAUNCHER_NAME @"nuke-launcher"
-#define NUKE_LAUNCHER_NODE_X 25
-#define NUKE_LAUNCHER_NODE_Y 10
-
-#define LAUNCHER_NORMAL( $launcher )    [NSString stringWithFormat: @"%@%@", $launcher, @"-normal.png"]
-#define LAUNCHER_HIGHLIGHT( $launcher ) [NSString stringWithFormat: @"%@%@", $launcher, @"-highlight.png"]
 
 /******************************************************************************/
 
@@ -35,9 +23,19 @@
 
 + (SKTexture *)texture
 {
+    return [self textureWithPercent:1.0];
+}
+
++ (SKTexture *)textureWithPercent:(CGFloat)percent
+{
     UIGraphicsBeginImageContext(CGSizeMake(EARTH_RADIUS * 2., EARTH_RADIUS * 2.));
     CGContextRef context = UIGraphicsGetCurrentContext();
-    [SKColor.whiteColor setFill];
+    [[SKColor
+        colorWithRed:percent
+        green:percent
+        blue:percent
+        alpha:1.f
+    ] setFill];
     CGContextFillEllipseInRect(
         context,
         CGRectMake(
@@ -66,8 +64,9 @@
     if (self = [super initWithTexture:Earth.texture])
     {
         [self setUserInteractionEnabled:YES];
+        
         [self preparePhysics];
-        [self prepareLaunchers];
+        [self prepareLabels];
     }
     
     return self;
@@ -76,31 +75,24 @@
 - (void)touchesBegan:(NSSet *)touches
     withEvent:(UIEvent *)event
 {
-    UITouch *touch = [touches anyObject];
-    CGPoint location = [touch locationInNode:self];
-    SKSpriteNode *node = (SKSpriteNode *)[self nodeAtPoint:location];
-
-    shouldTryMinerLaunch = [self isNodeMinerLauncher:node];
-    shouldTryNukeLaunch = [self isNodeNukeLauncher:node];
-    
-    if (shouldTryMinerLaunch
-        || shouldTryNukeLaunch)
-    {
-        [node setTexture:[SKTexture textureWithImageNamed:LAUNCHER_HIGHLIGHT(node.name)]];
-    }
+    didMoveDuringTouch = NO;
 }
 
+- (void)touchesMoved:(NSSet *)touches
+    withEvent:(UIEvent *)event
+{
+    didMoveDuringTouch = YES;
+}
 - (void)touchesEnded:(NSSet *)touches
     withEvent:(UIEvent *)event
 {
-    for (SKSpriteNode *node in nodes)
+    if (didMoveDuringTouch)
     {
-        [node setTexture:[SKTexture textureWithImageNamed:LAUNCHER_NORMAL(node.name)]];
+        [self
+            handleTouchesEnded:touches
+        ];
+        didMoveDuringTouch = NO;
     }
-    
-    [self
-        handleTouchesEnded:touches
-    ];
 }
 
 
@@ -120,53 +112,33 @@
     self.physicsBody.contactTestBitMask = asteroidCategory;
 }
 
-- (void)prepareLaunchers
+- (void)prepareLabels
 {
-    NSMutableSet *mutableNodeSet = [NSMutableSet set];
+    earthLabel = [self
+        labelForString:@"EARTH"
+        andPosition:CGPointMake(0, -5)
+        withFontSize:12
+    ];
     
-    SKSpriteNode *node = self.minerLauncher;
-    [self addChild:node];
-    [mutableNodeSet addObject:node];
-    
-    node = self.nukeLauncher;
-    [self addChild:node];
-    [mutableNodeSet addObject:node];
-    
-    nodes = [NSSet setWithSet:mutableNodeSet];
+    [self addChild: earthLabel];
 }
 
 /******************************************************************************/
 
-#pragma mark - Launcher methods
+#pragma mark - Label methods
 
 /******************************************************************************/
 
-- (SKSpriteNode *)minerLauncher
+- (SKLabelNode *)labelForString:(NSString *)string
+    andPosition:(CGPoint)position
+    withFontSize:(CGFloat)fontSize
 {
-    SKSpriteNode *node = [SKSpriteNode spriteNodeWithImageNamed:LAUNCHER_NORMAL(MINER_LAUNCHER_NAME)];
-    node.position = CGPointMake(MINER_LAUNCHER_NODE_X, MINER_LAUNCHER_NODE_Y);
-    node.name = MINER_LAUNCHER_NAME;
-    node.zPosition = 1.f;
-    return node;
-}
-
-- (BOOL)isNodeMinerLauncher:(SKSpriteNode *)node
-{
-    return [node.name isEqualToString:MINER_LAUNCHER_NAME];
-}
-
-- (SKSpriteNode *)nukeLauncher
-{
-    SKSpriteNode *node = [SKSpriteNode spriteNodeWithImageNamed:LAUNCHER_NORMAL(NUKE_LAUNCHER_NAME)];
-    node.position = CGPointMake(NUKE_LAUNCHER_NODE_X, NUKE_LAUNCHER_NODE_Y);
-    node.name = NUKE_LAUNCHER_NAME;
-    node.zPosition = 1.f;
-    return node;
-}
-
-- (BOOL)isNodeNukeLauncher:(SKSpriteNode *)node
-{
-    return [node.name isEqualToString:NUKE_LAUNCHER_NAME];
+    SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:@"Futura"];
+    label.text = string;
+    label.fontSize = fontSize;
+    label.fontColor = SKColor.blackColor;
+    label.position = position;
+    return label;
 }
 
 /******************************************************************************/
@@ -177,24 +149,28 @@
 
 - (void)handleTouchesEnded:(NSSet *)touches
 {
-    if (shouldTryMinerLaunch)
-    {
-        [self.delegate
-            earth:self
-            didTryToLaunchMinerWithTouches:touches
-        ];
-    }
-    
-    if (shouldTryNukeLaunch)
-    {
-        [self.delegate
-            earth:self
-            didTryToLaunchNukeWithTouches:touches
-        ];
-    }
-    
-    shouldTryMinerLaunch = NO;
-    shouldTryNukeLaunch = NO;
+    [self.delegate
+        earth:self
+        didRequestToFireProjectileWithTouches:touches
+    ];
 }
 
+/******************************************************************************/
+
+#pragma mark - Health related methods
+
+/******************************************************************************/
+
+
+- (void)updateHealth
+{
+    CGFloat percent = MAX(0.0, (GameManager.sharedManager.earthHealth / BASE_EARTH_HEALTH));
+    [self setTexture:[Earth textureWithPercent:percent]];
+    [earthLabel setFontColor:[UIColor
+        colorWithRed:(1.f - percent)
+        green:(1.f - percent)
+        blue:(1.f - percent)
+        alpha:1.f]
+    ];
+}
 @end

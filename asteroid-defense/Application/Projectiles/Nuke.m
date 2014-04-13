@@ -9,7 +9,7 @@
 #import "Nuke.h"
 #import "VectorUtil.h"
 
-#define LEVEL_1_SCALE 200.f
+#define LEVEL_1_SCALE 75.f
 
 @implementation Nuke
 

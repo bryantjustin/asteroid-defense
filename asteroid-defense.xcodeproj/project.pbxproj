@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1454406118FA69F300F45243 /* GameManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1454406018FA69F300F45243 /* GameManager.m */; };
 		14B89F3918F9A51A006A23C4 /* Earth.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B89F3818F9A51A006A23C4 /* Earth.m */; };
 		14D47E4218F9BFB500EA66DC /* miner.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D47E3E18F9BFB500EA66DC /* miner.png */; };
 		14D47E4318F9BFB500EA66DC /* miner@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D47E3F18F9BFB500EA66DC /* miner@2x.png */; };
@@ -61,6 +62,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1454405F18FA69F300F45243 /* GameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameManager.h; sourceTree = "<group>"; };
+		1454406018FA69F300F45243 /* GameManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameManager.m; sourceTree = "<group>"; };
 		14B89F3718F9A51A006A23C4 /* Earth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Earth.h; sourceTree = "<group>"; };
 		14B89F3818F9A51A006A23C4 /* Earth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Earth.m; sourceTree = "<group>"; };
 		14D47E3E18F9BFB500EA66DC /* miner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = miner.png; sourceTree = "<group>"; };
@@ -203,6 +206,8 @@
 			children = (
 				14D47E5618FA1DB000EA66DC /* CollisionManager.h */,
 				14D47E5718FA1DB000EA66DC /* CollisionManager.m */,
+				1454405F18FA69F300F45243 /* GameManager.h */,
+				1454406018FA69F300F45243 /* GameManager.m */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -483,6 +488,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14D47E4818F9BFE200EA66DC /* Nuke.m in Sources */,
+				1454406118FA69F300F45243 /* GameManager.m in Sources */,
 				14B89F3918F9A51A006A23C4 /* Earth.m in Sources */,
 				14D47E5818FA1DB000EA66DC /* CollisionManager.m in Sources */,
 				8E035B6818F98C2F002076E4 /* Space.m in Sources */,

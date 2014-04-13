@@ -10,7 +10,7 @@
 #import "GameConstants.h"
 #import "VectorUtil.h"
 
-#define LEVEL_1_SCALE 50.f
+#define LEVEL_1_SCALE 100.f
 
 @implementation Miner
 

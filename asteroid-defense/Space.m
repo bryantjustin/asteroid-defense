@@ -7,7 +7,9 @@
 //
 
 #import "Space.h"
+
 #import "Asteroid.h"
+#import "GameManager.h"
 #import "Nuke.h"
 #import "Miner.h"
 #import "Earth.h"
@@ -15,10 +17,29 @@
 
 #import "CollisionManager.h"
 
+#define MINER_LAUNCHER_NAME @"miner-launcher"
+#define MINER_LAUNCHER_NODE_X 40.f
+#define MINER_LAUNCHER_NODE_Y 275.f
+
+#define NUKE_LAUNCHER_NAME @"nuke-launcher"
+#define NUKE_LAUNCHER_NODE_X 95.f
+#define NUKE_LAUNCHER_NODE_Y 275.f
+
+#define LAUNCHER_NORMAL( $launcher )    [NSString stringWithFormat: @"%@%@", $launcher, @"-normal.png"]
+#define LAUNCHER_HIGHLIGHT( $launcher ) [NSString stringWithFormat: @"%@%@", $launcher, @"-highlight.png"]
+
 @implementation Space
 {
     CollisionManager *collisionManager;
+    
+    SKLabelNode *nukeCountLabel;
+    SKLabelNode *resourcesMinedLabel;
+    
+    NSSet *nodes;
+    ProjectileType projectileType;
 }
+
+@synthesize earth;
 
 /******************************************************************************/
 
@@ -49,6 +70,8 @@
         
         [self prepareCollisionManager];
         [self prepareEarth];
+        [self prepareLauncherControls];
+        [self prepareLabels];
         
         lastLaunch = 0;
         
@@ -75,6 +98,57 @@
     [self addChild:earth];
 }
 
+- (void)prepareLauncherControls
+{
+    NSMutableSet *mutableNodeSet = [NSMutableSet set];
+    
+    SKSpriteNode *node = self.minerLauncher;
+    [self addChild:node];
+    [mutableNodeSet addObject:node];
+    
+    node = self.nukeLauncher;
+    [self addChild:node];
+    [mutableNodeSet addObject:node];
+    
+    nodes = [NSSet setWithSet:mutableNodeSet];
+
+}
+
+- (void)prepareLabels
+{
+    resourcesMinedLabel = [self
+        labelForString:@"0/100"
+        andPosition:CGPointMake(40, 235)
+        withFontSize:12
+    ];
+    [self addChild:resourcesMinedLabel];
+     
+    nukeCountLabel = [self
+        labelForString:@(GameManager.sharedManager.nukesReady).stringValue
+        andPosition:CGPointMake(95, 235)
+        withFontSize:12
+    ];
+    [self addChild:nukeCountLabel];
+    
+    [NSNotificationCenter.defaultCenter
+        addObserver:self
+        selector:@selector(onAcquiredReadyNuke)
+        name:kDidAcquireReadyNuke
+        object:GameManager.sharedManager
+    ];
+}
+
+- (void)onAcquiredReadyNuke
+{
+    [self updateNukesReady];
+}
+
+/******************************************************************************/
+
+#pragma mark - Touch methods
+
+/******************************************************************************/
+
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *anyTouch = [touches anyObject];
@@ -100,6 +174,97 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [fingerTracker removeFromParent];
+    
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInNode:self];
+    SKSpriteNode *endingNode = (SKSpriteNode *)[self nodeAtPoint:location];
+    
+    if ([nodes containsObject:endingNode])
+    {
+        for (SKSpriteNode *node in nodes)
+        {
+            if (endingNode == node)
+            {
+                [node setTexture:[SKTexture textureWithImageNamed:LAUNCHER_HIGHLIGHT(node.name)]];
+                
+                if ([self isNodeMinerLauncher:node])
+                {
+                    projectileType = ProjectileTypeMiner;
+                }
+                else if([self isNodeNukeLauncher:node])
+                {
+                    projectileType = ProjectileTypeNuke;
+                }
+            }
+            else
+            {
+                [node setTexture:[SKTexture textureWithImageNamed:LAUNCHER_NORMAL(node.name)]];
+            }
+        }
+    }
+}
+
+/******************************************************************************/
+
+#pragma mark - Launcher methods
+
+/******************************************************************************/
+
+- (SKSpriteNode *)minerLauncher
+{
+    SKSpriteNode *node = [SKSpriteNode spriteNodeWithImageNamed:LAUNCHER_HIGHLIGHT(MINER_LAUNCHER_NAME)];
+    node.position = CGPointMake(MINER_LAUNCHER_NODE_X, MINER_LAUNCHER_NODE_Y);
+    node.name = MINER_LAUNCHER_NAME;
+    return node;
+}
+
+- (SKSpriteNode *)nukeLauncher
+{
+    SKSpriteNode *node = [SKSpriteNode spriteNodeWithImageNamed:LAUNCHER_NORMAL(NUKE_LAUNCHER_NAME)];
+    node.position = CGPointMake(NUKE_LAUNCHER_NODE_X, NUKE_LAUNCHER_NODE_Y);
+    node.name = NUKE_LAUNCHER_NAME;
+    return node;
+}
+
+- (BOOL)isNodeMinerLauncher:(SKSpriteNode *)node
+{
+    return [node.name isEqualToString:MINER_LAUNCHER_NAME];
+}
+
+- (BOOL)isNodeNukeLauncher:(SKSpriteNode *)node
+{
+    return [node.name isEqualToString:NUKE_LAUNCHER_NAME];
+}
+
+
+/******************************************************************************/
+
+#pragma mark - Label methods
+
+/******************************************************************************/
+
+- (SKLabelNode *)labelForString:(NSString *)string
+    andPosition:(CGPoint)position
+    withFontSize:(CGFloat)fontSize
+{
+    SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:@"Futura"];
+    label.text = string;
+    label.fontSize = fontSize;
+    label.fontColor = SKColor.whiteColor;
+    label.position = position;
+    label.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
+    
+    return label;
+}
+
+- (void)updateResourcesMined
+{
+    [resourcesMinedLabel setText:[NSString stringWithFormat: @"%d/%d",@(GameManager.sharedManager.resourcesMined).integerValue, REQUIRED_RESOURCES_FOR_NUKE]];
+}
+
+- (void)updateNukesReady
+{
+    [nukeCountLabel setText:@(GameManager.sharedManager.nukesReady).stringValue];
 }
 
 /******************************************************************************/
@@ -108,23 +273,30 @@
 
 /******************************************************************************/
 
-- (void)earth:(Earth *)earth
-    didTryToLaunchMinerWithTouches:(NSSet *)touches
+- (void)earth:(Earth *)theEarth
+    didRequestToFireProjectileWithTouches:(NSSet *)touches
 {
-    [self
-        launchProjectile:Miner.class
-        towards:[touches.anyObject locationInNode:self]
-    ];
-}
-
-- (void)earth:(Earth *)earth
-    didTryToLaunchNukeWithTouches:(NSSet *)touches
-{
-    [self
-        launchProjectile:Nuke.class
-        towards:[touches.anyObject locationInNode:self]
-    ];
-
+    switch (projectileType)
+    {
+        case ProjectileTypeMiner:
+            [self
+                launchProjectile:Miner.class
+                towards:[touches.anyObject locationInNode:self]
+            ];
+            break;
+        
+        case ProjectileTypeNuke:
+            if (GameManager.sharedManager.nukesReady > 0)
+            {
+                [GameManager.sharedManager deployReadyNuke];
+                [self updateNukesReady];
+                [self
+                    launchProjectile:Nuke.class
+                    towards:[touches.anyObject locationInNode:self]
+                ];
+            }
+            break;
+    }
 }
 
 - (void) spawnAsteroid
@@ -142,7 +314,7 @@
     Asteroid *asteroid = [Asteroid new];
     asteroid.position = spawnPoint;
 
-    asteroid.velocity = [VectorUtil normalizeVector:CGVectorMake( o.x - spawnPoint.x, o.y - spawnPoint.y ) toScale:1.];
+    asteroid.velocity = [VectorUtil normalizeVector:CGVectorMake( o.x - spawnPoint.x, o.y - spawnPoint.y ) toScale:50.];
     
     [self addChild:asteroid];
 }
