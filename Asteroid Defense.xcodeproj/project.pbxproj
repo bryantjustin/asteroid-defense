@@ -89,15 +89,15 @@
 		14D47E6118FA3A0900EA66DC /* nuke-launcher-highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nuke-launcher-highlight@2x.png"; sourceTree = "<group>"; };
 		14D47E6218FA3A0900EA66DC /* nuke-launcher-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nuke-launcher-normal.png"; sourceTree = "<group>"; };
 		14D47E6318FA3A0900EA66DC /* nuke-launcher-normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nuke-launcher-normal@2x.png"; sourceTree = "<group>"; };
-		8E035B4918F98C2F002076E4 /* asteroid-defense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "asteroid-defense.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E035B4918F98C2F002076E4 /* Asteroid Defense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Asteroid Defense.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E035B4C18F98C2F002076E4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8E035B4E18F98C2F002076E4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		8E035B5018F98C2F002076E4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8E035B5218F98C2F002076E4 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
-		8E035B5618F98C2F002076E4 /* asteroid-defense-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "asteroid-defense-Info.plist"; sourceTree = "<group>"; };
+		8E035B5618F98C2F002076E4 /* Asteroid Defense-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Asteroid Defense-Info.plist"; sourceTree = "<group>"; };
 		8E035B5818F98C2F002076E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8E035B5A18F98C2F002076E4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		8E035B5C18F98C2F002076E4 /* asteroid-defense-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "asteroid-defense-Prefix.pch"; sourceTree = "<group>"; };
+		8E035B5C18F98C2F002076E4 /* Asteroid Defense-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Asteroid Defense-Prefix.pch"; sourceTree = "<group>"; };
 		8E035B5D18F98C2F002076E4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8E035B5E18F98C2F002076E4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		8E035B6118F98C2F002076E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 		8E035B6718F98C2F002076E4 /* Space.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Space.m; sourceTree = "<group>"; };
 		8E035B6918F98C2F002076E4 /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spaceship.png; sourceTree = "<group>"; };
 		8E035B6B18F98C2F002076E4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		8E035B7118F98C2F002076E4 /* asteroid-defenseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "asteroid-defenseTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E035B7118F98C2F002076E4 /* Asteroid DefenseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Asteroid DefenseTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E035B7218F98C2F002076E4 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		8E035B8A18F9A20C002076E4 /* Asteroid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Asteroid.h; path = Application/Asteroid/Asteroid.h; sourceTree = "<group>"; };
 		8E035B8B18F9A20C002076E4 /* Asteroid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Asteroid.m; path = Application/Asteroid/Asteroid.m; sourceTree = "<group>"; };
@@ -230,8 +230,8 @@
 		8E035B4A18F98C2F002076E4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8E035B4918F98C2F002076E4 /* asteroid-defense.app */,
-				8E035B7118F98C2F002076E4 /* asteroid-defenseTests.xctest */,
+				8E035B4918F98C2F002076E4 /* Asteroid Defense.app */,
+				8E035B7118F98C2F002076E4 /* Asteroid DefenseTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -271,10 +271,10 @@
 		8E035B5518F98C2F002076E4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8E035B5618F98C2F002076E4 /* asteroid-defense-Info.plist */,
+				8E035B5618F98C2F002076E4 /* Asteroid Defense-Info.plist */,
 				8E035B5718F98C2F002076E4 /* InfoPlist.strings */,
 				8E035B5A18F98C2F002076E4 /* main.m */,
-				8E035B5C18F98C2F002076E4 /* asteroid-defense-Prefix.pch */,
+				8E035B5C18F98C2F002076E4 /* Asteroid Defense-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -342,9 +342,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8E035B4818F98C2F002076E4 /* asteroid-defense */ = {
+		8E035B4818F98C2F002076E4 /* Asteroid Defense */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8E035B8218F98C2F002076E4 /* Build configuration list for PBXNativeTarget "asteroid-defense" */;
+			buildConfigurationList = 8E035B8218F98C2F002076E4 /* Build configuration list for PBXNativeTarget "Asteroid Defense" */;
 			buildPhases = (
 				8D1B49D8C0824E098F079E50 /* Check Pods Manifest.lock */,
 				8E035B4518F98C2F002076E4 /* Sources */,
@@ -356,14 +356,14 @@
 			);
 			dependencies = (
 			);
-			name = "asteroid-defense";
+			name = "Asteroid Defense";
 			productName = "asteroid-defense";
-			productReference = 8E035B4918F98C2F002076E4 /* asteroid-defense.app */;
+			productReference = 8E035B4918F98C2F002076E4 /* Asteroid Defense.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8E035B7018F98C2F002076E4 /* asteroid-defenseTests */ = {
+		8E035B7018F98C2F002076E4 /* Asteroid DefenseTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8E035B8518F98C2F002076E4 /* Build configuration list for PBXNativeTarget "asteroid-defenseTests" */;
+			buildConfigurationList = 8E035B8518F98C2F002076E4 /* Build configuration list for PBXNativeTarget "Asteroid DefenseTests" */;
 			buildPhases = (
 				8E035B6D18F98C2F002076E4 /* Sources */,
 				8E035B6E18F98C2F002076E4 /* Frameworks */,
@@ -374,9 +374,9 @@
 			dependencies = (
 				8E035B7718F98C2F002076E4 /* PBXTargetDependency */,
 			);
-			name = "asteroid-defenseTests";
+			name = "Asteroid DefenseTests";
 			productName = "asteroid-defenseTests";
-			productReference = 8E035B7118F98C2F002076E4 /* asteroid-defenseTests.xctest */;
+			productReference = 8E035B7118F98C2F002076E4 /* Asteroid DefenseTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -396,7 +396,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8E035B4418F98C2F002076E4 /* Build configuration list for PBXProject "asteroid-defense" */;
+			buildConfigurationList = 8E035B4418F98C2F002076E4 /* Build configuration list for PBXProject "Asteroid Defense" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -409,8 +409,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8E035B4818F98C2F002076E4 /* asteroid-defense */,
-				8E035B7018F98C2F002076E4 /* asteroid-defenseTests */,
+				8E035B4818F98C2F002076E4 /* Asteroid Defense */,
+				8E035B7018F98C2F002076E4 /* Asteroid DefenseTests */,
 			);
 		};
 /* End PBXProject section */
@@ -520,7 +520,7 @@
 /* Begin PBXTargetDependency section */
 		8E035B7718F98C2F002076E4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8E035B4818F98C2F002076E4 /* asteroid-defense */;
+			target = 8E035B4818F98C2F002076E4 /* Asteroid Defense */;
 			targetProxy = 8E035B7618F98C2F002076E4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -626,9 +626,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Aaron Ritchie (GMR7452Y2G)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Aaron Ritchie (GMR7452Y2G)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "asteroid-defense/asteroid-defense-Prefix.pch";
-				INFOPLIST_FILE = "asteroid-defense/asteroid-defense-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "asteroid-defense/Asteroid Defense-Prefix.pch";
+				INFOPLIST_FILE = "asteroid-defense/Asteroid Defense-Info.plist";
+				PRODUCT_NAME = "Asteroid Defense";
 				PROVISIONING_PROFILE = "33F5AE6B-D76F-4998-8792-1679E9B3084D";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				WRAPPER_EXTENSION = app;
@@ -644,9 +644,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Aaron Ritchie (GMR7452Y2G)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Aaron Ritchie (GMR7452Y2G)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "asteroid-defense/asteroid-defense-Prefix.pch";
-				INFOPLIST_FILE = "asteroid-defense/asteroid-defense-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "asteroid-defense/Asteroid Defense-Prefix.pch";
+				INFOPLIST_FILE = "asteroid-defense/Asteroid Defense-Info.plist";
+				PRODUCT_NAME = "Asteroid Defense";
 				PROVISIONING_PROFILE = "33F5AE6B-D76F-4998-8792-1679E9B3084D";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				WRAPPER_EXTENSION = app;
@@ -669,7 +669,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "asteroid-defenseTests/asteroid-defenseTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Asteroid DefenseTests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -687,7 +687,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "asteroid-defense/asteroid-defense-Prefix.pch";
 				INFOPLIST_FILE = "asteroid-defenseTests/asteroid-defenseTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Asteroid DefenseTests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -696,7 +696,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8E035B4418F98C2F002076E4 /* Build configuration list for PBXProject "asteroid-defense" */ = {
+		8E035B4418F98C2F002076E4 /* Build configuration list for PBXProject "Asteroid Defense" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8E035B8018F98C2F002076E4 /* Debug */,
@@ -705,7 +705,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8E035B8218F98C2F002076E4 /* Build configuration list for PBXNativeTarget "asteroid-defense" */ = {
+		8E035B8218F98C2F002076E4 /* Build configuration list for PBXNativeTarget "Asteroid Defense" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8E035B8318F98C2F002076E4 /* Debug */,
@@ -714,7 +714,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8E035B8518F98C2F002076E4 /* Build configuration list for PBXNativeTarget "asteroid-defenseTests" */ = {
+		8E035B8518F98C2F002076E4 /* Build configuration list for PBXNativeTarget "Asteroid DefenseTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8E035B8618F98C2F002076E4 /* Debug */,
