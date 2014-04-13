@@ -7,19 +7,43 @@
 //
 
 #import "Asteroid.h"
+#import "VectorUtil.h"
 
 @implementation Asteroid
 
 - (id) init
 {
-    float radius = arc4random_uniform( 5.0 ) + 5.0;
+    float __radius = arc4random_uniform( 5.0 ) + 5.0;
     
+    if( self = [super initWithTexture:[Asteroid texture:__radius]])
+    {
+        self.radius = __radius;
+        self.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.radius];
+        self.physicsBody.categoryBitMask = asteroidCategory;
+        if( ASTEROID_COLLISIONS_COMBINE )
+        {
+            self.physicsBody.collisionBitMask = asteroidCategory;
+            self.physicsBody.contactTestBitMask = asteroidCategory;
+        }
+        self.physicsBody.dynamic = YES;
+        self.physicsBody.mass = 1.0 + ( self.radius - 5.0 ) / 5.0;
+        self.physicsBody.linearDamping = 0.0;
+    }
+    
+    return self;
+}
+
+- (id) initWithMass:(CGFloat)mass andRadius:(float)radius
+{
     if( self = [super initWithTexture:[Asteroid texture:radius]])
     {
-        self.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:radius];
+        self.radius = radius;
+        self.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.radius];
         self.physicsBody.categoryBitMask = asteroidCategory;
+        self.physicsBody.collisionBitMask = asteroidCategory;
+        self.physicsBody.contactTestBitMask = asteroidCategory;
         self.physicsBody.dynamic = YES;
-        self.physicsBody.mass = 1.0 + ( radius - 5.0 ) / 5.0;
+        self.physicsBody.mass = mass;
         self.physicsBody.linearDamping = 0.0;
     }
     
@@ -30,10 +54,19 @@
 {
     self.physicsBody.velocity = velocity;
 }
+- (CGVector)velocity
+{
+    return self.physicsBody.velocity;
+}
 
 - (void) setRadialGravity:(CGVector)radialGravity
 {
     [self.physicsBody applyForce:radialGravity];
+}
+
+- (CGFloat)mass
+{
+    return self.physicsBody.mass;
 }
 
 - (void) prepareTrail
@@ -65,6 +98,14 @@
     UIGraphicsEndImageContext();
     
     return texture;
+}
+
+- (Asteroid *)combineWithAsteroid:(Asteroid *)asteroid
+{
+    Asteroid *newAsteroid = [[Asteroid alloc] initWithMass:self.mass + asteroid.mass andRadius:self.radius + asteroid.radius ];
+    newAsteroid.velocity = [VectorUtil addVectors:self.velocity and:asteroid.velocity];
+    
+    return newAsteroid;
 }
 
 @end

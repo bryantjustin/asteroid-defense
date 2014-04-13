@@ -13,4 +13,6 @@
 + (CGVector)normalizeVector:(CGVector)vector
     toScale:(CGFloat)scale;
 
++ (CGVector)addVectors:(CGVector)v1 and:(CGVector)v2;
+
 @end

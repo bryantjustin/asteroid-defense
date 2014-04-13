@@ -12,9 +12,16 @@
 #import "Earth.h"
 #import "VectorUtil.h"
 
-@implementation Space
+#define PARTICLE_RESOURCE   @"nuke"
+#define PARTICLE_TYPE       @"sks"
+#define PARTICLES_TO_EMIT   50.
 
--(id)initWithSize:(CGSize)size {    
+@implementation Space
+{
+
+}
+-(id)initWithSize:(CGSize)size
+{
     if (self = [super initWithSize:size])
     {
         /* Setup your scene here */
@@ -22,12 +29,12 @@
         self.backgroundColor = [SKColor blackColor];
         
         self.physicsWorld.gravity = CGVectorMake(0.0f, 0.0f);
+        self.physicsWorld.contactDelegate = self;
         
         [self placeEarth];
         
         lastLaunch = 0;
         
-        self.physicsWorld.contactDelegate = self;
     }
     return self;
 }
@@ -107,7 +114,7 @@
     [self addChild:sprite];
 }
 
--(void)update:(CFTimeInterval)currentTime
+- (void)update:(CFTimeInterval)currentTime
 {
     CGPoint earthPosition = earth.position;
     
@@ -127,7 +134,7 @@
                 {
                     Asteroid *asteroid2 = (Asteroid *)child2;
                     
-                    if( asteroid == asteroid2 || [calculated[ asteroid2 ] boolValue] == YES )
+                    if( asteroid == asteroid2 || asteroid.hidden == YES || asteroid2.hidden == YES || [calculated[ asteroid2 ] boolValue] == YES )
                     {
                         continue;
                     }
@@ -135,11 +142,11 @@
                     CGPoint point2 = asteroid2.position;
                     
                     CGVector vector = [self getVectorBetweenPosition:point1 andPosition2:point2 andGravityForce:ASTEROIDAL_GRAVITY_FORCE];
-                    runningVector = [self addVectors:runningVector and:vector];
+                    runningVector = [VectorUtil addVectors:runningVector and:vector];
                 }
             }
             
-            runningVector = [self addVectors:runningVector and:[self getVectorBetweenPosition:point1 andPosition2:earthPosition andGravityForce:PLANETARY_GRAVITY_FORCE]];
+            runningVector = [VectorUtil addVectors:runningVector and:[self getVectorBetweenPosition:point1 andPosition2:earthPosition andGravityForce:PLANETARY_GRAVITY_FORCE]];
         
             asteroid.radialGravity = runningVector;
             
@@ -164,15 +171,141 @@
     return radialGravityForce;
 }
 
-- (CGVector)addVectors:(CGVector)v1 and:(CGVector)v2
+/******************************************************************************/
+
+#pragma mark - SKPhysicaContactDelegate
+
+/******************************************************************************/
+
+- (void)didBeginContact:(SKPhysicsContact *)contact
 {
-    return CGVectorMake(v2.dx + v1.dx, v2.dy + v1.dy);
+    if ([self isContactBetweenNukeAndAsteroid:contact])
+    {
+        [self detonateNukeAtContact:contact];
+    }
+    else if ([self isContactBetweenEarthAndAsteroid:contact])
+    {
+        [self shatterAsteroidAtContact:contact];
+    }
+    else if( [self isContactBetweenAsteroidAndAsteroid:contact])
+    {
+        [self combineAsteroids:contact];
+    }
 }
 
-- (void) didBeginContact:(SKPhysicsContact *)contact
+- (BOOL)isContactBetweenNukeAndAsteroid:(SKPhysicsContact *)contact
 {
+    return NO;
     
+    uint32_t categoryBitMaskA = contact.bodyA.categoryBitMask;
+    uint32_t categoryBitMaskB = contact.bodyB.categoryBitMask;
     
+    return (categoryBitMaskA == nukeCategory && categoryBitMaskB == asteroidCategory)
+    || (categoryBitMaskA == asteroidCategory && categoryBitMaskB == nukeCategory);
+}
+
+- (BOOL)isContactBetweenEarthAndAsteroid:(SKPhysicsContact *)contact
+{
+    return NO;
+    
+    uint32_t categoryBitMaskA = contact.bodyA.categoryBitMask;
+    uint32_t categoryBitMaskB = contact.bodyB.categoryBitMask;
+    
+    return (categoryBitMaskA == earthCategory && categoryBitMaskB == asteroidCategory)
+    || (categoryBitMaskA == asteroidCategory && categoryBitMaskB == earthCategory);
+}
+
+- (BOOL)isContactBetweenAsteroidAndAsteroid:(SKPhysicsContact *)contact
+{
+    if( !ASTEROID_COLLISIONS_COMBINE )
+    {
+        return NO;
+    }
+    
+    uint32_t categoryBitMaskA = contact.bodyA.categoryBitMask;
+    uint32_t categoryBitMaskB = contact.bodyB.categoryBitMask;
+    
+    return (categoryBitMaskA == asteroidCategory && categoryBitMaskB == asteroidCategory);
+}
+
+- (void)detonateNukeAtContact:(SKPhysicsContact *)contact
+{
+    [contact.bodyA.node removeFromParent];
+    [contact.bodyB.node removeFromParent];
+    
+    SKEmitterNode *emitter = [self spawnEmitterAt:contact.contactPoint];
+    [self addChild:emitter];
+    [self
+        performSelector:@selector(onEmitterComplete:)
+        withObject:emitter
+        afterDelay:[self lifeSpanForEmitter:emitter]
+    ];
+}
+
+- (Asteroid *)asteroidForContact:(SKPhysicsContact *)contact
+{
+    Asteroid *asteroid = nil;
+    if ([contact.bodyA.node isKindOfClass:Asteroid.class])
+    {
+        asteroid = (Asteroid *)contact.bodyA.node;
+    }
+    else if([contact.bodyB.node isKindOfClass:Asteroid.class])
+    {
+        asteroid = (Asteroid *)contact.bodyB.node;
+    }
+    return asteroid;
+}
+
+- (void)shatterAsteroidAtContact:(SKPhysicsContact *)contact
+{
+    [[self asteroidForContact:contact]removeFromParent];
+    
+    SKEmitterNode *emitter = [self spawnEmitterAt:contact.contactPoint];
+    [self addChild:emitter];
+    [self
+     performSelector:@selector(onEmitterComplete:)
+     withObject:emitter
+     afterDelay:[self lifeSpanForEmitter:emitter]
+     ];
+}
+
+- (void)combineAsteroids:(SKPhysicsContact *)contact
+{
+    Asteroid *asteroid = [((Asteroid *)contact.bodyA.node) combineWithAsteroid:(Asteroid *)contact.bodyB.node];
+    
+    [contact.bodyA.node removeFromParent];
+    [contact.bodyB.node removeFromParent];
+    
+    asteroid.position = contact.contactPoint;
+    
+    [self addChild:asteroid];
+}
+
+- (void)onEmitterComplete:(SKEmitterNode *)emitter
+{
+    [emitter removeFromParent];
+}
+
+- (SKEmitterNode *)spawnEmitterAt:(CGPoint)position
+{
+    SKEmitterNode *emitter = [NSKeyedUnarchiver unarchiveObjectWithFile:self.particlePath];
+    emitter.position = position;
+    emitter.numParticlesToEmit = PARTICLES_TO_EMIT;
+    return emitter;
+}
+
+- (NSString *)particlePath
+{
+    return [[NSBundle mainBundle]
+        pathForResource:PARTICLE_RESOURCE
+        ofType:PARTICLE_TYPE
+    ];
+}
+
+- (NSTimeInterval)lifeSpanForEmitter:(SKEmitterNode *)emitter
+{
+    return emitter.numParticlesToEmit / emitter.particleBirthRate +
+    emitter.particleLifetime + emitter.particleLifetimeRange / 2.;
 }
 
 @end

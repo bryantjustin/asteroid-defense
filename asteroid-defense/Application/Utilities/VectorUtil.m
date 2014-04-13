@@ -32,4 +32,9 @@
     return sqrtf(vector.dx * vector.dx + vector.dy * vector.dy);
 }
 
++ (CGVector)addVectors:(CGVector)v1 and:(CGVector)v2
+{
+    return CGVectorMake(v2.dx + v1.dx, v2.dy + v1.dy);
+}
+
 @end
