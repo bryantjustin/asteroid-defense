@@ -9,16 +9,25 @@
 #import <SpriteKit/SpriteKit.h>
 #import "Earth.h"
 
+
+typedef enum
+{
+    ProjectileTypeMiner,
+    ProjectileTypeNuke
+} ProjectileType;
+
 @interface Space : SKScene
 <
-    SKPhysicsContactDelegate
+    EarthDelegate
 >
 {
     CGPoint touchLocation;
-    Earth *earth;
     SKEmitterNode *fingerTracker;
 }
 
 - (void) spawnNukeExplostionAt:(CGPoint)point;
+- (void)updateResourcesMined;
+
+@property (nonatomic,strong) Earth *earth;
 
 @end

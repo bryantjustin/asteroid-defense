@@ -17,6 +17,7 @@
 @property CGFloat mass;
 
 @property (nonatomic) CGVector radialGravity;
+@property (nonatomic) BOOL isBeingMined;
 
 - (void) prepareTrail;
 

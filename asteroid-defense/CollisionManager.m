@@ -9,11 +9,16 @@
 #import "CollisionManager.h"
 
 #import "Asteroid.h"
+#import "GameManager.h"
+#import "Miner.h"
 #import "Space.h"
 
 #define PARTICLE_RESOURCE   @"nuke"
 #define PARTICLE_TYPE       @"sks"
-#define PARTICLES_TO_EMIT   50.
+#define PARTICLES_TO_EMIT   30.f
+
+#define MINER_FADE_DURATION 0.1f
+#define ASTEROID_SCALE_DURATION 0.35f
 
 @implementation CollisionManager
 {
@@ -50,6 +55,11 @@
     else if ([self isContactBetweenEarthAndAsteroid:contact])
     {
         [self shatterAsteroidAtContact:contact];
+        [self takeDamageFromAsteroidContact:contact];
+    }
+    else if ([self isContactBetweenMinerAndAsteroid:contact])
+    {
+        [self mineAsteroidAtContact:contact];
     }
     else if ([self isContactBetweenAsteroidAndAsteroid:contact])
     {
@@ -102,9 +112,18 @@
 {
     uint32_t categoryBitMaskA = contact.bodyA.categoryBitMask;
     uint32_t categoryBitMaskB = contact.bodyB.categoryBitMask;
-    
+
     return (categoryBitMaskA == detonationCategory && categoryBitMaskB == asteroidCategory)
     || (categoryBitMaskA == asteroidCategory && categoryBitMaskB == detonationCategory);
+}
+
+- (BOOL)isContactBetweenMinerAndAsteroid:(SKPhysicsContact *)contact
+{
+    uint32_t categoryBitMaskA = contact.bodyA.categoryBitMask;
+    uint32_t categoryBitMaskB = contact.bodyB.categoryBitMask;
+    
+    return (categoryBitMaskA == minerCategory && categoryBitMaskB == asteroidCategory)
+    || (categoryBitMaskA == asteroidCategory && categoryBitMaskB == minerCategory);
 }
 
 /******************************************************************************/
@@ -123,7 +142,7 @@
 
 - (void)shatterAsteroidAtContact:(SKPhysicsContact *)contact
 {
-    [[self asteroidForContact:contact]removeFromParent];
+    [[self asteroidForContact:contact] removeFromParent];
     
     SKEmitterNode *emitter = [self spawnEmitterAt:contact.contactPoint];
     [space addChild:emitter];
@@ -169,12 +188,69 @@
     
     [asteroid.physicsBody applyImpulse:vector];
 }
+    
+- (void)mineAsteroidAtContact:(SKPhysicsContact *)contact
+{
+    __weak Miner* miner = [self minerForContact:contact];
+    
+    SKAction *action = [SKAction fadeOutWithDuration:MINER_FADE_DURATION];
+    [miner
+        runAction:action
+        completion:^(void)
+        {
+            [miner removeFromParent];
+            
+        }
+    ];
+    
+    __weak Asteroid* asteroid = [self asteroidForContact:contact];
+    if (!asteroid.isBeingMined)
+    {
+        asteroid.isBeingMined = YES;
+        action = [SKAction
+            scaleTo:0.
+            duration:ASTEROID_SCALE_DURATION * asteroid.radius / ASTEROID_MAX_RADIUS
+        ];
+        
+        [asteroid
+            runAction:action
+         
+            completion:^(void)
+            {
+                [GameManager.sharedManager takeResourcesFromAsteroid:asteroid];
+                [space updateResourcesMined];
+                [space.earth updateHealth];
+                [asteroid removeFromParent];
+            }
+        ];
+    }
+}
+
+- (void)takeDamageFromAsteroidContact:(SKPhysicsContact *)contact
+{
+    [GameManager.sharedManager takeDamageFromAsteroid:[self asteroidForContact:contact]];
+    [[self earthForContact:contact] updateHealth];
+}
 
 /******************************************************************************/
 
 #pragma mark - Utility methods
 
 /******************************************************************************/
+
+- (Earth *)earthForContact:(SKPhysicsContact *)contact
+{
+    Earth *earth = nil;
+    if ([contact.bodyA.node isKindOfClass:Earth.class])
+    {
+        earth = (Earth *)contact.bodyA.node;
+    }
+    else if([contact.bodyB.node isKindOfClass:Earth.class])
+    {
+        earth = (Earth *)contact.bodyB.node;
+    }
+    return earth;
+}
 
 - (Asteroid *)asteroidForContact:(SKPhysicsContact *)contact
 {
@@ -188,6 +264,20 @@
         asteroid = (Asteroid *)contact.bodyB.node;
     }
     return asteroid;
+}
+
+- (Miner *)minerForContact:(SKPhysicsContact *)contact
+{
+    Miner *miner = nil;
+    if ([contact.bodyA.node isKindOfClass:Miner.class])
+    {
+        miner = (Miner *)contact.bodyA.node;
+    }
+    else if([contact.bodyB.node isKindOfClass:Miner.class])
+    {
+        miner = (Miner *)contact.bodyB.node;
+    }
+    return miner;
 }
 
 - (void)onEmitterComplete:(SKEmitterNode *)emitter

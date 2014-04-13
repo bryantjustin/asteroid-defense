@@ -11,9 +11,11 @@
 
 @implementation Asteroid
 
+@synthesize isBeingMined;
+
 - (id) init
 {
-    float __radius = arc4random_uniform( 5.0 ) + 5.0;
+    float __radius = arc4random_uniform( ASTEROID_MIN_RADIUS ) + ASTEROID_MIN_RADIUS;
     
     if( self = [super initWithTexture:[Asteroid texture:__radius]])
     {
@@ -57,11 +59,11 @@
     CGContextSetLineWidth(context, 2.0);
     
     CGRect rect = CGRectMake(
-                             0,
-                             0,
-                             radius * 2,
-                             radius * 2
-                             );
+        0,
+        0,
+        radius * 2,
+        radius * 2
+    );
     
     CGContextStrokeEllipseInRect(context, CGRectInset(rect, 2, 2));
     
