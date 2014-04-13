@@ -12,10 +12,16 @@
 {
 }
 
+@property float radius;
 @property (nonatomic) CGVector velocity;
+@property (nonatomic) CGFloat mass;
 
 @property (nonatomic) CGVector radialGravity;
 
+- (id) initWithMass:(CGFloat)mass andRadius:(float)radius;
+
 - (void) prepareTrail;
+
+- (Asteroid *)combineWithAsteroid:(Asteroid *)asteroid;
 
 @end

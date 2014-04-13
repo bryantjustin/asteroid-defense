@@ -7,7 +7,6 @@
 //
 
 #import "Earth.h"
-#import "Game.h"
 
 @implementation Earth
 

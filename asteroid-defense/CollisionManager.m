@@ -9,7 +9,6 @@
 #import "CollisionManager.h"
 
 #import "Asteroid.h"
-#import "Game.h"
 #import "Space.h"
 
 #define PARTICLE_RESOURCE   @"nuke"
