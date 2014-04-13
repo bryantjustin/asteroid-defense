@@ -6,3 +6,7 @@ Pods/Pods.xcodeproj/xcuserdata/adamborzecki.xcuserdatad/xcschemes/xcschememanage
 *.xcbkptlist
 
 *.xcuserstate
+
+*.orig
+
+*.orig
