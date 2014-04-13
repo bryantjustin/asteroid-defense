@@ -13,18 +13,34 @@
 #import "Earth.h"
 #import "VectorUtil.h"
 
+#import "CollisionManager.h"
+
 #define kRADIAL_GRAVITY_FORCE 1000.0f
 #define ASTEROID_SPAWN_DISTANCE 1500.0f
 #define LAUNCH_INTERVAL 3.0f
 
-#define PARTICLE_RESOURCE   @"nuke"
-#define PARTICLE_TYPE       @"sks"
-#define PARTICLES_TO_EMIT   50.
-
 @implementation Space
 {
-
+    CollisionManager *collisionManager;
 }
+
+/******************************************************************************/
+
+#pragma mark - Utility properties
+
+/******************************************************************************/
+
+- (CGPoint)earthPoint
+{
+    return CGPointMake(self.size.width / 2.0, self.size.height / 2.0);
+}
+
+/******************************************************************************/
+
+#pragma mark - Initialization methods
+
+/******************************************************************************/
+
 -(id)initWithSize:(CGSize)size
 {
     if (self = [super initWithSize:size])
@@ -34,21 +50,27 @@
         self.backgroundColor = [SKColor blackColor];
         
         self.physicsWorld.gravity = CGVectorMake(0.0f, 0.0f);
-        self.physicsWorld.contactDelegate = self;
         
-        [self placeEarth];
+        [self prepareCollisionManager];
+        [self prepareEarth];
         
         lastLaunch = 0;
     }
     return self;
 }
 
-- (CGPoint)earthPoint
+/******************************************************************************/
+
+#pragma mark - Prepare views and managers
+
+/******************************************************************************/
+
+- (void)prepareCollisionManager
 {
-    return CGPointMake(self.size.width / 2.0, self.size.height / 2.0);
+    collisionManager = [CollisionManager managerWithSpace:self];
 }
 
-- (void)placeEarth
+- (void)prepareEarth
 {
     earth = [Earth new];
     earth.position = self.earthPoint;
@@ -150,106 +172,4 @@
     }
 }
 
-/******************************************************************************/
-
-#pragma mark - SKPhysicaContactDelegate
-
-/******************************************************************************/
-
-- (void)didBeginContact:(SKPhysicsContact *)contact
-{
-    if ([self isContactBetweenNukeAndAsteroid:contact])
-    {
-        [self detonateNukeAtContact:contact];
-    }
-    else if ([self isContactBetweenEarthAndAsteroid:contact])
-    {
-        [self shatterAsteroidAtContact:contact];
-    }
-}
-
-- (BOOL)isContactBetweenNukeAndAsteroid:(SKPhysicsContact *)contact
-{
-    uint32_t categoryBitMaskA = contact.bodyA.categoryBitMask;
-    uint32_t categoryBitMaskB = contact.bodyB.categoryBitMask;
-    
-    return (categoryBitMaskA == nukeCategory && categoryBitMaskB == asteroidCategory)
-    || (categoryBitMaskA == asteroidCategory && categoryBitMaskB == nukeCategory);
-}
-
-- (BOOL)isContactBetweenEarthAndAsteroid:(SKPhysicsContact *)contact
-{
-    uint32_t categoryBitMaskA = contact.bodyA.categoryBitMask;
-    uint32_t categoryBitMaskB = contact.bodyB.categoryBitMask;
-    
-    return (categoryBitMaskA == earthCategory && categoryBitMaskB == asteroidCategory)
-    || (categoryBitMaskA == asteroidCategory && categoryBitMaskB == earthCategory);
-}
-
-- (void)detonateNukeAtContact:(SKPhysicsContact *)contact
-{
-    [contact.bodyA.node removeFromParent];
-    [contact.bodyB.node removeFromParent];
-    
-    SKEmitterNode *emitter = [self spawnEmitterAt:contact.contactPoint];
-    [self addChild:emitter];
-    [self
-        performSelector:@selector(onEmitterComplete:)
-        withObject:emitter
-        afterDelay:[self lifeSpanForEmitter:emitter]
-    ];
-}
-
-- (Asteroid *)asteroidForContact:(SKPhysicsContact *)contact
-{
-    Asteroid *asteroid = nil;
-    if ([contact.bodyA.node isKindOfClass:Asteroid.class])
-    {
-        asteroid = (Asteroid *)contact.bodyA.node;
-    }
-    else if([contact.bodyB.node isKindOfClass:Asteroid.class])
-    {
-        asteroid = (Asteroid *)contact.bodyB.node;
-    }
-    return asteroid;
-}
-
-- (void)shatterAsteroidAtContact:(SKPhysicsContact *)contact
-{
-    [[self asteroidForContact:contact]removeFromParent];
-    
-    SKEmitterNode *emitter = [self spawnEmitterAt:contact.contactPoint];
-    [self addChild:emitter];
-    [self
-     performSelector:@selector(onEmitterComplete:)
-     withObject:emitter
-     afterDelay:[self lifeSpanForEmitter:emitter]
-     ];
-}
-- (void)onEmitterComplete:(SKEmitterNode *)emitter
-{
-    [emitter removeFromParent];
-}
-
-- (SKEmitterNode *)spawnEmitterAt:(CGPoint)position
-{
-    SKEmitterNode *emitter = [NSKeyedUnarchiver unarchiveObjectWithFile:self.particlePath];
-    emitter.position = position;
-    emitter.numParticlesToEmit = PARTICLES_TO_EMIT;
-    return emitter;
-}
-
-- (NSString *)particlePath
-{
-    return [[NSBundle mainBundle]
-        pathForResource:PARTICLE_RESOURCE
-        ofType:PARTICLE_TYPE
-    ];
-}
-
-- (NSTimeInterval)lifeSpanForEmitter:(SKEmitterNode *)emitter
-{
-    return emitter.numParticlesToEmit / emitter.particleBirthRate +
-    emitter.particleLifetime + emitter.particleLifetimeRange / 2.;
-}
 @end
