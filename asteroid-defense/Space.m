@@ -40,9 +40,13 @@
     
     int time;
     NSTimeInterval lastTime;
+    SKLabelNode *earthWasLostLabel;
+    SKLabelNode *tapToTryAgain;
     
     NSSet *nodes;
     ProjectileType projectileType;
+    
+    BOOL markedForSelfDestruct;
 }
 
 @synthesize earth;
@@ -64,7 +68,7 @@
 
 /******************************************************************************/
 
--(id)initWithSize:(CGSize)size
+- (id)initWithSize:(CGSize)size
 {
     if (self = [super initWithSize:size])
     {
@@ -82,6 +86,25 @@
     return self;
 }
 
+/******************************************************************************/
+
+#pragma mark - Deconstructor
+
+/******************************************************************************/
+
+- (void)dealloc
+{
+    [NSNotificationCenter.defaultCenter
+        removeObserver:self
+        name:kDidAcquireReadyNuke
+        object:GameManager.sharedManager
+    ];
+    [NSNotificationCenter.defaultCenter
+        removeObserver:self
+        name:@"WorldKiller"
+        object:nil
+    ];
+}
 /******************************************************************************/
 
 #pragma mark - Prepare views and managers
@@ -134,17 +157,19 @@
     [self addChild:nukeCountLabel];
     
     timer = [self
-        labelForString:@"Time: 00000"
-        andPosition:CGPointMake(40,768)
-        withFontSize:12
+        labelForString:@"TIME: 00000"
+        andPosition:CGPointMake(20,770)
+        withFontSize:18
     ];
+    [timer setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeLeft];
     [self addChild:timer];
     
     worldKillerWarning = [self
-                          labelForString:@"World killer approaching!"
-                          andPosition:CGPointMake( 385,768)
-                          withFontSize:15
-                          ];
+        labelForString:@"WORLD KILLER APPROACHING!"
+        andPosition:CGPointMake(385,580)
+        withFontSize:18
+    ];
+    [worldKillerWarning setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeCenter];
     [self addChild:worldKillerWarning];
     worldKillerWarning.alpha = 0;
     
@@ -161,6 +186,21 @@
      name:@"WorldKiller"
      object:nil
      ];
+    
+    earthWasLostLabel = [self
+        labelForString:@"EARTH WAS LOST!"
+        andPosition:CGPointMake(385, 680)
+        withFontSize:48.
+    ];
+    [earthWasLostLabel setAlpha:0.];
+    [self addChild:earthWasLostLabel];
+    
+    tapToTryAgain = [self labelForString:@"TAP TO TRY AGAIN."
+        andPosition:CGPointMake(385, 630)
+        withFontSize:48.
+    ];
+    [tapToTryAgain setAlpha:0.];
+    [self addChild:tapToTryAgain];
 }
 
 - (void)onAcquiredReadyNuke
@@ -173,6 +213,23 @@
     [worldKillerWarning runAction:[SKAction fadeAlphaTo:1 duration:1.0] completion:^{
         [worldKillerWarning runAction:[SKAction fadeAlphaTo:0.0 duration:1.0]];
     }];
+}
+
+- (void)initiateSelfDestruct
+{
+    SKAction *action = [SKAction
+        fadeAlphaTo:1.f
+        duration:0.35
+    ];
+    
+    [earthWasLostLabel runAction:action];
+    [tapToTryAgain
+        runAction:action
+        completion:^(void)
+        {
+            markedForSelfDestruct = YES;
+        }
+    ];
 }
 
 /******************************************************************************/
@@ -205,6 +262,12 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (markedForSelfDestruct)
+    {
+        [self.delegate spaceDidRequestToTryAgain:self];
+        return;
+    }
+    
     [fingerTracker removeFromParent];
     
     UITouch *touch = [touches anyObject];
@@ -415,7 +478,7 @@
     if( currentTime - lastTime > 1 )
     {
         time++;
-        timer.text = [NSString stringWithFormat:@"Time: %05d",time];
+        timer.text = [NSString stringWithFormat:@"TIME: %05d",time];
         lastTime = currentTime;
     }
 }

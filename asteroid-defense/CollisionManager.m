@@ -260,6 +260,10 @@
 {
     [GameManager.sharedManager takeDamageFromAsteroid:[self asteroidForContact:contact]];
     [[self earthForContact:contact] updateHealth];
+    if (GameManager.sharedManager.earthHealth <= 0)
+    {
+        [space initiateSelfDestruct];
+    }
 }
 
 /******************************************************************************/
