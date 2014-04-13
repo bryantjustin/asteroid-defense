@@ -30,6 +30,7 @@
     self.physicsBody.categoryBitMask = nukeCategory;
     self.physicsBody.dynamic = YES;
     self.physicsBody.mass = 1.f;
+    self.physicsBody.restitution = 1.0;
     self.physicsBody.linearDamping = 0.f;
     self.physicsBody.collisionBitMask = asteroidCategory;
     self.physicsBody.contactTestBitMask = asteroidCategory;
