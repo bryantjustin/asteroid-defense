@@ -11,7 +11,7 @@
 
 @interface Space : SKScene
 <
-    SKPhysicsContactDelegate
+    EarthDelegate
 >
 {
     CGPoint touchLocation;

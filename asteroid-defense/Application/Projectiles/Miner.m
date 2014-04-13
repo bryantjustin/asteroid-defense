@@ -7,7 +7,7 @@
 //
 
 #import "Miner.h"
-#import "Game.h"
+#import "GameConstants.h"
 #import "VectorUtil.h"
 
 #define LEVEL_1_SCALE 50.f

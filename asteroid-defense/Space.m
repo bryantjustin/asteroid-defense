@@ -71,6 +71,7 @@
 {
     earth = [Earth new];
     earth.position = self.earthPoint;
+    earth.delegate = self;
     [self addChild:earth];
 }
 
@@ -98,18 +99,32 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch *anyTouch = [touches anyObject];
-    
     [fingerTracker removeFromParent];
-    
+}
+
+/******************************************************************************/
+
+#pragma mark - EarthDelegate methods
+
+/******************************************************************************/
+
+- (void)earth:(Earth *)earth
+    didTryToLaunchMinerWithTouches:(NSSet *)touches
+{
     [self
         launchProjectile:Miner.class
-        towards:[anyTouch locationInNode:self]
+        towards:[touches.anyObject locationInNode:self]
     ];
-//    [self
-//        launchProjectile:Nuke.class
-//        towards:[anyTouch locationInNode:self]
-//    ];
+}
+
+- (void)earth:(Earth *)earth
+    didTryToLaunchNukeWithTouches:(NSSet *)touches
+{
+    [self
+        launchProjectile:Nuke.class
+        towards:[touches.anyObject locationInNode:self]
+    ];
+
 }
 
 - (void) spawnAsteroid

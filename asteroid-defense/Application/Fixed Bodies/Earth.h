@@ -8,6 +8,19 @@
 
 #import <SpriteKit/SpriteKit.h>
 
+@class Earth;
+
+@protocol EarthDelegate <NSObject>
+
+- (void)earth:(Earth *)earth
+    didTryToLaunchMinerWithTouches:(NSSet *)touches;
+- (void)earth:(Earth *)earth
+    didTryToLaunchNukeWithTouches:(NSSet *)touches;
+
+@end
+
 @interface Earth : SKSpriteNode
+
+@property (nonatomic,weak) id<EarthDelegate> delegate;
 
 @end

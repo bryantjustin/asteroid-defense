@@ -17,7 +17,7 @@ static const uint32_t minerCategory      =  0x1 << 3;
 #define PLANETARY_GRAVITY_FORCE 4000.0f
 #define ASTEROIDAL_GRAVITY_FORCE 400.0f
 #define ASTEROID_SPAWN_DISTANCE 640.0f
-#define LAUNCH_INTERVAL 0.2f
+#define LAUNCH_INTERVAL 1.5f
 
 #define EARTH_CENTER CGPointMake( 512.0, 384.0 )
 
