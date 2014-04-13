@@ -18,4 +18,6 @@
 
 + (CollisionManager *)managerWithSpace:(Space *)space;
 
+- (void) spawnAndSetupEmitterAt:(CGPoint)position;
+
 @end

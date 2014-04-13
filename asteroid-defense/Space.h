@@ -23,9 +23,9 @@ typedef enum
 {
     CGPoint touchLocation;
     SKEmitterNode *fingerTracker;
-    NSTimeInterval lastLaunch;
 }
 
+- (void) spawnNukeExplostionAt:(CGPoint)point;
 - (void)updateResourcesMined;
 
 @property (nonatomic,strong) Earth *earth;
