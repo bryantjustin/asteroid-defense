@@ -10,6 +10,8 @@
 
 @interface Asteroid : SKSpriteNode
 {
+    SKLabelNode *health;
+    int healthPoints;
 }
 
 @property float radius;

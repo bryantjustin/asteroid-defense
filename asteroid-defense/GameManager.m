@@ -82,7 +82,14 @@
 
 - (void)takeDamageFromAsteroid:(Asteroid *)asteroid
 {
-    earthHealth -= [self radiusFactorForAsteroid:asteroid] * BASE_ASTEROID_DAMAGE ;
+    if(( asteroid.physicsBody.categoryBitMask & worldKillerCategory ) != 0 )
+    {
+        earthHealth = 0.0f;
+    }
+    else
+    {
+        earthHealth -= [self radiusFactorForAsteroid:asteroid] * BASE_ASTEROID_DAMAGE ;
+    }
 }
 
 - (void)takeResourcesFromAsteroid:(Asteroid *)asteroid

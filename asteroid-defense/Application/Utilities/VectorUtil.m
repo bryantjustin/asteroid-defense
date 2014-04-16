@@ -47,4 +47,12 @@
     return radialGravityForce;
 }
 
++ (CGPoint) rotatePoint:(CGPoint)point aboutPoint:(CGPoint)origin byAngle:(float)angleInRadians
+{
+    CGFloat xPoint = cosf( angleInRadians ) * ( point.x - origin.x ) - sinf( angleInRadians ) * ( point.y - origin.y ) + origin.x;
+    CGFloat yPoint = sinf( angleInRadians ) * ( point.x - origin.x ) + cosf( angleInRadians ) * ( point.y - origin.y ) + origin.y;
+    
+    return CGPointMake( xPoint, yPoint );
+}
+
 @end

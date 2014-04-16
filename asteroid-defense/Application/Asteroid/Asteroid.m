@@ -37,6 +37,16 @@
         self.physicsBody = [Asteroid getPhyicsBodyWithRadius:ASTEROID_WORLD_KILLER_RADIUS andMass:mass];
         self.physicsBody.categoryBitMask = asteroidCategory | worldKillerCategory;
         self.mass = self.physicsBody.mass;
+        
+        healthPoints = arc4random_uniform( WORLD_KILLER_HIT_POINTS_MAX - WORLD_KILLER_HIT_POINTS_MIN ) + WORLD_KILLER_HIT_POINTS_MIN;
+        
+        health = [SKLabelNode labelNodeWithFontNamed:@"Futura"];
+        health.text = [NSString stringWithFormat:@"%d", healthPoints];
+        health.fontSize = 12.0;
+        health.fontColor = SKColor.whiteColor;
+        health.position = CGPointMake( 0.0, -5.0 );
+        
+        [self addChild:health];
     }
     
     return self;
@@ -45,6 +55,9 @@
 - (void) setVelocity:(CGVector)velocity
 {
     self.physicsBody.velocity = velocity;
+    
+    SKAction *action = [SKAction rotateByAngle:atan2(velocity.dy,velocity.dx) duration:10];
+    [self runAction:[SKAction repeatActionForever:action]];
 }
 - (CGVector)velocity
 {
@@ -59,7 +72,8 @@
 - (void) damage
 {
     self.damagePoints++;
-    if( self.damagePoints == WORLD_KILLER_HIT_POINTS )
+    health.text = [NSString stringWithFormat:@"%d", healthPoints - self.damagePoints];
+    if( self.damagePoints == healthPoints )
     {
         [self removeFromParent];
     }
@@ -80,21 +94,50 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     [SKColor.whiteColor set];
     CGContextSetLineWidth(context, 2.0);
+    CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), 1.0, 1.5, 1.0, 1.0);
+    CGContextBeginPath(UIGraphicsGetCurrentContext());
     
-    CGRect rect = CGRectMake(
-        0,
-        0,
-        radius * 2,
-        radius * 2
-    );
+    int points = 16;
+    float degreesPerPoint = 360.0/(float)points;
+    float currentAngle = 0.0;
+    float minRadius = radius - 5.0;
+    float maxRadius = radius;
+    CGPoint firstPoint;
     
-    CGContextStrokeEllipseInRect(context, CGRectInset(rect, 2, 2));
+    for( int i = 0; i < points; i++ )
+    {
+        float angleRandom = degreesPerPoint;//[self randomFloatBetween:0.0 and:degreesPerPoint];
+        float angle = currentAngle + angleRandom;
+        float r = [self randomFloatBetween:minRadius and:maxRadius];
+        CGPoint point = [VectorUtil rotatePoint:CGPointMake(radius + r, radius  ) aboutPoint:CGPointMake( radius , radius  ) byAngle:angle * M_PI / 180.0];
+        if( i == 0 )
+        {
+            CGContextMoveToPoint(UIGraphicsGetCurrentContext(), point.x, point.y);
+            firstPoint = point;
+        }
+        else
+        {
+            CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), point.x, point.y);
+        }
+        
+        currentAngle = angle;
+    }
     
+    CGContextAddLineToPoint( UIGraphicsGetCurrentContext(), firstPoint.x, firstPoint.y );
+    
+    CGContextStrokePath(UIGraphicsGetCurrentContext());
+
     UIImage *textureImage = UIGraphicsGetImageFromCurrentImageContext();
     SKTexture *texture = [SKTexture textureWithImage:textureImage];
     UIGraphicsEndImageContext();
     
     return texture;
+}
+
++ (float)randomFloatBetween:(float)smallNumber and:(float)bigNumber
+{
+    float diff = bigNumber - smallNumber;
+    return (((float) (arc4random() % ((unsigned)RAND_MAX + 1)) / RAND_MAX) * diff) + smallNumber;
 }
 
 - (Asteroid *)combineWithAsteroid:(Asteroid *)asteroid

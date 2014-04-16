@@ -50,12 +50,11 @@
     SKView * skView = (SKView *)self.view;
     [skView presentScene:nil];
     
+    [GameManager.sharedManager resetGameManager];
+    
     space = nil;
     space = [self spawnSpace];
-    
     [skView presentScene:space];
-    
-    [GameManager.sharedManager resetGameManager];
 }
 
 - (void)didReceiveMemoryWarning
@@ -66,8 +65,6 @@
 
 - (Space *)spawnSpace
 {
-    SKView * skView = (SKView *)self.view;
-    
     Space * scene = [Space sceneWithSize:sceneBoundsSize];
     scene.scaleMode = SKSceneScaleModeAspectFill;
     scene.delegate = self;

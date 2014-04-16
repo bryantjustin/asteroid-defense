@@ -17,4 +17,6 @@
 
 + (CGVector)getVectorBetweenPosition:(CGPoint)p1 andPosition2:(CGPoint)p2 andGravityForce:(float)gravity;
 
++ (CGPoint) rotatePoint:(CGPoint)point aboutPoint:(CGPoint)origin byAngle:(float)angleInRadians;
+
 @end

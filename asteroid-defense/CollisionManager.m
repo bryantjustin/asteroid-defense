@@ -68,7 +68,7 @@
     }
     else if([self isContactBetweenDetonationAndAsteroid:contact])
     {
-        [self deflectAsteroid:contact withImpulse:15.0];
+        [self deflectAsteroid:contact withImpulse:30.0];
     }
 }
 
@@ -144,6 +144,9 @@
     {
         [self deflectAsteroid:contact withImpulse:80.0];
         [asteroid damage];
+        Asteroid *chip = [[Asteroid alloc] init];
+        chip.position = contact.contactPoint;
+        [space addChild:chip];
     }
     
     Nuke *nuke;
@@ -288,16 +291,14 @@
 
 - (Asteroid *)asteroidForContact:(SKPhysicsContact *)contact
 {
-    Asteroid *asteroid = nil;
-    if ([contact.bodyA.node isKindOfClass:Asteroid.class])
+    if ((contact.bodyA.categoryBitMask & asteroidCategory) != 0 )
     {
-        asteroid = (Asteroid *)contact.bodyA.node;
+        return (Asteroid *)contact.bodyA.node;
     }
-    else if([contact.bodyB.node isKindOfClass:Asteroid.class])
+    else
     {
-        asteroid = (Asteroid *)contact.bodyB.node;
+        return (Asteroid *)contact.bodyB.node;
     }
-    return asteroid;
 }
 
 - (Miner *)minerForContact:(SKPhysicsContact *)contact

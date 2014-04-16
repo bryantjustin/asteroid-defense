@@ -31,7 +31,7 @@
     CGPoint o = EARTH_CENTER;
     CGPoint p = CGPointMake( o.x, ASTEROID_SPAWN_DISTANCE);
     
-    CGPoint spawnPoint = [self rotatePoint:p aboutPoint:o byAngle:angle];
+    CGPoint spawnPoint = [VectorUtil rotatePoint:p aboutPoint:o byAngle:angle];
     
     Asteroid *asteroid = isWorldKiller ? [[Asteroid alloc] initAsWorldKiller] : [Asteroid new];
     asteroid.position = spawnPoint;
@@ -48,20 +48,12 @@
         float distance = arc4random_uniform(ASTEROID_SPAWN_DISTANCE - EARTH_RADIUS) + EARTH_RADIUS;
         distance *= ( up ) ? 1 : -1;
         
-        targetPoint = [self rotatePoint:CGPointMake( o.x, o.y + distance) aboutPoint:o byAngle: angle + ( M_PI_2 * ( up ? 1 : -1 )) ];
+        targetPoint = [VectorUtil rotatePoint:CGPointMake( o.x, o.y + distance) aboutPoint:o byAngle: angle + ( M_PI_2 * ( up ? 1 : -1 )) ];
     }
     
     asteroid.velocity = [VectorUtil normalizeVector:CGVectorMake( targetPoint.x - spawnPoint.x, targetPoint.y - spawnPoint.y ) toScale: isWorldKiller ? 25. : 12.];
 
     return asteroid;
-}
-
-+ (CGPoint) rotatePoint:(CGPoint)point aboutPoint:(CGPoint)origin byAngle:(float)angleInRadians
-{
-    CGFloat xPoint = cosf( angleInRadians ) * ( point.x - origin.x ) - sinf( angleInRadians ) * ( point.y - origin.y ) + origin.x;
-    CGFloat yPoint = sinf( angleInRadians ) * ( point.x - origin.x ) + cosf( angleInRadians ) * ( point.y - origin.y ) + origin.y;
-    
-    return CGPointMake( xPoint, yPoint );
 }
 
 + (BOOL) isWorldKiller

@@ -449,7 +449,7 @@
                 {
                     Asteroid *asteroid2 = (Asteroid *)child2;
                     
-                    if( asteroid == asteroid2 || (asteroid.physicsBody.categoryBitMask & worldKillerCategory ) != 0 || [calculated[ asteroid2 ] boolValue] == YES )
+                    if( asteroid == asteroid2 || (asteroid.physicsBody.categoryBitMask & worldKillerCategory ) != 0 || [calculated[ @(asteroid2.hash).stringValue ] boolValue] == YES )
                     {
                         continue;
                     }
@@ -465,7 +465,7 @@
         
             asteroid.radialGravity = runningVector;
             
-            calculated[ asteroid ] = @(YES);
+            calculated[ @(asteroid.hash).stringValue ] = @(YES);
         }
     }
     

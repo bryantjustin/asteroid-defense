@@ -9,13 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "asteroid-defense/Application/AsteroidSpawner/AsteroidSpawner.m"
-            timestampString = "419095441.413723"
+            filePath = "asteroid-defense/CollisionManager.m"
+            timestampString = "419283411.38766"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "+generateAsteroid"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "-isContactBetweenEarthAndAsteroid:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

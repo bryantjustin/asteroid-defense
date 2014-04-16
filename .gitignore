@@ -12,3 +12,7 @@ Pods/Pods.xcodeproj/xcuserdata/adamborzecki.xcuserdatad/xcschemes/xcschememanage
 *.orig
 
 *.xcbkptlist
+
+*.xcworkspacedata
+
+*.xcbkptlist
