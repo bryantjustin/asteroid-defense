@@ -22,7 +22,7 @@
 
 - (void)deployReadyNuke;
 - (void)takeDamageFromAsteroid:(Asteroid *)asteroid;
-- (void)takeResourcesFromAsteroid:(Asteroid *)asteroid;
+- (int)takeResourcesFromAsteroid:(Asteroid *)asteroid;
 - (void)resetGameManager;
 
 @end

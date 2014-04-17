@@ -92,7 +92,7 @@
     }
 }
 
-- (void)takeResourcesFromAsteroid:(Asteroid *)asteroid
+- (int)takeResourcesFromAsteroid:(Asteroid *)asteroid
 {
     int resourcesMinedFromAsteroid = [self radiusFactorForAsteroid:asteroid] * BASE_ASTEROID_RESOURCES;
     
@@ -109,6 +109,8 @@
             object:self
         ];
     }
+    
+    return resourcesMinedFromAsteroid;
 }
 
 /******************************************************************************/

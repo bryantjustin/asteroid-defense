@@ -68,7 +68,7 @@
     }
     else if([self isContactBetweenDetonationAndAsteroid:contact])
     {
-        [self deflectAsteroid:contact withImpulse:30.0];
+        [self deflectAsteroid:contact withImpulse:60.0];
     }
 }
 
@@ -250,10 +250,24 @@
          
             completion:^(void)
             {
-                [GameManager.sharedManager takeResourcesFromAsteroid:asteroid];
+                int resourcesMined = [GameManager.sharedManager takeResourcesFromAsteroid:asteroid];
                 [space updateResourcesMined];
                 [space.earth updateHealth];
                 [asteroid removeFromParent];
+                
+                SKLabelNode *minedAmount = [SKLabelNode labelNodeWithFontNamed:@"Futura"];
+                minedAmount.fontColor = SKColor.whiteColor;
+                minedAmount.fontSize = 12;
+                minedAmount.alpha = 0;
+                minedAmount.text = [NSString stringWithFormat:@"+%d", resourcesMined];
+                minedAmount.position = contact.contactPoint;
+                [space addChild:minedAmount];
+                
+                [minedAmount runAction:[SKAction fadeAlphaTo:1 duration:0.75] completion:^{
+                    [minedAmount runAction:[SKAction fadeAlphaTo:0 duration:0.75] completion:^{
+                        [minedAmount removeFromParent];
+                    }];
+                }];
             }
         ];
     }
