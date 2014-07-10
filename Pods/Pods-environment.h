@@ -6,9 +6,9 @@
 // project.
 
 
-// AFNetworking
-#define COCOAPODS_POD_AVAILABLE_AFNetworking
-#define COCOAPODS_VERSION_MAJOR_AFNetworking 1
-#define COCOAPODS_VERSION_MINOR_AFNetworking 3
-#define COCOAPODS_VERSION_PATCH_AFNetworking 3
+// PhysicsDebugger
+#define COCOAPODS_POD_AVAILABLE_PhysicsDebugger
+#define COCOAPODS_VERSION_MAJOR_PhysicsDebugger 1
+#define COCOAPODS_VERSION_MINOR_PhysicsDebugger 0
+#define COCOAPODS_VERSION_PATCH_PhysicsDebugger 0
 

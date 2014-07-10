@@ -1,0 +1,729 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1454406118FA69F300F45243 /* GameManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1454406018FA69F300F45243 /* GameManager.m */; };
+		14B89F3918F9A51A006A23C4 /* Earth.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B89F3818F9A51A006A23C4 /* Earth.m */; };
+		14D47E4218F9BFB500EA66DC /* miner.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D47E3E18F9BFB500EA66DC /* miner.png */; };
+		14D47E4318F9BFB500EA66DC /* miner@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D47E3F18F9BFB500EA66DC /* miner@2x.png */; };
+		14D47E4418F9BFB500EA66DC /* nuke.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D47E4018F9BFB500EA66DC /* nuke.png */; };
+		14D47E4518F9BFB500EA66DC /* nuke@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D47E4118F9BFB500EA66DC /* nuke@2x.png */; };
+		14D47E4818F9BFE200EA66DC /* Nuke.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D47E4718F9BFE200EA66DC /* Nuke.m */; };
+		14D47E4A18F9DEA900EA66DC /* nuke.sks in Resources */ = {isa = PBXBuildFile; fileRef = 14D47E4918F9DEA900EA66DC /* nuke.sks */; };
+		14D47E4E18F9E9F700EA66DC /* VectorUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D47E4D18F9E9F700EA66DC /* VectorUtil.m */; };
+		14D47E5418FA18AC00EA66DC /* Miner.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D47E5318FA18AC00EA66DC /* Miner.m */; };
+		14D47E5818FA1DB000EA66DC /* CollisionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D47E5718FA1DB000EA66DC /* CollisionManager.m */; };
+		14D47E6418FA3A0900EA66DC /* miner-launcher-highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D47E5C18FA3A0900EA66DC /* miner-launcher-highlight.png */; };
+		14D47E6518FA3A0900EA66DC /* miner-launcher-highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D47E5D18FA3A0900EA66DC /* miner-launcher-highlight@2x.png */; };
+		14D47E6618FA3A0900EA66DC /* miner-launcher-normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D47E5E18FA3A0900EA66DC /* miner-launcher-normal.png */; };
+		14D47E6718FA3A0900EA66DC /* miner-launcher-normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D47E5F18FA3A0900EA66DC /* miner-launcher-normal@2x.png */; };
+		14D47E6818FA3A0900EA66DC /* nuke-launcher-highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D47E6018FA3A0900EA66DC /* nuke-launcher-highlight.png */; };
+		14D47E6918FA3A0900EA66DC /* nuke-launcher-highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D47E6118FA3A0900EA66DC /* nuke-launcher-highlight@2x.png */; };
+		14D47E6A18FA3A0900EA66DC /* nuke-launcher-normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D47E6218FA3A0900EA66DC /* nuke-launcher-normal.png */; };
+		14D47E6B18FA3A0900EA66DC /* nuke-launcher-normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D47E6318FA3A0900EA66DC /* nuke-launcher-normal@2x.png */; };
+		8E035B4D18F98C2F002076E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E035B4C18F98C2F002076E4 /* Foundation.framework */; };
+		8E035B4F18F98C2F002076E4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E035B4E18F98C2F002076E4 /* CoreGraphics.framework */; };
+		8E035B5118F98C2F002076E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E035B5018F98C2F002076E4 /* UIKit.framework */; };
+		8E035B5318F98C2F002076E4 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E035B5218F98C2F002076E4 /* SpriteKit.framework */; };
+		8E035B5918F98C2F002076E4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E035B5718F98C2F002076E4 /* InfoPlist.strings */; };
+		8E035B5B18F98C2F002076E4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E035B5A18F98C2F002076E4 /* main.m */; };
+		8E035B5F18F98C2F002076E4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E035B5E18F98C2F002076E4 /* AppDelegate.m */; };
+		8E035B6218F98C2F002076E4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E035B6018F98C2F002076E4 /* Main.storyboard */; };
+		8E035B6518F98C2F002076E4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E035B6418F98C2F002076E4 /* ViewController.m */; };
+		8E035B6818F98C2F002076E4 /* Space.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E035B6718F98C2F002076E4 /* Space.m */; };
+		8E035B6A18F98C2F002076E4 /* Spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E035B6918F98C2F002076E4 /* Spaceship.png */; };
+		8E035B6C18F98C2F002076E4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E035B6B18F98C2F002076E4 /* Images.xcassets */; };
+		8E035B7318F98C2F002076E4 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E035B7218F98C2F002076E4 /* XCTest.framework */; };
+		8E035B7418F98C2F002076E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E035B4C18F98C2F002076E4 /* Foundation.framework */; };
+		8E035B7518F98C2F002076E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E035B5018F98C2F002076E4 /* UIKit.framework */; };
+		8E035B8C18F9A20C002076E4 /* Asteroid.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E035B8B18F9A20C002076E4 /* Asteroid.m */; };
+		8E035B9118F9A5C5002076E4 /* Asteroid.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E035B8F18F9A5C5002076E4 /* Asteroid.png */; };
+		8E035B9218F9A5C5002076E4 /* Asteroid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E035B9018F9A5C5002076E4 /* Asteroid@2x.png */; };
+		8E035B9F18F9BD22002076E4 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E035B9D18F9BD22002076E4 /* spark.png */; };
+		8E035BA118F9DCF9002076E4 /* AsteroidPath.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8E035BA018F9DCF9002076E4 /* AsteroidPath.sks */; };
+		8E05116518F9E52C0029E94D /* FingerTracker.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8E05116418F9E52C0029E94D /* FingerTracker.sks */; };
+		8E05116918FA12970029E94D /* AsteroidSpawner.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E05116818FA12970029E94D /* AsteroidSpawner.m */; };
+		8E7E8F6518FA4D2A00930456 /* NukeExplosion.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7E8F6418FA4D2A00930456 /* NukeExplosion.m */; };
+		AF043BE93D694459B8450AF6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF4F674E05AB49259E75E59A /* libPods.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8E035B7618F98C2F002076E4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8E035B4118F98C2F002076E4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E035B4818F98C2F002076E4;
+			remoteInfo = "asteroid-defense";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1454405F18FA69F300F45243 /* GameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameManager.h; sourceTree = "<group>"; };
+		1454406018FA69F300F45243 /* GameManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameManager.m; sourceTree = "<group>"; };
+		14B89F3718F9A51A006A23C4 /* Earth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Earth.h; sourceTree = "<group>"; };
+		14B89F3818F9A51A006A23C4 /* Earth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Earth.m; sourceTree = "<group>"; };
+		14D47E3E18F9BFB500EA66DC /* miner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = miner.png; sourceTree = "<group>"; };
+		14D47E3F18F9BFB500EA66DC /* miner@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "miner@2x.png"; sourceTree = "<group>"; };
+		14D47E4018F9BFB500EA66DC /* nuke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nuke.png; sourceTree = "<group>"; };
+		14D47E4118F9BFB500EA66DC /* nuke@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nuke@2x.png"; sourceTree = "<group>"; };
+		14D47E4618F9BFE200EA66DC /* Nuke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Nuke.h; sourceTree = "<group>"; };
+		14D47E4718F9BFE200EA66DC /* Nuke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Nuke.m; sourceTree = "<group>"; };
+		14D47E4918F9DEA900EA66DC /* nuke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = nuke.sks; path = Resources/Particles/nuke.sks; sourceTree = "<group>"; };
+		14D47E4C18F9E9F700EA66DC /* VectorUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VectorUtil.h; path = Application/Utilities/VectorUtil.h; sourceTree = "<group>"; };
+		14D47E4D18F9E9F700EA66DC /* VectorUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VectorUtil.m; path = Application/Utilities/VectorUtil.m; sourceTree = "<group>"; };
+		14D47E5218FA18AC00EA66DC /* Miner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Miner.h; sourceTree = "<group>"; };
+		14D47E5318FA18AC00EA66DC /* Miner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Miner.m; sourceTree = "<group>"; };
+		14D47E5618FA1DB000EA66DC /* CollisionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollisionManager.h; sourceTree = "<group>"; };
+		14D47E5718FA1DB000EA66DC /* CollisionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollisionManager.m; sourceTree = "<group>"; };
+		14D47E5918FA2C8800EA66DC /* Projectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Projectile.h; sourceTree = "<group>"; };
+		14D47E5C18FA3A0900EA66DC /* miner-launcher-highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "miner-launcher-highlight.png"; sourceTree = "<group>"; };
+		14D47E5D18FA3A0900EA66DC /* miner-launcher-highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "miner-launcher-highlight@2x.png"; sourceTree = "<group>"; };
+		14D47E5E18FA3A0900EA66DC /* miner-launcher-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "miner-launcher-normal.png"; sourceTree = "<group>"; };
+		14D47E5F18FA3A0900EA66DC /* miner-launcher-normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "miner-launcher-normal@2x.png"; sourceTree = "<group>"; };
+		14D47E6018FA3A0900EA66DC /* nuke-launcher-highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nuke-launcher-highlight.png"; sourceTree = "<group>"; };
+		14D47E6118FA3A0900EA66DC /* nuke-launcher-highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nuke-launcher-highlight@2x.png"; sourceTree = "<group>"; };
+		14D47E6218FA3A0900EA66DC /* nuke-launcher-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nuke-launcher-normal.png"; sourceTree = "<group>"; };
+		14D47E6318FA3A0900EA66DC /* nuke-launcher-normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nuke-launcher-normal@2x.png"; sourceTree = "<group>"; };
+		8E035B4918F98C2F002076E4 /* Asteroid Defense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Asteroid Defense.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E035B4C18F98C2F002076E4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		8E035B4E18F98C2F002076E4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		8E035B5018F98C2F002076E4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		8E035B5218F98C2F002076E4 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		8E035B5618F98C2F002076E4 /* Asteroid Defense-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Asteroid Defense-Info.plist"; sourceTree = "<group>"; };
+		8E035B5818F98C2F002076E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8E035B5A18F98C2F002076E4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8E035B5C18F98C2F002076E4 /* Asteroid Defense-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Asteroid Defense-Prefix.pch"; sourceTree = "<group>"; };
+		8E035B5D18F98C2F002076E4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		8E035B5E18F98C2F002076E4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		8E035B6118F98C2F002076E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8E035B6318F98C2F002076E4 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		8E035B6418F98C2F002076E4 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		8E035B6618F98C2F002076E4 /* Space.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Space.h; sourceTree = "<group>"; };
+		8E035B6718F98C2F002076E4 /* Space.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Space.m; sourceTree = "<group>"; };
+		8E035B6918F98C2F002076E4 /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spaceship.png; sourceTree = "<group>"; };
+		8E035B6B18F98C2F002076E4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		8E035B7118F98C2F002076E4 /* Asteroid DefenseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Asteroid DefenseTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E035B7218F98C2F002076E4 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		8E035B8A18F9A20C002076E4 /* Asteroid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Asteroid.h; path = Application/Asteroid/Asteroid.h; sourceTree = "<group>"; };
+		8E035B8B18F9A20C002076E4 /* Asteroid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Asteroid.m; path = Application/Asteroid/Asteroid.m; sourceTree = "<group>"; };
+		8E035B8F18F9A5C5002076E4 /* Asteroid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Asteroid.png; path = Resources/PNG/Asteroid.png; sourceTree = "<group>"; };
+		8E035B9018F9A5C5002076E4 /* Asteroid@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Asteroid@2x.png"; path = "Resources/PNG/Asteroid@2x.png"; sourceTree = "<group>"; };
+		8E035B9418F9A681002076E4 /* GameConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameConstants.h; path = Application/Game/GameConstants.h; sourceTree = "<group>"; };
+		8E035B9D18F9BD22002076E4 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark.png; path = Resources/Particles/spark.png; sourceTree = "<group>"; };
+		8E035BA018F9DCF9002076E4 /* AsteroidPath.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = AsteroidPath.sks; path = Resources/Particles/AsteroidPath.sks; sourceTree = "<group>"; };
+		8E05116418F9E52C0029E94D /* FingerTracker.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = FingerTracker.sks; path = Resources/Particles/FingerTracker.sks; sourceTree = "<group>"; };
+		8E05116718FA12970029E94D /* AsteroidSpawner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AsteroidSpawner.h; path = Application/AsteroidSpawner/AsteroidSpawner.h; sourceTree = "<group>"; };
+		8E05116818FA12970029E94D /* AsteroidSpawner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AsteroidSpawner.m; path = Application/AsteroidSpawner/AsteroidSpawner.m; sourceTree = "<group>"; };
+		8E7E8F6318FA4D2A00930456 /* NukeExplosion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NukeExplosion.h; sourceTree = "<group>"; };
+		8E7E8F6418FA4D2A00930456 /* NukeExplosion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NukeExplosion.m; sourceTree = "<group>"; };
+		9534B94CF7C9403A86D32F42 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		DF4F674E05AB49259E75E59A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8E035B4618F98C2F002076E4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E035B4F18F98C2F002076E4 /* CoreGraphics.framework in Frameworks */,
+				8E035B5118F98C2F002076E4 /* UIKit.framework in Frameworks */,
+				8E035B5318F98C2F002076E4 /* SpriteKit.framework in Frameworks */,
+				8E035B4D18F98C2F002076E4 /* Foundation.framework in Frameworks */,
+				AF043BE93D694459B8450AF6 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E035B6E18F98C2F002076E4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E035B7318F98C2F002076E4 /* XCTest.framework in Frameworks */,
+				8E035B7518F98C2F002076E4 /* UIKit.framework in Frameworks */,
+				8E035B7418F98C2F002076E4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		14B89F3618F9A443006A23C4 /* Fixed Bodies */ = {
+			isa = PBXGroup;
+			children = (
+				14B89F3718F9A51A006A23C4 /* Earth.h */,
+				14B89F3818F9A51A006A23C4 /* Earth.m */,
+			);
+			name = "Fixed Bodies";
+			path = "Application/Fixed Bodies";
+			sourceTree = "<group>";
+		};
+		14D47E3C18F9BED600EA66DC /* Projectiles */ = {
+			isa = PBXGroup;
+			children = (
+				14D47E4618F9BFE200EA66DC /* Nuke.h */,
+				14D47E4718F9BFE200EA66DC /* Nuke.m */,
+				14D47E5218FA18AC00EA66DC /* Miner.h */,
+				14D47E5318FA18AC00EA66DC /* Miner.m */,
+				8E7E8F6318FA4D2A00930456 /* NukeExplosion.h */,
+				8E7E8F6418FA4D2A00930456 /* NukeExplosion.m */,
+				14D47E5918FA2C8800EA66DC /* Projectile.h */,
+			);
+			name = Projectiles;
+			path = Application/Projectiles;
+			sourceTree = "<group>";
+		};
+		14D47E3D18F9BEE200EA66DC /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				14D47E5C18FA3A0900EA66DC /* miner-launcher-highlight.png */,
+				14D47E5D18FA3A0900EA66DC /* miner-launcher-highlight@2x.png */,
+				14D47E5E18FA3A0900EA66DC /* miner-launcher-normal.png */,
+				14D47E5F18FA3A0900EA66DC /* miner-launcher-normal@2x.png */,
+				14D47E6018FA3A0900EA66DC /* nuke-launcher-highlight.png */,
+				14D47E6118FA3A0900EA66DC /* nuke-launcher-highlight@2x.png */,
+				14D47E6218FA3A0900EA66DC /* nuke-launcher-normal.png */,
+				14D47E6318FA3A0900EA66DC /* nuke-launcher-normal@2x.png */,
+				8E035B8F18F9A5C5002076E4 /* Asteroid.png */,
+				8E035B9018F9A5C5002076E4 /* Asteroid@2x.png */,
+				14D47E3E18F9BFB500EA66DC /* miner.png */,
+				14D47E3F18F9BFB500EA66DC /* miner@2x.png */,
+				14D47E4018F9BFB500EA66DC /* nuke.png */,
+				14D47E4118F9BFB500EA66DC /* nuke@2x.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		14D47E4B18F9E9B700EA66DC /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				14D47E4C18F9E9F700EA66DC /* VectorUtil.h */,
+				14D47E4D18F9E9F700EA66DC /* VectorUtil.m */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		14D47E5518FA1D8300EA66DC /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				14D47E5618FA1DB000EA66DC /* CollisionManager.h */,
+				14D47E5718FA1DB000EA66DC /* CollisionManager.m */,
+				1454405F18FA69F300F45243 /* GameManager.h */,
+				1454406018FA69F300F45243 /* GameManager.m */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		8E035B4018F98C2F002076E4 = {
+			isa = PBXGroup;
+			children = (
+				8E035B5418F98C2F002076E4 /* asteroid-defense */,
+				8E035B4B18F98C2F002076E4 /* Frameworks */,
+				8E035B4A18F98C2F002076E4 /* Products */,
+				9534B94CF7C9403A86D32F42 /* Pods.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		8E035B4A18F98C2F002076E4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8E035B4918F98C2F002076E4 /* Asteroid Defense.app */,
+				8E035B7118F98C2F002076E4 /* Asteroid DefenseTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8E035B4B18F98C2F002076E4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8E035B4C18F98C2F002076E4 /* Foundation.framework */,
+				8E035B4E18F98C2F002076E4 /* CoreGraphics.framework */,
+				8E035B5018F98C2F002076E4 /* UIKit.framework */,
+				8E035B5218F98C2F002076E4 /* SpriteKit.framework */,
+				8E035B7218F98C2F002076E4 /* XCTest.framework */,
+				DF4F674E05AB49259E75E59A /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8E035B5418F98C2F002076E4 /* asteroid-defense */ = {
+			isa = PBXGroup;
+			children = (
+				8E035B8D18F9A55C002076E4 /* Resources */,
+				8E035B8818F9A18D002076E4 /* Application */,
+				8E035B5D18F98C2F002076E4 /* AppDelegate.h */,
+				8E035B5E18F98C2F002076E4 /* AppDelegate.m */,
+				8E035B6618F98C2F002076E4 /* Space.h */,
+				8E035B6718F98C2F002076E4 /* Space.m */,
+				8E035B6018F98C2F002076E4 /* Main.storyboard */,
+				8E035B6318F98C2F002076E4 /* ViewController.h */,
+				8E035B6418F98C2F002076E4 /* ViewController.m */,
+				8E035B6918F98C2F002076E4 /* Spaceship.png */,
+				8E035B6B18F98C2F002076E4 /* Images.xcassets */,
+				8E035B5518F98C2F002076E4 /* Supporting Files */,
+			);
+			path = "asteroid-defense";
+			sourceTree = "<group>";
+		};
+		8E035B5518F98C2F002076E4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8E035B5618F98C2F002076E4 /* Asteroid Defense-Info.plist */,
+				8E035B5718F98C2F002076E4 /* InfoPlist.strings */,
+				8E035B5A18F98C2F002076E4 /* main.m */,
+				8E035B5C18F98C2F002076E4 /* Asteroid Defense-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8E035B8818F9A18D002076E4 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				8E05116618FA12540029E94D /* AsteroidSpawner */,
+				8E035B8918F9A1D9002076E4 /* Asteroid */,
+				14B89F3618F9A443006A23C4 /* Fixed Bodies */,
+				8E035B9318F9A66D002076E4 /* GameConstants */,
+				14D47E5518FA1D8300EA66DC /* Managers */,
+				14D47E3C18F9BED600EA66DC /* Projectiles */,
+				14D47E4B18F9E9B700EA66DC /* Utilities */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		8E035B8918F9A1D9002076E4 /* Asteroid */ = {
+			isa = PBXGroup;
+			children = (
+				8E035B8A18F9A20C002076E4 /* Asteroid.h */,
+				8E035B8B18F9A20C002076E4 /* Asteroid.m */,
+			);
+			name = Asteroid;
+			sourceTree = "<group>";
+		};
+		8E035B8D18F9A55C002076E4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				14D47E3D18F9BEE200EA66DC /* Images */,
+				8E035B9B18F9BD06002076E4 /* Particles */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		8E035B9318F9A66D002076E4 /* GameConstants */ = {
+			isa = PBXGroup;
+			children = (
+				8E035B9418F9A681002076E4 /* GameConstants.h */,
+			);
+			name = GameConstants;
+			sourceTree = "<group>";
+		};
+		8E035B9B18F9BD06002076E4 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				8E05116418F9E52C0029E94D /* FingerTracker.sks */,
+				8E035B9D18F9BD22002076E4 /* spark.png */,
+				8E035BA018F9DCF9002076E4 /* AsteroidPath.sks */,
+				14D47E4918F9DEA900EA66DC /* nuke.sks */,
+			);
+			name = Particles;
+			sourceTree = "<group>";
+		};
+		8E05116618FA12540029E94D /* AsteroidSpawner */ = {
+			isa = PBXGroup;
+			children = (
+				8E05116718FA12970029E94D /* AsteroidSpawner.h */,
+				8E05116818FA12970029E94D /* AsteroidSpawner.m */,
+			);
+			name = AsteroidSpawner;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8E035B4818F98C2F002076E4 /* Asteroid Defense */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E035B8218F98C2F002076E4 /* Build configuration list for PBXNativeTarget "Asteroid Defense" */;
+			buildPhases = (
+				8D1B49D8C0824E098F079E50 /* Check Pods Manifest.lock */,
+				8E035B4518F98C2F002076E4 /* Sources */,
+				8E035B4618F98C2F002076E4 /* Frameworks */,
+				8E035B4718F98C2F002076E4 /* Resources */,
+				452A881EBBC34762B9B49192 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Asteroid Defense";
+			productName = "asteroid-defense";
+			productReference = 8E035B4918F98C2F002076E4 /* Asteroid Defense.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8E035B7018F98C2F002076E4 /* Asteroid DefenseTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E035B8518F98C2F002076E4 /* Build configuration list for PBXNativeTarget "Asteroid DefenseTests" */;
+			buildPhases = (
+				8E035B6D18F98C2F002076E4 /* Sources */,
+				8E035B6E18F98C2F002076E4 /* Frameworks */,
+				8E035B6F18F98C2F002076E4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8E035B7718F98C2F002076E4 /* PBXTargetDependency */,
+			);
+			name = "Asteroid DefenseTests";
+			productName = "asteroid-defenseTests";
+			productReference = 8E035B7118F98C2F002076E4 /* Asteroid DefenseTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8E035B4118F98C2F002076E4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Adam Borzecki";
+				TargetAttributes = {
+					8E035B4818F98C2F002076E4 = {
+						DevelopmentTeam = YNS5XB6UP5;
+					};
+					8E035B7018F98C2F002076E4 = {
+						TestTargetID = 8E035B4818F98C2F002076E4;
+					};
+				};
+			};
+			buildConfigurationList = 8E035B4418F98C2F002076E4 /* Build configuration list for PBXProject "Asteroid Defense" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8E035B4018F98C2F002076E4;
+			productRefGroup = 8E035B4A18F98C2F002076E4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8E035B4818F98C2F002076E4 /* Asteroid Defense */,
+				8E035B7018F98C2F002076E4 /* Asteroid DefenseTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8E035B4718F98C2F002076E4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14D47E6B18FA3A0900EA66DC /* nuke-launcher-normal@2x.png in Resources */,
+				14D47E4218F9BFB500EA66DC /* miner.png in Resources */,
+				8E035B5918F98C2F002076E4 /* InfoPlist.strings in Resources */,
+				8E035BA118F9DCF9002076E4 /* AsteroidPath.sks in Resources */,
+				8E05116518F9E52C0029E94D /* FingerTracker.sks in Resources */,
+				8E035B6C18F98C2F002076E4 /* Images.xcassets in Resources */,
+				14D47E4518F9BFB500EA66DC /* nuke@2x.png in Resources */,
+				8E035B9118F9A5C5002076E4 /* Asteroid.png in Resources */,
+				8E035B6A18F98C2F002076E4 /* Spaceship.png in Resources */,
+				14D47E4A18F9DEA900EA66DC /* nuke.sks in Resources */,
+				14D47E6718FA3A0900EA66DC /* miner-launcher-normal@2x.png in Resources */,
+				14D47E6418FA3A0900EA66DC /* miner-launcher-highlight.png in Resources */,
+				14D47E4318F9BFB500EA66DC /* miner@2x.png in Resources */,
+				14D47E6818FA3A0900EA66DC /* nuke-launcher-highlight.png in Resources */,
+				14D47E6518FA3A0900EA66DC /* miner-launcher-highlight@2x.png in Resources */,
+				8E035B9F18F9BD22002076E4 /* spark.png in Resources */,
+				14D47E6618FA3A0900EA66DC /* miner-launcher-normal.png in Resources */,
+				8E035B6218F98C2F002076E4 /* Main.storyboard in Resources */,
+				14D47E4418F9BFB500EA66DC /* nuke.png in Resources */,
+				14D47E6918FA3A0900EA66DC /* nuke-launcher-highlight@2x.png in Resources */,
+				8E035B9218F9A5C5002076E4 /* Asteroid@2x.png in Resources */,
+				14D47E6A18FA3A0900EA66DC /* nuke-launcher-normal.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E035B6F18F98C2F002076E4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		452A881EBBC34762B9B49192 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8D1B49D8C0824E098F079E50 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8E035B4518F98C2F002076E4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14D47E4818F9BFE200EA66DC /* Nuke.m in Sources */,
+				1454406118FA69F300F45243 /* GameManager.m in Sources */,
+				14B89F3918F9A51A006A23C4 /* Earth.m in Sources */,
+				8E7E8F6518FA4D2A00930456 /* NukeExplosion.m in Sources */,
+				14D47E5818FA1DB000EA66DC /* CollisionManager.m in Sources */,
+				8E035B6818F98C2F002076E4 /* Space.m in Sources */,
+				8E035B6518F98C2F002076E4 /* ViewController.m in Sources */,
+				8E035B5F18F98C2F002076E4 /* AppDelegate.m in Sources */,
+				8E05116918FA12970029E94D /* AsteroidSpawner.m in Sources */,
+				8E035B8C18F9A20C002076E4 /* Asteroid.m in Sources */,
+				14D47E5418FA18AC00EA66DC /* Miner.m in Sources */,
+				14D47E4E18F9E9F700EA66DC /* VectorUtil.m in Sources */,
+				8E035B5B18F98C2F002076E4 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E035B6D18F98C2F002076E4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8E035B7718F98C2F002076E4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E035B4818F98C2F002076E4 /* Asteroid Defense */;
+			targetProxy = 8E035B7618F98C2F002076E4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8E035B5718F98C2F002076E4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8E035B5818F98C2F002076E4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		8E035B6018F98C2F002076E4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8E035B6118F98C2F002076E4 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8E035B8018F98C2F002076E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		8E035B8118F98C2F002076E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8E035B8318F98C2F002076E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9534B94CF7C9403A86D32F42 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Aaron Ritchie (GMR7452Y2G)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Aaron Ritchie (GMR7452Y2G)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "asteroid-defense/Asteroid Defense-Prefix.pch";
+				INFOPLIST_FILE = "asteroid-defense/Asteroid Defense-Info.plist";
+				PRODUCT_NAME = "Asteroid Defense";
+				PROVISIONING_PROFILE = "33F5AE6B-D76F-4998-8792-1679E9B3084D";
+				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		8E035B8418F98C2F002076E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9534B94CF7C9403A86D32F42 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Aaron Ritchie (GMR7452Y2G)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Aaron Ritchie (GMR7452Y2G)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "asteroid-defense/Asteroid Defense-Prefix.pch";
+				INFOPLIST_FILE = "asteroid-defense/Asteroid Defense-Info.plist";
+				PRODUCT_NAME = "Asteroid Defense";
+				PROVISIONING_PROFILE = "33F5AE6B-D76F-4998-8792-1679E9B3084D";
+				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		8E035B8618F98C2F002076E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/asteroid-defense.app/asteroid-defense";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "asteroid-defense/asteroid-defense-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "asteroid-defenseTests/asteroid-defenseTests-Info.plist";
+				PRODUCT_NAME = "Asteroid DefenseTests";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		8E035B8718F98C2F002076E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/asteroid-defense.app/asteroid-defense";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "asteroid-defense/asteroid-defense-Prefix.pch";
+				INFOPLIST_FILE = "asteroid-defenseTests/asteroid-defenseTests-Info.plist";
+				PRODUCT_NAME = "Asteroid DefenseTests";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8E035B4418F98C2F002076E4 /* Build configuration list for PBXProject "Asteroid Defense" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E035B8018F98C2F002076E4 /* Debug */,
+				8E035B8118F98C2F002076E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8E035B8218F98C2F002076E4 /* Build configuration list for PBXNativeTarget "Asteroid Defense" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E035B8318F98C2F002076E4 /* Debug */,
+				8E035B8418F98C2F002076E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8E035B8518F98C2F002076E4 /* Build configuration list for PBXNativeTarget "Asteroid DefenseTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E035B8618F98C2F002076E4 /* Debug */,
+				8E035B8718F98C2F002076E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8E035B4118F98C2F002076E4 /* Project object */;
+}

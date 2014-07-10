@@ -7,9 +7,13 @@
 //
 
 #import "ViewController.h"
-#import "MyScene.h"
+#import "GameManager.h"
 
 @implementation ViewController
+{
+    Space *space;
+    CGSize sceneBoundsSize;
+}
 
 - (void)viewDidLoad
 {
@@ -17,15 +21,14 @@
 
     // Configure the view.
     SKView * skView = (SKView *)self.view;
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
+    skView.showsFPS = NO;
+    skView.showsNodeCount = NO;
     
-    // Create and configure the scene.
-    SKScene * scene = [MyScene sceneWithSize:skView.bounds.size];
-    scene.scaleMode = SKSceneScaleModeAspectFill;
+    sceneBoundsSize = skView.bounds.size;
+    space = [self spawnSpace];
     
     // Present the scene.
-    [skView presentScene:scene];
+    [skView presentScene:space];
 }
 
 - (BOOL)shouldAutorotate
@@ -42,10 +45,30 @@
     }
 }
 
+- (void)spaceDidRequestToTryAgain:(Space *)theSpace
+{
+    SKView * skView = (SKView *)self.view;
+    [skView presentScene:nil];
+    
+    [GameManager.sharedManager resetGameManager];
+    
+    space = nil;
+    space = [self spawnSpace];
+    [skView presentScene:space];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
+}
+
+- (Space *)spawnSpace
+{
+    Space * scene = [Space sceneWithSize:sceneBoundsSize];
+    scene.scaleMode = SKSceneScaleModeAspectFill;
+    scene.delegate = self;
+    return scene;
 }
 
 @end
