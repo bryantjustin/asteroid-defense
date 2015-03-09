@@ -48,6 +48,7 @@
 		8E035BA118F9DCF9002076E4 /* AsteroidPath.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8E035BA018F9DCF9002076E4 /* AsteroidPath.sks */; };
 		8E05116518F9E52C0029E94D /* FingerTracker.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8E05116418F9E52C0029E94D /* FingerTracker.sks */; };
 		8E05116918FA12970029E94D /* AsteroidSpawner.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E05116818FA12970029E94D /* AsteroidSpawner.m */; };
+		8E7E8F6518FA4D2A00930456 /* NukeExplosion.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7E8F6418FA4D2A00930456 /* NukeExplosion.m */; };
 		AF043BE93D694459B8450AF6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF4F674E05AB49259E75E59A /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -118,6 +119,8 @@
 		8E05116418F9E52C0029E94D /* FingerTracker.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = FingerTracker.sks; path = Resources/Particles/FingerTracker.sks; sourceTree = "<group>"; };
 		8E05116718FA12970029E94D /* AsteroidSpawner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AsteroidSpawner.h; path = Application/AsteroidSpawner/AsteroidSpawner.h; sourceTree = "<group>"; };
 		8E05116818FA12970029E94D /* AsteroidSpawner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AsteroidSpawner.m; path = Application/AsteroidSpawner/AsteroidSpawner.m; sourceTree = "<group>"; };
+		8E7E8F6318FA4D2A00930456 /* NukeExplosion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NukeExplosion.h; sourceTree = "<group>"; };
+		8E7E8F6418FA4D2A00930456 /* NukeExplosion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NukeExplosion.m; sourceTree = "<group>"; };
 		9534B94CF7C9403A86D32F42 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		DF4F674E05AB49259E75E59A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -165,6 +168,8 @@
 				14D47E4718F9BFE200EA66DC /* Nuke.m */,
 				14D47E5218FA18AC00EA66DC /* Miner.h */,
 				14D47E5318FA18AC00EA66DC /* Miner.m */,
+				8E7E8F6318FA4D2A00930456 /* NukeExplosion.h */,
+				8E7E8F6418FA4D2A00930456 /* NukeExplosion.m */,
 				14D47E5918FA2C8800EA66DC /* Projectile.h */,
 			);
 			name = Projectiles;
@@ -490,6 +495,7 @@
 				14D47E4818F9BFE200EA66DC /* Nuke.m in Sources */,
 				1454406118FA69F300F45243 /* GameManager.m in Sources */,
 				14B89F3918F9A51A006A23C4 /* Earth.m in Sources */,
+				8E7E8F6518FA4D2A00930456 /* NukeExplosion.m in Sources */,
 				14D47E5818FA1DB000EA66DC /* CollisionManager.m in Sources */,
 				8E035B6818F98C2F002076E4 /* Space.m in Sources */,
 				8E035B6518F98C2F002076E4 /* ViewController.m in Sources */,

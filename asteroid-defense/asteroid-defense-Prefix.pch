@@ -16,3 +16,4 @@
 #endif
 
 #import "GameConstants.h"
+#import "VectorUtil.h"

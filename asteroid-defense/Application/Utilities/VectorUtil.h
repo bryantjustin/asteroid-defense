@@ -15,4 +15,6 @@
 
 + (CGVector)addVectors:(CGVector)v1 and:(CGVector)v2;
 
++ (CGVector)getVectorBetweenPosition:(CGPoint)p1 andPosition2:(CGPoint)p2 andGravityForce:(float)gravity;
+
 @end

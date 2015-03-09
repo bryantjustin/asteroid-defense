@@ -12,6 +12,7 @@
 #import "GameManager.h"
 #import "Miner.h"
 #import "Space.h"
+#import "Nuke.h"
 
 #define PARTICLE_RESOURCE   @"nuke"
 #define PARTICLE_TYPE       @"sks"
@@ -61,6 +62,14 @@
     {
         [self mineAsteroidAtContact:contact];
     }
+    else if ([self isContactBetweenAsteroidAndAsteroid:contact])
+    {
+        [self combineAsteroidsAtContact:contact];
+    }
+    else if([self isContactBetweenDetonationAndAsteroid:contact])
+    {
+        [self deflectAsteroid:contact withImpulse:15.0];
+    }
 }
 
 /******************************************************************************/
@@ -74,8 +83,8 @@
     uint32_t categoryBitMaskA = contact.bodyA.categoryBitMask;
     uint32_t categoryBitMaskB = contact.bodyB.categoryBitMask;
     
-    return (categoryBitMaskA == nukeCategory && categoryBitMaskB == asteroidCategory)
-    || (categoryBitMaskA == asteroidCategory && categoryBitMaskB == nukeCategory);
+    return (categoryBitMaskA == nukeCategory && (categoryBitMaskB & asteroidCategory ) != 0)
+    || ((categoryBitMaskA & asteroidCategory ) != 0 && categoryBitMaskB == nukeCategory);
 }
 
 - (BOOL)isContactBetweenEarthAndAsteroid:(SKPhysicsContact *)contact
@@ -83,8 +92,30 @@
     uint32_t categoryBitMaskA = contact.bodyA.categoryBitMask;
     uint32_t categoryBitMaskB = contact.bodyB.categoryBitMask;
     
-    return (categoryBitMaskA == earthCategory && categoryBitMaskB == asteroidCategory)
-    || (categoryBitMaskA == asteroidCategory && categoryBitMaskB == earthCategory);
+    return (categoryBitMaskA == earthCategory && (categoryBitMaskB & asteroidCategory ) != 0)
+    || ((categoryBitMaskA & asteroidCategory ) != 0 && categoryBitMaskB == earthCategory);
+}
+
+- (BOOL)isContactBetweenAsteroidAndAsteroid:(SKPhysicsContact *)contact
+{
+    if( !ASTEROID_COLLISIONS_COMBINE )
+    {
+        return NO;
+    }
+    
+    uint32_t categoryBitMaskA = contact.bodyA.categoryBitMask;
+    uint32_t categoryBitMaskB = contact.bodyB.categoryBitMask;
+    
+    return ((categoryBitMaskA & asteroidCategory ) != 0 && (categoryBitMaskB & asteroidCategory ) != 0);
+}
+
+- (BOOL)isContactBetweenDetonationAndAsteroid:(SKPhysicsContact *)contact
+{
+    uint32_t categoryBitMaskA = contact.bodyA.categoryBitMask;
+    uint32_t categoryBitMaskB = contact.bodyB.categoryBitMask;
+
+    return (categoryBitMaskA == detonationCategory && (categoryBitMaskB & asteroidCategory ) != 0)
+    || ((categoryBitMaskA & asteroidCategory ) != 0 && categoryBitMaskB == detonationCategory);
 }
 
 - (BOOL)isContactBetweenMinerAndAsteroid:(SKPhysicsContact *)contact
@@ -92,8 +123,8 @@
     uint32_t categoryBitMaskA = contact.bodyA.categoryBitMask;
     uint32_t categoryBitMaskB = contact.bodyB.categoryBitMask;
     
-    return (categoryBitMaskA == minerCategory && categoryBitMaskB == asteroidCategory)
-    || (categoryBitMaskA == asteroidCategory && categoryBitMaskB == minerCategory);
+    return (categoryBitMaskA == minerCategory && (categoryBitMaskB & asteroidCategory ) != 0)
+    || ((categoryBitMaskA & asteroidCategory ) != 0 && categoryBitMaskB == minerCategory);
 }
 
 /******************************************************************************/
@@ -104,21 +135,37 @@
 
 - (void)detonateNukeAtContact:(SKPhysicsContact *)contact
 {
-    [contact.bodyA.node removeFromParent];
-    [contact.bodyB.node removeFromParent];
+    Asteroid *asteroid = [self asteroidForContact:contact];
+    if( (asteroid.physicsBody.categoryBitMask & worldKillerCategory ) == 0)
+    {
+        [asteroid removeFromParent];
+    }
+    else
+    {
+        [self deflectAsteroid:contact withImpulse:80.0];
+    }
     
-    SKEmitterNode *emitter = [self spawnEmitterAt:contact.contactPoint];
-    [space addChild:emitter];
-    [self
-        performSelector:@selector(onEmitterComplete:)
-        withObject:emitter
-        afterDelay:[self lifeSpanForEmitter:emitter]
-    ];
+    Nuke *nuke;
+    
+    if( asteroid == contact.bodyA.node )
+    {
+        nuke = (Nuke *)contact.bodyB.node;
+    }
+    else
+    {
+        nuke = (Nuke *)contact.bodyA.node;
+    }
+    
+    [nuke removeFromParent];
+    
+    
+    [self spawnAndSetupEmitterAt:contact.contactPoint];
 }
 
 - (void)shatterAsteroidAtContact:(SKPhysicsContact *)contact
 {
-    [[self asteroidForContact:contact] removeFromParent];
+    Asteroid *asteroid = [self asteroidForContact:contact];
+    [asteroid removeFromParent];
     
     SKEmitterNode *emitter = [self spawnEmitterAt:contact.contactPoint];
     [space addChild:emitter];
@@ -129,6 +176,42 @@
     ];
 }
 
+- (void)combineAsteroidsAtContact:(SKPhysicsContact *)contact
+{
+    Asteroid *a1 = (Asteroid *)contact.bodyA.node;
+    Asteroid *a2 = (Asteroid *)contact.bodyB.node;
+    
+    Asteroid *newAsteroid = [a1 combineWithAsteroid:a2];
+    newAsteroid.position = contact.contactPoint;
+    NSLog( @"%@", NSStringFromCGPoint(newAsteroid.position));
+    
+//    [a1 removeFromParent];
+    [a2 removeFromParent];
+}
+
+- (void) deflectAsteroid:(SKPhysicsContact *)contact withImpulse:(CGFloat)impulseUnit
+{
+    Asteroid *asteroid = [self asteroidForContact:contact];
+    
+    SKNode *originNode;
+    
+    if( asteroid == contact.bodyA.node )
+    {
+        originNode = contact.bodyB.node;
+    }
+    else
+    {
+        originNode = contact.bodyA.node;
+    }
+    
+    CGPoint o = originNode.position;
+    CGPoint a = asteroid.position;
+    
+    CGVector vector = [VectorUtil normalizeVector: CGVectorMake( ( a.x - o.x ) * 1, ( a.y - o.y ) * 1) toScale:impulseUnit];
+    
+    [asteroid.physicsBody applyImpulse:vector];
+}
+    
 - (void)mineAsteroidAtContact:(SKPhysicsContact *)contact
 {
     __weak Miner* miner = [self minerForContact:contact];
@@ -144,6 +227,12 @@
     ];
     
     __weak Asteroid* asteroid = [self asteroidForContact:contact];
+    
+    if(( asteroid.physicsBody.categoryBitMask & worldKillerCategory ) != 0 )
+    {
+        return;
+    }
+    
     if (!asteroid.isBeingMined)
     {
         asteroid.isBeingMined = YES;
@@ -231,6 +320,17 @@
     emitter.position = position;
     emitter.numParticlesToEmit = PARTICLES_TO_EMIT;
     return emitter;
+}
+
+- (void) spawnAndSetupEmitterAt:(CGPoint)position
+{
+    SKEmitterNode *emitter = [self spawnEmitterAt:position];
+    [space addChild:emitter];
+    [self
+     performSelector:@selector(onEmitterComplete:)
+     withObject:emitter
+     afterDelay:[self lifeSpanForEmitter:emitter]
+     ];
 }
 
 - (NSString *)particlePath

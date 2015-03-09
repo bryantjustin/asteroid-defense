@@ -9,29 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "asteroid-defense/Application/Utilities/VectorUtil.m"
-            timestampString = "419037653.779671"
+            filePath = "asteroid-defense/Application/AsteroidSpawner/AsteroidSpawner.m"
+            timestampString = "419095441.413723"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "+normalizeVector:toScale:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "asteroid-defense/Application/Asteroid/Asteroid.m"
-            timestampString = "419048471.9152"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
-            landmarkName = "-combineWithAsteroid:"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "+generateAsteroid"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

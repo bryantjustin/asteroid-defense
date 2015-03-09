@@ -11,9 +11,10 @@
 #import "Asteroid.h"
 #import "GameManager.h"
 #import "Nuke.h"
+#import "NukeExplosion.h"
 #import "Miner.h"
 #import "Earth.h"
-#import "VectorUtil.h"
+#import "AsteroidSpawner.h"
 
 #import "CollisionManager.h"
 
@@ -34,6 +35,11 @@
     
     SKLabelNode *nukeCountLabel;
     SKLabelNode *resourcesMinedLabel;
+    SKLabelNode *timer;
+    SKLabelNode *worldKillerWarning;
+    
+    int time;
+    NSTimeInterval lastTime;
     
     NSSet *nodes;
     ProjectileType projectileType;
@@ -72,9 +78,6 @@
         [self prepareEarth];
         [self prepareLauncherControls];
         [self prepareLabels];
-        
-        lastLaunch = 0;
-        
     }
     return self;
 }
@@ -130,17 +133,46 @@
     ];
     [self addChild:nukeCountLabel];
     
+    timer = [self
+        labelForString:@"Time: 00000"
+        andPosition:CGPointMake(40,768)
+        withFontSize:12
+    ];
+    [self addChild:timer];
+    
+    worldKillerWarning = [self
+                          labelForString:@"World killer approaching!"
+                          andPosition:CGPointMake( 385,768)
+                          withFontSize:15
+                          ];
+    [self addChild:worldKillerWarning];
+    worldKillerWarning.alpha = 0;
+    
     [NSNotificationCenter.defaultCenter
         addObserver:self
         selector:@selector(onAcquiredReadyNuke)
         name:kDidAcquireReadyNuke
         object:GameManager.sharedManager
     ];
+
+    [NSNotificationCenter.defaultCenter
+     addObserver:self
+     selector:@selector(onWorldKillerSpawn)
+     name:@"WorldKiller"
+     object:nil
+     ];
 }
 
 - (void)onAcquiredReadyNuke
 {
     [self updateNukesReady];
+}
+
+- (void) onWorldKillerSpawn
+{
+    [worldKillerWarning runAction:[SKAction fadeAlphaTo:1 duration:1.0] completion:^{
+        [worldKillerWarning runAction:[SKAction fadeAlphaTo:0.0 duration:1.0]];
+    }];
 }
 
 /******************************************************************************/
@@ -338,7 +370,7 @@
 {
     CGPoint earthPosition = earth.position;
     
-    NSMutableDictionary *calculated = [NSMutableDictionary new];
+    calculated = (NSMutableDictionary*)CFBridgingRelease(CFDictionaryCreateMutable(nil, 0, NULL, NULL));
     
     for( SKNode *child in self.children )
     {
@@ -354,19 +386,19 @@
                 {
                     Asteroid *asteroid2 = (Asteroid *)child2;
                     
-                    if( asteroid == asteroid2 || asteroid.hidden == YES || asteroid2.hidden == YES || [calculated[ asteroid2 ] boolValue] == YES )
+                    if( asteroid == asteroid2 || (asteroid.physicsBody.categoryBitMask & worldKillerCategory ) != 0 || [calculated[ asteroid2 ] boolValue] == YES )
                     {
                         continue;
                     }
                     
                     CGPoint point2 = asteroid2.position;
                     
-                    CGVector vector = [self getVectorBetweenPosition:point1 andPosition2:point2 andGravityForce:ASTEROIDAL_GRAVITY_FORCE];
+                    CGVector vector = [VectorUtil getVectorBetweenPosition:point1 andPosition2:point2 andGravityForce:ASTEROIDAL_GRAVITY_FORCE];
                     runningVector = [VectorUtil addVectors:runningVector and:vector];
                 }
             }
             
-            runningVector = [VectorUtil addVectors:runningVector and:[self getVectorBetweenPosition:point1 andPosition2:earthPosition andGravityForce:PLANETARY_GRAVITY_FORCE]];
+            runningVector = [VectorUtil addVectors:runningVector and:[VectorUtil getVectorBetweenPosition:point1 andPosition2:earthPosition andGravityForce:PLANETARY_GRAVITY_FORCE]];
         
             asteroid.radialGravity = runningVector;
             
@@ -374,21 +406,27 @@
         }
     }
     
-    if( currentTime - lastLaunch > LAUNCH_INTERVAL )
+    Asteroid *newAsteroid = [AsteroidSpawner spawn:currentTime];
+    if( newAsteroid )
     {
-        [self spawnAsteroid];
-        lastLaunch = currentTime;
+        [self addChild:newAsteroid];
+    }
+    
+    if( currentTime - lastTime > 1 )
+    {
+        time++;
+        timer.text = [NSString stringWithFormat:@"Time: %05d",time];
+        lastTime = currentTime;
     }
 }
 
-- (CGVector) getVectorBetweenPosition:(CGPoint)p1 andPosition2:(CGPoint)p2 andGravityForce:(float)gravity
+- (void) spawnNukeExplostionAt:(CGPoint)point
 {
-    CGFloat distance = sqrt( pow( p1.x - p2.x, 2.0) + (pow( p1.y - p2.y, 2.0 )));
+    NukeExplosion *explosion = [NukeExplosion new];
+    explosion.position = point;
+    [self addChild:explosion];
     
-    CGFloat force = gravity / ( distance * distance);
-    CGVector radialGravityForce = CGVectorMake((p2.x - p1.x) * force, (p2.y - p1.y) * force);
-    
-    return radialGravityForce;
+//    [collisionManager spawnAndSetupEmitterAt:point];
 }
 
 @end

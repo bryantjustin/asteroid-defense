@@ -20,33 +20,23 @@
     if( self = [super initWithTexture:[Asteroid texture:__radius]])
     {
         self.radius = __radius;
-        self.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.radius];
-        self.physicsBody.categoryBitMask = asteroidCategory;
-        if( ASTEROID_COLLISIONS_COMBINE )
-        {
-            self.physicsBody.collisionBitMask = asteroidCategory;
-            self.physicsBody.contactTestBitMask = asteroidCategory;
-        }
-        self.physicsBody.dynamic = YES;
-        self.physicsBody.mass = 1.f + ( self.radius - 5.0 ) / 5.0;
-        self.physicsBody.linearDamping = 0.0;
+        float mass = 1.0 + ( self.radius - 5.0 ) / 5.0;
+        self.physicsBody = [Asteroid getPhyicsBodyWithRadius:__radius andMass:mass];
+        self.mass = self.physicsBody.mass;
     }
     
     return self;
 }
 
-- (id) initWithMass:(CGFloat)mass andRadius:(float)radius
+- (id) initAsWorldKiller
 {
-    if( self = [super initWithTexture:[Asteroid texture:radius]])
+    if( self = [super initWithTexture:[Asteroid texture:ASTEROID_WORLD_KILLER_RADIUS]])
     {
-        self.radius = radius;
-        self.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.radius];
-        self.physicsBody.categoryBitMask = asteroidCategory;
-        self.physicsBody.collisionBitMask = asteroidCategory;
-        self.physicsBody.contactTestBitMask = asteroidCategory;
-        self.physicsBody.dynamic = YES;
-        self.physicsBody.mass = mass;
-        self.physicsBody.linearDamping = 0.0;
+        self.radius = ASTEROID_WORLD_KILLER_RADIUS;
+        float mass = 1.0 + ( self.radius - 5.0 ) / 5.0;
+        self.physicsBody = [Asteroid getPhyicsBodyWithRadius:ASTEROID_WORLD_KILLER_RADIUS andMass:mass];
+        self.physicsBody.categoryBitMask = asteroidCategory | worldKillerCategory;
+        self.mass = self.physicsBody.mass;
     }
     
     return self;
@@ -66,11 +56,6 @@
     [self.physicsBody applyForce:radialGravity];
 }
 
-- (CGFloat)mass
-{
-    return self.physicsBody.mass;
-}
-
 - (void) prepareTrail
 {
     NSString *burstPath = [[NSBundle mainBundle] pathForResource:@"AsteroidPath" ofType:@"sks"];
@@ -81,6 +66,7 @@
 
 + (SKTexture *)texture: (float)radius
 {
+    
     UIGraphicsBeginImageContext(CGSizeMake(radius * 2., radius * 2.));
     CGContextRef context = UIGraphicsGetCurrentContext();
     [SKColor.whiteColor set];
@@ -104,10 +90,36 @@
 
 - (Asteroid *)combineWithAsteroid:(Asteroid *)asteroid
 {
-    Asteroid *newAsteroid = [[Asteroid alloc] initWithMass:self.mass + asteroid.mass andRadius:self.radius + asteroid.radius ];
-    newAsteroid.velocity = [VectorUtil addVectors:self.velocity and:asteroid.velocity];
+    self.radius += asteroid.radius;
+    self.texture = [Asteroid texture:self.radius];
+    self.mass += asteroid.mass;
+    self.velocity = [VectorUtil addVectors:self.velocity and:asteroid.velocity];
+    self.physicsBody = nil;
+    self.physicsBody = [Asteroid getPhyicsBodyWithRadius:self.radius andMass:self.mass];
     
-    return newAsteroid;
+    return self;
+}
+
++ (SKPhysicsBody *)getPhyicsBodyWithRadius:(float)radius andMass:(float)mass
+{
+    SKPhysicsBody *physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:radius];
+    physicsBody.categoryBitMask = asteroidCategory;
+    if( ASTEROID_COLLISIONS_COMBINE )
+    {
+        physicsBody.collisionBitMask = asteroidCategory | detonationCategory;
+        physicsBody.contactTestBitMask = asteroidCategory | detonationCategory;
+    }
+    else
+    {
+        physicsBody.collisionBitMask = asteroidCategory;
+        physicsBody.contactTestBitMask = detonationCategory;
+    }
+    
+    physicsBody.dynamic = YES;
+    physicsBody.mass = mass;
+    physicsBody.linearDamping = 0.0;
+    
+    return physicsBody;
 }
 
 @end

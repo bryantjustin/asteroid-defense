@@ -37,4 +37,14 @@
     return CGVectorMake(v2.dx + v1.dx, v2.dy + v1.dy);
 }
 
++ (CGVector) getVectorBetweenPosition:(CGPoint)p1 andPosition2:(CGPoint)p2 andGravityForce:(float)gravity
+{
+    CGFloat distance = sqrt( pow( p1.x - p2.x, 2.0) + (pow( p1.y - p2.y, 2.0 )));
+    
+    CGFloat force = gravity / ( distance * distance);
+    CGVector radialGravityForce = CGVectorMake((p2.x - p1.x) * force, (p2.y - p1.y) * force);
+    
+    return radialGravityForce;
+}
+
 @end
